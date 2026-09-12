@@ -43,6 +43,11 @@
         
         <!-- TAB 1: BOOK CONSULTATION (HOME) -->
         <div id="tab-home" class="section-card active">
+            <!-- Banner Image Set Here -->
+            <div style="margin: -20px -20px 15px -20px;">
+                <img src="48027.png" alt="Real Astro Banner" style="width: 100%; border-radius: 10px 10px 0 0; display: block;" />
+            </div>
+
             <h3>📱 Book Consultation</h3>
             <label style="font-size: 13px; font-weight: bold; color: #444;">Enter Your Name:</label>
             <input type="text" id="username" placeholder="e.g. Rahul Sharma" />
@@ -162,18 +167,12 @@
 
     <script>
         function switchTab(tabId, element) {
-            // Hide all tabs
             const tabs = document.querySelectorAll('.section-card');
             tabs.forEach(tab => tab.classList.remove('active'));
-
-            // Show selected tab
             document.getElementById('tab-' + tabId).classList.add('active');
-
-            // Update nav button active state
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
-
             window.scrollTo(0, 0);
         }
 
