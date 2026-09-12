@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Astro - Acharya Subhadip</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; }
-        .header { background-color: #ff9933; color: white; padding: 20px; font-size: 24px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0 0 70px 0; text-align: center; }
+        .header { background-color: #ff9933; color: white; padding: 18px; font-size: 22px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
         .container { max-width: 420px; margin: 15px auto; padding: 10px; }
-        .menu-card { background: white; margin: 15px 0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: left; }
-        .menu-card h3 { color: #d35400; margin-top: 0; font-size: 18px; border-bottom: 2px solid #ff9933; padding-bottom: 5px; }
-        details { background: #fff8e8; margin: 10px 0; border: 1px solid #ffe0b2; border-radius: 8px; padding: 12px; text-align: left; }
-        summary { font-weight: bold; color: #d35400; cursor: pointer; font-size: 15px; outline: none; }
-        summary:hover { color: #e68a00; }
+        .section-card { background: white; margin: 10px 0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: left; display: none; }
+        .section-card.active { display: block; }
+        .section-card h3 { color: #d35400; margin-top: 0; font-size: 18px; border-bottom: 2px solid #ff9933; padding-bottom: 5px; }
+        details { background: #fff8e8; margin: 10px 0; border: 1px solid #ffe0b2; border-radius: 8px; padding: 10px; }
+        summary { font-weight: bold; color: #d35400; cursor: pointer; font-size: 14px; outline: none; }
         .sub-text { font-size: 13px; color: #555; margin-top: 8px; line-height: 1.5; }
         .sub-text ul { padding-left: 18px; margin: 5px 0; }
         .btn { background-color: #ff9933; color: white; border: none; padding: 12px 15px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; text-align: center; }
@@ -26,35 +26,52 @@
         input { width: 100%; padding: 12px; margin: 5px 0 15px 0; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; text-align: center; }
         del { color: #888; font-size: 14px; }
         p { font-size: 14px; color: #555; line-height: 1.5; margin: 8px 0; }
+        
+        /* Bottom Navigation Menu Bar */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 1000; }
+        .nav-btn { background: none; border: none; font-size: 11px; color: #666; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-weight: bold; flex: 1; }
+        .nav-btn span { font-size: 18px; margin-bottom: 2px; }
+        .nav-btn.active { color: #ff9933; }
         #status { margin-top: 15px; font-weight: bold; font-size: 15px; text-align: center; }
+        .review-box { background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #ff9933; }
     </style>
 </head>
 <body>
-    <div class="header">🔮 Acharya Subhadip</div>
+    <div class="header">🔮 Real Astro</div>
     
     <div class="container">
-        <!-- Step 1: Client Details -->
-        <div class="menu-card">
-            <h3>👤 Client Details</h3>
+        
+        <!-- TAB 1: BOOK CONSULTATION (HOME) -->
+        <div id="tab-home" class="section-card active">
+            <h3>📱 Book Consultation</h3>
             <label style="font-size: 13px; font-weight: bold; color: #444;">Enter Your Name:</label>
             <input type="text" id="username" placeholder="e.g. Rahul Sharma" />
+
+            <h3 style="margin-top: 20px;">💳 Select Plan & Pay</h3>
+            <button class="btn btn-pay1" onclick="makePayment(100, 10)">Pay ₹100 for 10 Minutes</button>
+            <button class="btn btn-pay2" onclick="makePayment(150, 20)">Pay <del>₹200</del> ₹150 for 20 Mins <br><small>(Save ₹50)</small></button>
+            <button class="btn btn-pay3" onclick="makePayment(200, 30)">Pay <del>₹300</del> ₹200 for 30 Mins <br><small>(Save ₹100)</small></button>
+
+            <h3 style="margin-top: 25px;">📞 Join After Payment</h3>
+            <button class="btn btn-chat" onclick="startChat()">💬 Chat Consultation</button>
+            <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+            <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
         </div>
 
-        <!-- Step 2: About & Achievements Menu -->
-        <div class="menu-card">
-            <h3>🌟 Meet Your Astrologer</h3>
+        <!-- TAB 2: MEET YOUR ASTROLOGER (ABOUT) -->
+        <div id="tab-about" class="section-card">
+            <h3>🌟 Meet Acharya Subhadip</h3>
             <p><strong>Acharya Subhadip</strong> is a Vedic Astrologer, Numerologist & Palmistry Expert with around <strong>10 years of experience</strong> and <strong>10,000+ personalized consultations</strong>.</p>
             <p>Previously worked with reputed platforms like <strong>AstroTalk, AstroSage & AstroYogi</strong>.</p>
 
-            <!-- Expertise Dropdowns -->
             <details>
                 <summary>🕉️ Vedic Astrology Expertise</summary>
                 <div class="sub-text">
                     <p>Detailed analysis of birth charts, planetary positions, and Dasha periods.</p>
                     <ul>
-                        <li><strong>Kundli & Birth Chart:</strong> Janam Kundli, Houses, Nakshatra, Planetary Strength.</li>
-                        <li><strong>Career & Business:</strong> Job growth, business opportunities, entrepreneurship, finance.</li>
-                        <li><strong>Marriage & Relationships:</strong> Compatibility, timing, relationship guidance.</li>
+                        <li>Kundli Analysis & Janam Kundli</li>
+                        <li>Career, Business & Financial Growth</li>
+                        <li>Marriage, Compatibility & Relationships</li>
                     </ul>
                 </div>
             </details>
@@ -62,12 +79,11 @@
             <details>
                 <summary>🔢 Numerology Expertise</summary>
                 <div class="sub-text">
-                    <p>Interpretation of numbers connected with birth date, name, and lifestyle.</p>
+                    <p>Interpretation of numbers connected with birth date and name.</p>
                     <ul>
-                        <li>Lucky Number & Birth Number Analysis</li>
-                        <li>Life Path / Destiny Number guidance</li>
-                        <li>Name Number & Numerological Name Correction</li>
-                        <li>Mobile, Business & Vehicle Number Numerology</li>
+                        <li>Lucky Number & Birth Number</li>
+                        <li>Life Path & Destiny Number</li>
+                        <li>Name Correction & Mobile Number Numerology</li>
                     </ul>
                 </div>
             </details>
@@ -75,58 +91,97 @@
             <details>
                 <summary>✋ Palmistry Expertise</summary>
                 <div class="sub-text">
-                    <p>Traditional palm-reading principles to analyze major lines and mounts.</p>
+                    <p>Traditional palm-reading principles to analyze major lines.</p>
                     <ul>
-                        <li>Heart Line, Head Line & Life Line Analysis</li>
-                        <li>Fate Line & Sun Line for Career and Reputation</li>
-                        <li>Mounts of Palm & Marriage Lines</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details>
-                <summary>🏆 Experience & Why Choose Us</summary>
-                <div class="sub-text">
-                    <ul>
-                        <li>10+ Years Professional Experience</li>
-                        <li>10,000+ Successful Consultations</li>
-                        <li>Ex-Astrologer at AstroTalk, AstroSage & AstroYogi</li>
-                        <li>Personalized, accurate and practical guidance</li>
+                        <li>Heart, Head & Life Line Analysis</li>
+                        <li>Fate Line & Sun Line for Career</li>
+                        <li>Mounts and Marriage Lines</li>
                     </ul>
                 </div>
             </details>
         </div>
 
-        <!-- Step 3: Pricing Plans Menu -->
-        <div class="menu-card">
-            <h3>💳 Select Consultation Plan</h3>
-            <button class="btn btn-pay1" onclick="makePayment(100, 10)">Pay ₹100 for 10 Minutes</button>
-            <button class="btn btn-pay2" onclick="makePayment(150, 20)">Pay <del>₹200</del> ₹150 for 20 Mins <br><small>(Save ₹50)</small></button>
-            <button class="btn btn-pay3" onclick="makePayment(200, 30)">Pay <del>₹300</del> ₹200 for 30 Mins <br><small>(Save ₹100)</small></button>
+        <!-- TAB 3: REVIEWS & RATINGS -->
+        <div id="tab-reviews" class="section-card">
+            <h3>⭐ Client Reviews & Ratings</h3>
+            <p style="text-align: center; font-size: 16px; font-weight: bold; color: #e67e22;">⭐ 4.9 / 5.0 (10,000+ Consultations)</p>
+            
+            <div class="review-box">
+                <strong>Ananya Roy</strong> <span style="color: #f39c12;">⭐⭐⭐⭐⭐</span>
+                <p>"Acharya Subhadip ji ki predictions ekdum sateek hoti hain. Career ke baare mein jo bataya wo sach hua. Bohot badiya guidance mili!"</p>
+            </div>
+
+            <div class="review-box">
+                <strong>Vikram Malhotra</strong> <span style="color: #f39c12;">⭐⭐⭐⭐⭐</span>
+                <p>"Main kafi dino se pareshan tha, inhone Kundli dekh kar itne aasan remedies bataye ki ab sab thik chal raha hai. Highly recommended!"</p>
+            </div>
+
+            <div class="review-box">
+                <strong>Pooja Sharma</strong> <span style="color: #f39c12;">⭐⭐⭐⭐⭐</span>
+                <p>"Numerology aur palmistry reading zabardast thi. Bohot hi polite aur experienced astrologer hain."</p>
+            </div>
         </div>
 
-        <!-- Step 4: Connect / Consultation Menu -->
-        <div class="menu-card">
-            <h3>📞 Join Consultation (After Payment)</h3>
-            <button class="btn btn-chat" onclick="startChat()">💬 Chat Consultation</button>
-            <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
-            <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
+        <!-- TAB 4: CONTACT US -->
+        <div id="tab-contact" class="section-card">
+            <h3>📞 Contact Us</h3>
+            <p>If you face any issues with payment or booking, feel free to reach out to us:</p>
+            <p><strong>Platform:</strong> Real Astro</p>
+            <p><strong>Consultant:</strong> Acharya Subhadip (Tata)</p>
+            <p><strong>UPI ID:</strong> bengaliblogger144@okhdfcbank</p>
+            <p><strong>Support:</strong> Available via WhatsApp Chat & Direct Calls through the Book tab.</p>
+        </div>
+
+        <!-- TAB 5: TERMS & CONDITIONS -->
+        <div id="tab-terms" class="section-card">
+            <h3>📜 Terms & Conditions</h3>
+            <p><strong>1. Services:</strong> Real Astro provides online astrology, numerology, and palmistry consultations for guidance purposes.</p>
+            <p><strong>2. Payments:</strong> All payments made via UPI are final. Please ensure correct details before transferring.</p>
+            <p><strong>3. Privacy:</strong> Client birth details and personal information are kept strictly confidential.</p>
+            <p><strong>4. Disclaimer:</strong> Astrological consultations are based on traditional calculations and are meant for guidance and positive direction in life.</p>
         </div>
 
         <p id="status"></p>
         
-        <!-- Test Connection -->
-        <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 14px; margin-top: 10px;" onclick="checkConnection()">Test Server Connection</button>
+        <div style="margin-top: 20px;">
+            <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 13px;" onclick="checkConnection()">Test Server Connection</button>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION MENU BAR -->
+    <div class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('home', this)"><span>🏠</span>Book</button>
+        <button class="nav-btn" onclick="switchTab('about', this)"><span>🌟</span>About</button>
+        <button class="nav-btn" onclick="switchTab('reviews', this)"><span>⭐</span>Reviews</button>
+        <button class="nav-btn" onclick="switchTab('contact', this)"><span>📞</span>Contact</button>
+        <button class="nav-btn" onclick="switchTab('terms', this)"><span>📜</span>Terms</button>
     </div>
 
     <!-- ZegoCloud UI Kit Script -->
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
     <script>
+        function switchTab(tabId, element) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.section-card');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            // Update nav button active state
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+
         function makePayment(amount, minutes) {
             const userName = document.getElementById('username').value.trim();
             if (!userName) {
-                alert("Please enter your name in the Client Details section before payment!");
+                alert("Please enter your name in the Book tab before payment!");
+                switchTab('home', document.querySelector('.nav-btn'));
                 return;
             }
 
@@ -143,6 +198,7 @@
             const nameField = document.getElementById('username').value.trim();
             if (!nameField) {
                 alert("Please enter your name first!");
+                switchTab('home', document.querySelector('.nav-btn'));
                 return;
             }
             const whatsappUrl = `https://wa.me/?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(nameField)}. I want to start my consultation chat.`;
@@ -153,6 +209,7 @@
             const userName = document.getElementById('username').value.trim();
             if (!userName) {
                 alert("Please enter your name first!");
+                switchTab('home', document.querySelector('.nav-btn'));
                 return;
             }
 
@@ -179,6 +236,7 @@
             const userName = document.getElementById('username').value.trim();
             if (!userName) {
                 alert("Please enter your name first!");
+                switchTab('home', document.querySelector('.nav-btn'));
                 return;
             }
 
