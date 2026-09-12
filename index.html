@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Astro</title>
+    <title>Real Astro - Online Consultation</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; }
         .header { background-color: #ff9933; color: white; padding: 20px; font-size: 24px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card { background: white; margin: 20px; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card { background: white; margin: 20px auto; max-width: 400px; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .btn { background-color: #ff9933; color: white; border: none; padding: 15px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 15px; }
         .btn:hover { background-color: #e68a00; }
         .btn-pay { background-color: #28a745; margin-top: 10px; }
         .btn-pay:hover { background-color: #218838; }
+        .btn-call { background-color: #007bff; margin-top: 10px; }
+        .btn-call:hover { background-color: #0056b3; }
+        input { width: 90%; padding: 12px; margin: 10px 0; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
         #status { margin-top: 20px; font-weight: bold; font-size: 16px; }
     </style>
 </head>
@@ -28,32 +31,74 @@
         <!-- UPI Payment Button -->
         <button class="btn btn-pay" onclick="makePayment()">Pay ₹101 via UPI</button>
 
+        <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
+
+        <!-- Calling Section -->
+        <h3>Join Consultation Call</h3>
+        <input type="text" id="username" placeholder="Enter Your Name" />
+        <button class="btn btn-call" onclick="startCall()">Join Video/Audio Call</button>
+
         <p id="status"></p>
         
-        <!-- Test Connection Button (Neeche chhota kar diya gaya hai) -->
-        <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 14px; margin-top: 30px;" onclick="checkConnection()">Test Server Connection</button>
+        <!-- Test Connection Button -->
+        <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 14px; margin-top: 25px;" onclick="checkConnection()">Test Server Connection</button>
     </div>
+
+    <!-- ZegoCloud UI Kit Script -->
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
     <script>
         function makePayment() {
-            // Aapka UPI ID aur Amount (Abhi testing ke liye 101 rakha hai)
             const upiId = "bengaliblogger144@okhdfcbank";
             const amount = "101";
             const name = "Real Astro Consultation";
-            
-            // Phone ka GPay/PhonePe open karne ka link
             const upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
             
-            document.getElementById('status').innerText = "Opening UPI App... Please complete the payment.";
+            document.getElementById('status').innerText = "Opening UPI App... Please complete payment.";
             document.getElementById('status').style.color = "green";
-            
-            // Mobile app me open karna
             window.location.href = upiLink;
+        }
+
+        function startCall() {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) {
+                alert("Please enter your name first!");
+                return;
+            }
+
+            // Aapki ZegoCloud Details
+            const appID = 1009897816;
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const roomID = "real_astro_consultation_room"; // Sabhi clients isi room me connect honge
+
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(
+                appID, 
+                serverSecret, 
+                roomID, 
+                generateId(), 
+                userName
+            );
+
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.body,
+                sharedLinks: [{
+                    name: 'Personal link',
+                    url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
+                }],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference, // Video/Audio Call Mode
+                },
+            });
+        }
+
+        function generateId() {
+            return String(Math.floor(Math.random() * 100000));
         }
 
         function checkConnection() {
             document.getElementById('status').innerText = "Connecting to server...";
-            document.getElementById('status').style.color = "blue";
+            document.getElementById('status'].style.color = "blue";
             
             fetch('https://real-astro-backend.onrender.com/')
             .then(response => response.text())
