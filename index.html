@@ -10,11 +10,14 @@
         .card { background: white; margin: 20px auto; max-width: 400px; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .btn { background-color: #ff9933; color: white; border: none; padding: 15px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 15px; }
         .btn:hover { background-color: #e68a00; }
-        .btn-pay { background-color: #28a745; margin-top: 10px; }
-        .btn-pay:hover { background-color: #218838; }
-        .btn-call { background-color: #007bff; margin-top: 10px; }
-        .btn-call:hover { background-color: #0056b3; }
+        .btn-pay1 { background-color: #28a745; margin-top: 10px; }
+        .btn-pay2 { background-color: #218838; margin-top: 10px; }
+        .btn-pay3 { background-color: #1e7e34; margin-top: 10px; }
+        .btn-chat { background-color: #17a2b8; margin-top: 10px; }
+        .btn-audio { background-color: #ffc107; color: #333; margin-top: 10px; }
+        .btn-video { background-color: #007bff; margin-top: 10px; }
         input { width: 90%; padding: 12px; margin: 10px 0; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
+        del { color: #ffcccc; font-size: 15px; }
         #status { margin-top: 20px; font-weight: bold; font-size: 16px; }
     </style>
 </head>
@@ -23,20 +26,27 @@
     
     <div class="card">
         <h2>Namaste! 🙏</h2>
-        <p>Book your online astrology consultation.</p>
+        <p>Select your consultation plan & grab the offer:</p>
         
-        <!-- Consultation Fee -->
-        <h3 style="color: #333;">Consultation Fee: ₹101</h3>
-        
-        <!-- UPI Payment Button -->
-        <button class="btn btn-pay" onclick="makePayment()">Pay ₹101 via UPI</button>
+        <!-- User Name Input -->
+        <input type="text" id="username" placeholder="Enter Your Name" />
+
+        <!-- Offer Pricing Buttons -->
+        <button class="btn btn-pay1" onclick="makePayment(100, 10)">Pay ₹100 for 10 Minutes</button>
+        <button class="btn btn-pay2" onclick="makePayment(150, 20)">Pay <del>₹200</del> ₹150 for 20 Mins (Save ₹50)</button>
+        <button class="btn btn-pay3" onclick="makePayment(200, 30)">Pay <del>₹300</del> ₹200 for 30 Mins (Save ₹100)</button>
 
         <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
 
-        <!-- Calling Section -->
-        <h3>Join Consultation Call</h3>
-        <input type="text" id="username" placeholder="Enter Your Name" />
-        <button class="btn btn-call" onclick="startCall()">Join Video/Audio Call</button>
+        <h3>Join Consultation After Payment:</h3>
+        <!-- Chat Button -->
+        <button class="btn btn-chat" onclick="startChat()">💬 Chat Consultation</button>
+
+        <!-- Audio Call Button -->
+        <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+
+        <!-- Video Call Button -->
+        <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
 
         <p id="status"></p>
         
@@ -48,46 +58,78 @@
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
     <script>
-        function makePayment() {
+        function makePayment(amount, minutes) {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) {
+                alert("Please enter your name before payment!");
+                return;
+            }
+
             const upiId = "bengaliblogger144@okhdfcbank";
-            const amount = "101";
-            const name = "Real Astro Consultation";
-            const upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+            const payeeName = "Real Astro (" + minutes + " Mins)";
+            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR`;
             
-            document.getElementById('status').innerText = "Opening UPI App... Please complete payment.";
+            document.getElementById('status').innerText = `Opening UPI for ₹${amount} (${minutes} Mins)... Please complete payment.`;
             document.getElementById('status').style.color = "green";
             window.location.href = upiLink;
         }
 
-        function startCall() {
+        function startChat() {
+            const nameField = document.getElementById('username').value.trim();
+            if (!nameField) {
+                alert("Please enter your name first!");
+                return;
+            }
+            const whatsappUrl = `https://wa.me/?text=Hello%20Astrologer,%20My%20name%20is%20${encodeURIComponent(nameField)}. I want to start my consultation chat.`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function startAudioCall() {
             const userName = document.getElementById('username').value.trim();
             if (!userName) {
                 alert("Please enter your name first!");
                 return;
             }
 
-            // Aapki ZegoCloud Details
             const appID = 1009897816;
             const serverSecret = "30cf208a168057120577256aa90fba8c";
-            const roomID = "real_astro_consultation_room"; // Sabhi clients isi room me connect honge
+            const roomID = "real_astro_consultation_room";
 
             const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(
-                appID, 
-                serverSecret, 
-                roomID, 
-                generateId(), 
-                userName
+                appID, serverSecret, roomID, generateId(), userName
             );
 
             const zp = ZegoUIKitPrebuilt.create(kitToken);
             zp.joinRoom({
                 container: document.body,
-                sharedLinks: [{
-                    name: 'Personal link',
-                    url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
-                }],
                 scenario: {
-                    mode: ZegoUIKitPrebuilt.VideoConference, // Video/Audio Call Mode
+                    mode: ZegoUIKitPrebuilt.OneONoneCall,
+                },
+                turnOnCameraWhenJoining: false,
+                showMyCameraToggleButton: false,
+            });
+        }
+
+        function startVideoCall() {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) {
+                alert("Please enter your name first!");
+                return;
+            }
+
+            const appID = 1009897816;
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const roomID = "real_astro_consultation_room";
+
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(
+                appID, serverSecret, roomID, generateId(), userName
+            );
+
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.body,
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
                 },
             });
         }
@@ -98,7 +140,7 @@
 
         function checkConnection() {
             document.getElementById('status').innerText = "Connecting to server...";
-            document.getElementById('status'].style.color = "blue";
+            document.getElementById('status').style.color = "blue";
             
             fetch('https://real-astro-backend.onrender.com/')
             .then(response => response.text())
