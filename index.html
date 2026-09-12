@@ -3,67 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Astro - Online Consultation</title>
+    <title>Real Astro - Acharya Subhadip</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; }
         .header { background-color: #ff9933; color: white; padding: 20px; font-size: 24px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card { background: white; margin: 20px auto; max-width: 400px; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .bio-box { background: #fff8e8; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ffe0b2; text-align: left; font-size: 14px; color: #333; }
-        .bio-box h3 { color: #d35400; margin-top: 0; text-align: center; font-size: 18px; }
-        .btn { background-color: #ff9933; color: white; border: none; padding: 15px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 15px; }
+        .container { max-width: 420px; margin: 15px auto; padding: 10px; }
+        .menu-card { background: white; margin: 15px 0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: left; }
+        .menu-card h3 { color: #d35400; margin-top: 0; font-size: 18px; border-bottom: 2px solid #ff9933; padding-bottom: 5px; }
+        details { background: #fff8e8; margin: 10px 0; border: 1px solid #ffe0b2; border-radius: 8px; padding: 12px; text-align: left; }
+        summary { font-weight: bold; color: #d35400; cursor: pointer; font-size: 15px; outline: none; }
+        summary:hover { color: #e68a00; }
+        .sub-text { font-size: 13px; color: #555; margin-top: 8px; line-height: 1.5; }
+        .sub-text ul { padding-left: 18px; margin: 5px 0; }
+        .btn { background-color: #ff9933; color: white; border: none; padding: 12px 15px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; text-align: center; }
         .btn:hover { background-color: #e68a00; }
-        .btn-pay1 { background-color: #28a745; margin-top: 10px; }
-        .btn-pay2 { background-color: #218838; margin-top: 10px; }
-        .btn-pay3 { background-color: #1e7e34; margin-top: 10px; }
-        .btn-chat { background-color: #17a2b8; margin-top: 10px; }
-        .btn-audio { background-color: #ffc107; color: #333; margin-top: 10px; }
-        .btn-video { background-color: #007bff; margin-top: 10px; }
-        input { width: 90%; padding: 12px; margin: 10px 0; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
+        .btn-pay1 { background-color: #28a745; }
+        .btn-pay2 { background-color: #218838; }
+        .btn-pay3 { background-color: #1e7e34; }
+        .btn-chat { background-color: #17a2b8; }
+        .btn-audio { background-color: #ffc107; color: #333; }
+        .btn-video { background-color: #007bff; }
+        input { width: 100%; padding: 12px; margin: 5px 0 15px 0; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; text-align: center; }
         del { color: #888; font-size: 14px; }
-        #status { margin-top: 20px; font-weight: bold; font-size: 16px; }
+        p { font-size: 14px; color: #555; line-height: 1.5; margin: 8px 0; }
+        #status { margin-top: 15px; font-weight: bold; font-size: 15px; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="header">🌟 Real Astro</div>
+    <div class="header">🔮 Acharya Subhadip</div>
     
-    <div class="card">
-        <h2>Namaste! 🙏</h2>
-        
-        <!-- Astrologer Bio & Expertise Section -->
-        <div class="bio-box">
-            <h3>🌟 Meet Your Astrologer</h3>
-            <p><strong>Name:</strong> Subhadip Mahata (Tata)</p>
-            <p><strong>Experience:</strong> Years of dedicated online consultations & guiding clients.</p>
-            <p><strong>Expertise:</strong> Vedic Astrology, Kundli Reading, Career & Relationship Guidance.</p>
-            <p><strong>Achievements:</strong> Trusted by numerous clients for accurate predictions and effective remedies.</p>
+    <div class="container">
+        <!-- Step 1: Client Details -->
+        <div class="menu-card">
+            <h3>👤 Client Details</h3>
+            <label style="font-size: 13px; font-weight: bold; color: #444;">Enter Your Name:</label>
+            <input type="text" id="username" placeholder="e.g. Rahul Sharma" />
         </div>
 
-        <p>Select your consultation plan & grab the offer:</p>
-        
-        <!-- User Name Input -->
-        <input type="text" id="username" placeholder="Enter Your Name" />
+        <!-- Step 2: About & Achievements Menu -->
+        <div class="menu-card">
+            <h3>🌟 Meet Your Astrologer</h3>
+            <p><strong>Acharya Subhadip</strong> is a Vedic Astrologer, Numerologist & Palmistry Expert with around <strong>10 years of experience</strong> and <strong>10,000+ personalized consultations</strong>.</p>
+            <p>Previously worked with reputed platforms like <strong>AstroTalk, AstroSage & AstroYogi</strong>.</p>
 
-        <!-- Offer Pricing Buttons -->
-        <button class="btn btn-pay1" onclick="makePayment(100, 10)">Pay ₹100 for 10 Minutes</button>
-        <button class="btn btn-pay2" onclick="makePayment(150, 20)">Pay <del>₹200</del> ₹150 for 20 Mins (Save ₹50)</button>
-        <button class="btn btn-pay3" onclick="makePayment(200, 30)">Pay <del>₹300</del> ₹200 for 30 Mins (Save ₹100)</button>
+            <!-- Expertise Dropdowns -->
+            <details>
+                <summary>🕉️ Vedic Astrology Expertise</summary>
+                <div class="sub-text">
+                    <p>Detailed analysis of birth charts, planetary positions, and Dasha periods.</p>
+                    <ul>
+                        <li><strong>Kundli & Birth Chart:</strong> Janam Kundli, Houses, Nakshatra, Planetary Strength.</li>
+                        <li><strong>Career & Business:</strong> Job growth, business opportunities, entrepreneurship, finance.</li>
+                        <li><strong>Marriage & Relationships:</strong> Compatibility, timing, relationship guidance.</li>
+                    </ul>
+                </div>
+            </details>
 
-        <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
+            <details>
+                <summary>🔢 Numerology Expertise</summary>
+                <div class="sub-text">
+                    <p>Interpretation of numbers connected with birth date, name, and lifestyle.</p>
+                    <ul>
+                        <li>Lucky Number & Birth Number Analysis</li>
+                        <li>Life Path / Destiny Number guidance</li>
+                        <li>Name Number & Numerological Name Correction</li>
+                        <li>Mobile, Business & Vehicle Number Numerology</li>
+                    </ul>
+                </div>
+            </details>
 
-        <h3>Join Consultation After Payment:</h3>
-        <!-- Chat Button -->
-        <button class="btn btn-chat" onclick="startChat()">💬 Chat Consultation</button>
+            <details>
+                <summary>✋ Palmistry Expertise</summary>
+                <div class="sub-text">
+                    <p>Traditional palm-reading principles to analyze major lines and mounts.</p>
+                    <ul>
+                        <li>Heart Line, Head Line & Life Line Analysis</li>
+                        <li>Fate Line & Sun Line for Career and Reputation</li>
+                        <li>Mounts of Palm & Marriage Lines</li>
+                    </ul>
+                </div>
+            </details>
 
-        <!-- Audio Call Button -->
-        <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+            <details>
+                <summary>🏆 Experience & Why Choose Us</summary>
+                <div class="sub-text">
+                    <ul>
+                        <li>10+ Years Professional Experience</li>
+                        <li>10,000+ Successful Consultations</li>
+                        <li>Ex-Astrologer at AstroTalk, AstroSage & AstroYogi</li>
+                        <li>Personalized, accurate and practical guidance</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
 
-        <!-- Video Call Button -->
-        <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
+        <!-- Step 3: Pricing Plans Menu -->
+        <div class="menu-card">
+            <h3>💳 Select Consultation Plan</h3>
+            <button class="btn btn-pay1" onclick="makePayment(100, 10)">Pay ₹100 for 10 Minutes</button>
+            <button class="btn btn-pay2" onclick="makePayment(150, 20)">Pay <del>₹200</del> ₹150 for 20 Mins <br><small>(Save ₹50)</small></button>
+            <button class="btn btn-pay3" onclick="makePayment(200, 30)">Pay <del>₹300</del> ₹200 for 30 Mins <br><small>(Save ₹100)</small></button>
+        </div>
+
+        <!-- Step 4: Connect / Consultation Menu -->
+        <div class="menu-card">
+            <h3>📞 Join Consultation (After Payment)</h3>
+            <button class="btn btn-chat" onclick="startChat()">💬 Chat Consultation</button>
+            <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+            <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
+        </div>
 
         <p id="status"></p>
         
-        <!-- Test Connection Button -->
-        <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 14px; margin-top: 25px;" onclick="checkConnection()">Test Server Connection</button>
+        <!-- Test Connection -->
+        <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 14px; margin-top: 10px;" onclick="checkConnection()">Test Server Connection</button>
     </div>
 
     <!-- ZegoCloud UI Kit Script -->
@@ -73,12 +126,12 @@
         function makePayment(amount, minutes) {
             const userName = document.getElementById('username').value.trim();
             if (!userName) {
-                alert("Please enter your name before payment!");
+                alert("Please enter your name in the Client Details section before payment!");
                 return;
             }
 
             const upiId = "bengaliblogger144@okhdfcbank";
-            const payeeName = "Real Astro (" + minutes + " Mins)";
+            const payeeName = "Acharya Subhadip (" + minutes + " Mins)";
             const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR`;
             
             document.getElementById('status').innerText = `Opening UPI for ₹${amount} (${minutes} Mins)... Please complete payment.`;
@@ -92,7 +145,7 @@
                 alert("Please enter your name first!");
                 return;
             }
-            const whatsappUrl = `https://wa.me/?text=Hello%20Astrologer,%20My%20name%20is%20${encodeURIComponent(nameField)}. I want to start my consultation chat.`;
+            const whatsappUrl = `https://wa.me/?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(nameField)}. I want to start my consultation chat.`;
             window.open(whatsappUrl, '_blank');
         }
 
