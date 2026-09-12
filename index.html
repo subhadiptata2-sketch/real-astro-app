@@ -8,6 +8,7 @@
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0 0 70px 0; text-align: center; }
         .header { background-color: #ff9933; color: white; padding: 18px; font-size: 22px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
         .container { max-width: 420px; margin: 15px auto; padding: 10px; }
+        .banner-img { width: 100%; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .section-card { background: white; margin: 10px 0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: left; display: none; }
         .section-card.active { display: block; }
         .section-card h3 { color: #d35400; margin-top: 0; font-size: 18px; border-bottom: 2px solid #ff9933; padding-bottom: 5px; }
@@ -43,10 +44,8 @@
         
         <!-- TAB 1: BOOK CONSULTATION (HOME) -->
         <div id="tab-home" class="section-card active">
-            <!-- Banner Image Set Here -->
-            <div style="margin: -20px -20px 15px -20px;">
-                <img src="48027.png" alt="Real Astro Banner" style="width: 100%; border-radius: 10px 10px 0 0; display: block;" />
-            </div>
+            <!-- Home Screen Banner Image -->
+            <img src="banner.png" alt="Real Astro Banner" class="banner-img">
 
             <h3>📱 Book Consultation</h3>
             <label style="font-size: 13px; font-weight: bold; color: #444;">Enter Your Name:</label>
@@ -123,7 +122,7 @@
 
             <div class="review-box">
                 <strong>Pooja Sharma</strong> <span style="color: #f39c12;">⭐⭐⭐⭐⭐</span>
-                <p>"Numerology aur palmistry reading zabardast thi. Bohot hi polite aur experienced astrologer hain."</p>
+                <p>"Numerology aur palmistry reading zabardast تھی۔ Bohot hi polite aur experienced astrologer hain."</p>
             </div>
         </div>
 
@@ -169,10 +168,13 @@
         function switchTab(tabId, element) {
             const tabs = document.querySelectorAll('.section-card');
             tabs.forEach(tab => tab.classList.remove('active'));
+
             document.getElementById('tab-' + tabId).classList.add('active');
+
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
+
             window.scrollTo(0, 0);
         }
 
