@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Astro</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; text-align: center; }
+        .header { background-color: #ff9933; color: white; padding: 20px; font-size: 24px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card { background: white; margin: 20px; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .btn { background-color: #ff9933; color: white; border: none; padding: 15px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 15px; }
+        .btn:hover { background-color: #e68a00; }
+        #status { margin-top: 20px; font-weight: bold; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="header">🌟 Real Astro</div>
+    
+    <div class="card">
+        <h2>Namaste! 🙏</h2>
+        <p>Book your online astrology consultation easily.</p>
+        
+        <!-- Button to test connection with your Render backend -->
+        <button class="btn" onclick="checkConnection()">Test Server Connection</button>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        function checkConnection() {
+            document.getElementById('status').innerText = "Connecting to server...";
+            document.getElementById('status').style.color = "blue";
+            
+            // Calling your Render Live URL
+            fetch('https://real-astro-backend.onrender.com/')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('status').innerText = "✅ " + data;
+                document.getElementById('status').style.color = "green";
+            })
+            .catch(error => {
+                document.getElementById('status').innerText = "❌ Connection Failed. Please try again.";
+                document.getElementById('status').style.color = "red";
+            });
+        }
+    </script>
+</body>
+</html>
