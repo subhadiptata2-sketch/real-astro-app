@@ -10,6 +10,8 @@
         .card { background: white; margin: 20px; padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .btn { background-color: #ff9933; color: white; border: none; padding: 15px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 15px; }
         .btn:hover { background-color: #e68a00; }
+        .btn-pay { background-color: #28a745; margin-top: 10px; }
+        .btn-pay:hover { background-color: #218838; }
         #status { margin-top: 20px; font-weight: bold; font-size: 16px; }
     </style>
 </head>
@@ -18,19 +20,41 @@
     
     <div class="card">
         <h2>Namaste! 🙏</h2>
-        <p>Book your online astrology consultation easily.</p>
+        <p>Book your online astrology consultation.</p>
         
-        <!-- Button to test connection with your Render backend -->
-        <button class="btn" onclick="checkConnection()">Test Server Connection</button>
+        <!-- Consultation Fee -->
+        <h3 style="color: #333;">Consultation Fee: ₹101</h3>
+        
+        <!-- UPI Payment Button -->
+        <button class="btn btn-pay" onclick="makePayment()">Pay ₹101 via UPI</button>
+
         <p id="status"></p>
+        
+        <!-- Test Connection Button (Neeche chhota kar diya gaya hai) -->
+        <button class="btn" style="background-color: #6c757d; padding: 10px; font-size: 14px; margin-top: 30px;" onclick="checkConnection()">Test Server Connection</button>
     </div>
 
     <script>
+        function makePayment() {
+            // Aapka UPI ID aur Amount (Abhi testing ke liye 101 rakha hai)
+            const upiId = "bengaliblogger144@okhdfcbank";
+            const amount = "101";
+            const name = "Real Astro Consultation";
+            
+            // Phone ka GPay/PhonePe open karne ka link
+            const upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+            
+            document.getElementById('status').innerText = "Opening UPI App... Please complete the payment.";
+            document.getElementById('status').style.color = "green";
+            
+            // Mobile app me open karna
+            window.location.href = upiLink;
+        }
+
         function checkConnection() {
             document.getElementById('status').innerText = "Connecting to server...";
             document.getElementById('status').style.color = "blue";
             
-            // Calling your Render Live URL
             fetch('https://real-astro-backend.onrender.com/')
             .then(response => response.text())
             .then(data => {
@@ -38,7 +62,7 @@
                 document.getElementById('status').style.color = "green";
             })
             .catch(error => {
-                document.getElementById('status').innerText = "❌ Connection Failed. Please try again.";
+                document.getElementById('status').innerText = "❌ Connection Failed.";
                 document.getElementById('status').style.color = "red";
             });
         }
