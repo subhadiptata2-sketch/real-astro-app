@@ -7,7 +7,7 @@
     <!-- Google Fonts for Modern Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for consistent theming */
+        /* CSS Variables */
         :root {
             --primary-dark: #100b38;
             --primary-accent: #2a0845;
@@ -19,207 +19,117 @@
             --bg-color: #f4f5f9;
             --surface: #ffffff;
             --text-main: #2c3e50;
-            --text-muted: #7f8c8d;
+            --text-muted: #64748b;
             --success: #27ae60;
             --whatsapp: #25D366;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-md: 0 8px 24px rgba(16, 11, 56, 0.12);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(16, 11, 56, 0.08);
             --border-radius: 16px;
             --transition: all 0.3s ease;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
-        
-        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 80px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 90px; }
 
-        /* 🌟 MODERN COSMIC APP BAR 🌟 */
+        /* 🌟 APP BAR 🌟 */
         .app-bar { 
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); 
-            color: var(--gold); 
-            padding: 16px 20px; 
-            font-size: 20px; 
-            font-weight: 700; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            letter-spacing: 0.5px;
+            color: var(--gold); padding: 16px 20px; font-size: 20px; font-weight: 700; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; 
+            display: flex; align-items: center; justify-content: center; letter-spacing: 0.5px;
         }
         .app-bar span { margin-right: 8px; font-size: 24px; }
 
-        /* 🌟 LAYOUT 🌟 */
-        .container { max-width: 600px; margin: 0 auto; padding: 16px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 16px; overflow-x: hidden; }
 
-        /* 🌟 MODERN COMPONENT CARDS 🌟 */
-        .section-card { 
-            display: none; 
-            animation: fadeIn 0.4s ease forwards;
-        }
+        /* 🌟 TABS (Only Home is complex now) 🌟 */
+        .section-card { display: none; animation: fadeIn 0.4s ease forwards; }
         .section-card.active { display: block; }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card {
-            background: var(--surface);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .hero-card {
-            background: linear-gradient(135deg, var(--primary-accent) 0%, #3a0d5c 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        .hero-card::after {
-            content: '';
-            position: absolute;
-            top: -50%; right: -50%; bottom: -50%; left: -50%;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 70%);
-            z-index: 0;
-            animation: pulse 8s infinite alternate;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        /* 🌟 CARDS & SECTIONS 🌟 */
+        .home-section { background: var(--surface); border-radius: var(--border-radius); padding: 24px 20px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+        .section-header { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .section-header::after { content: ''; width: 40px; height: 3px; background: var(--gold); border-radius: 2px; }
         
-        .hero-content { position: relative; z-index: 1; }
-        .hero-title { font-size: 24px; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
-        .hero-subtitle { font-size: 14px; font-weight: 300; opacity: 0.9; margin-bottom: 16px; }
+        /* 1. HERO SECTION */
+        .hero-card { background: linear-gradient(135deg, var(--primary-dark) 0%, #3a0d5c 100%); color: white; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.2); padding: 40px 20px; }
+        .hero-title { font-size: 28px; color: var(--gold); margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
+        .hero-subtitle { font-size: 15px; font-weight: 300; opacity: 0.9; margin-bottom: 20px; }
+        .trust-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .trust-chip { background: rgba(255, 255, 255, 0.1); color: var(--gold-light); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.3); backdrop-filter: blur(4px); }
 
-        /* Trust Badges converted to HTML */
-        .trust-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
-        .trust-chip { 
-            background: rgba(255, 255, 255, 0.1); 
-            color: var(--gold-light); 
-            font-size: 11px; 
-            font-weight: 600; 
-            padding: 6px 12px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            backdrop-filter: blur(4px);
-            display: flex; align-items: center; gap: 4px;
-        }
+        /* 2. SERVICES */
+        .service-grid { display: grid; gap: 12px; }
+        .service-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .service-icon { font-size: 24px; background: #fffbeb; padding: 10px; border-radius: 50%; color: var(--gold-dark); border: 1px solid #fde68a; }
+        .service-info h4 { color: var(--primary-dark); font-size: 16px; margin-bottom: 4px; }
+        .service-info p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5; }
 
-        /* 🌟 TYPOGRAPHY 🌟 */
-        h3.section-title { 
-            color: var(--primary-dark); 
-            font-size: 18px; 
-            font-weight: 600; 
-            margin-bottom: 16px; 
-            display: flex; align-items: center; gap: 8px;
-        }
-        .text-hint { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 500;}
-        p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
+        /* 3. WHY CHOOSE US */
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 14px; font-weight: 500; color: var(--text-main); background: #f0fdf4; padding: 12px; border-radius: 10px; border: 1px solid #bbf7d0; }
+        .feature-list li span { color: var(--success); font-size: 18px; }
 
-        /* 🌟 FORMS & INPUTS 🌟 */
+        /* 4. PROFILE */
+        .profile-box { text-align: center; }
+        .profile-avatar { width: 90px; height: 90px; background: linear-gradient(135deg, var(--gold), var(--orange)); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white; box-shadow: 0 4px 10px rgba(255, 153, 51, 0.3); }
+        .profile-name { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
+        .profile-tag { font-size: 13px; color: var(--gold-dark); font-weight: 600; margin-bottom: 12px; }
+        
+        /* 5. HOW IT WORKS */
+        .step-container { display: flex; flex-direction: column; gap: 16px; position: relative; }
+        .step-container::before { content: ''; position: absolute; left: 19px; top: 10px; bottom: 10px; width: 2px; background: #e2e8f0; z-index: 0; }
+        .step { display: flex; gap: 16px; position: relative; z-index: 1; }
+        .step-num { width: 40px; height: 40px; background: var(--primary-dark); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .step-text h4 { font-size: 15px; color: var(--primary-dark); margin-bottom: 4px; margin-top: 8px;}
+        .step-text p { font-size: 13px; color: var(--text-muted); }
+
+        /* 6. BOOKING SECTION (Functional) */
+        .booking-highlight { border: 2px solid var(--gold); box-shadow: var(--shadow-md); }
         .input-group { margin-bottom: 16px; }
-        .form-control { 
-            width: 100%; 
-            padding: 14px 16px; 
-            font-size: 15px; 
-            border: 1px solid #e0e6ed; 
-            border-radius: 12px; 
-            background: #f8fafc;
-            color: var(--text-main);
-            transition: var(--transition);
-        }
+        .text-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 600;}
+        .form-control { width: 100%; padding: 14px 16px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; transition: var(--transition); }
         .form-control:focus { outline: none; border-color: var(--orange); background: white; box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.15); }
-        .form-control::placeholder { color: #a0aec0; }
-
-        /* 🌟 BUTTONS 🌟 */
-        .btn { 
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            width: 100%; padding: 14px 16px; 
-            font-size: 15px; font-weight: 600; 
-            border: none; border-radius: 12px; 
-            cursor: pointer; 
-            transition: var(--transition);
-            margin-bottom: 12px;
-        }
-        .btn:active { transform: scale(0.98); }
         
-        .btn-primary { background: linear-gradient(to right, var(--orange), var(--orange-hover)); color: white; box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3); }
-        .btn-whatsapp { background-color: var(--whatsapp); color: white; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); }
-        
-        /* Pricing Plan Cards (Replacing raw buttons) */
-        .plan-grid { display: grid; gap: 12px; }
-        .plan-card {
-            border: 2px solid #e0e6ed;
-            border-radius: 12px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: white;
-        }
-        .plan-card:hover, .plan-card:active { border-color: var(--success); background: #f0fdf4; }
+        .plan-grid { display: grid; gap: 12px; margin-bottom: 20px;}
+        .plan-card { border: 2px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition); background: white; }
+        .plan-card:active { border-color: var(--success); background: #f0fdf4; transform: scale(0.98); }
         .plan-info { text-align: left; }
         .plan-time { font-size: 16px; font-weight: 700; color: var(--text-main); display: block; }
-        .plan-save { font-size: 12px; color: var(--success); font-weight: 600; background: #dcfce7; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+        .plan-save { font-size: 12px; color: var(--success); font-weight: 700; background: #dcfce7; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
         .plan-price { font-size: 18px; font-weight: 700; color: var(--success); }
-        del { color: var(--text-muted); font-size: 13px; font-weight: normal; margin-right: 4px;}
+        del { color: var(--text-muted); font-size: 13px; margin-right: 4px;}
 
-        /* Connect Options Grid */
         .connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .connect-grid .btn { margin-bottom: 0; padding: 12px; font-size: 14px; }
-        .btn-chat { grid-column: span 2; background: #f8fafc; color: var(--primary-dark); border: 1px solid #e0e6ed; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; font-size: 14px; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; transition: var(--transition); }
+        .btn:active { transform: scale(0.96); }
+        .btn-chat { grid-column: span 2; background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; }
         .btn-audio { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
         .btn-video { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .btn-primary { background: linear-gradient(to right, var(--orange), var(--orange-hover)); color: white; box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3); font-size: 16px; padding: 16px;}
 
-        /* 🌟 ACCORDIONS (Details) 🌟 */
-        details { 
-            background: var(--surface); margin-bottom: 12px; 
-            border: 1px solid #e0e6ed; border-radius: 12px; 
-            overflow: hidden; transition: var(--transition);
-        }
-        details[open] { border-color: var(--gold-light); box-shadow: var(--shadow-sm); }
-        summary { 
-            font-weight: 600; color: var(--primary-dark); 
-            padding: 16px; cursor: pointer; font-size: 15px; 
-            outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center;
-        }
+        /* 7. REVIEWS */
+        .review-scroll { display: flex; flex-direction: column; gap: 12px; }
+        .review-card { background: #f8fafc; padding: 16px; border-radius: 12px; border-left: 4px solid var(--gold); }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;}
+        .review-name { font-weight: 600; font-size: 14px; color: var(--primary-dark); }
+        .review-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px;}
+        .review-text { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.5;}
+
+        /* 8. FAQ */
+        details { background: #f8fafc; margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; transition: var(--transition); }
+        details[open] { border-color: var(--gold-light); background: white; }
+        summary { font-weight: 600; color: var(--primary-dark); padding: 16px; cursor: pointer; font-size: 14px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '▼'; font-size: 12px; color: var(--text-muted); transition: transform 0.3s; }
         details[open] summary::after { transform: rotate(180deg); color: var(--gold-dark); }
-        .sub-text { padding: 0 16px 16px; font-size: 14px; color: var(--text-muted); }
-        .sub-text ul { padding-left: 20px; margin-top: 8px; }
-        .sub-text li { margin-bottom: 6px; }
+        .faq-text { padding: 0 16px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.5;}
 
-        /* 🌟 REVIEWS 🌟 */
-        .review-card { background: #f8fafc; padding: 16px; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid var(--gold); }
-        .review-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .review-name { font-weight: 600; font-size: 14px; color: var(--primary-dark); }
-        .review-stars { color: #f59e0b; font-size: 12px; letter-spacing: 2px;}
-        .review-text { font-size: 13px; color: var(--text-muted); font-style: italic; }
-
-        /* 🌟 BOTTOM NAVIGATION 🌟 */
-        .bottom-nav { 
-            position: fixed; bottom: 0; left: 0; width: 100%; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(10px);
-            border-top: 1px solid #e0e6ed; 
-            display: flex; justify-content: space-around; 
-            padding: 8px 0 12px 0; 
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.05); 
-            z-index: 1000; 
-            padding-bottom: env(safe-area-inset-bottom, 12px); /* For iOS rounded screens */
-        }
-        .nav-btn { 
-            background: none; border: none; 
-            font-size: 11px; color: #a0aec0; 
-            cursor: pointer; 
-            display: flex; flex-direction: column; align-items: center; 
-            font-weight: 600; flex: 1; transition: var(--transition); 
-        }
-        .nav-btn span { font-size: 22px; margin-bottom: 4px; filter: grayscale(100%) opacity(0.6); transition: var(--transition); }
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; padding: 10px 0 16px 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 1000; }
+        .nav-btn { background: none; border: none; font-size: 11px; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-weight: 600; flex: 1; transition: var(--transition); }
+        .nav-btn span { font-size: 22px; margin-bottom: 4px; filter: grayscale(100%) opacity(0.5); transition: var(--transition); }
         .nav-btn.active { color: var(--gold-dark); transform: translateY(-2px); }
         .nav-btn.active span { filter: grayscale(0%) opacity(1); }
 
@@ -233,192 +143,274 @@
     
     <div class="container">
         
-        <!-- TAB 1: HOME (BOOK CONSULTATION) -->
+        <!-- 📱 TAB 1: HOME (COMPREHENSIVE LANDING PAGE) -->
         <div id="tab-home" class="section-card active">
             
-            <!-- Modernized Hero Card replacing large poster dependency -->
-            <div class="card hero-card">
-                <div class="hero-content">
-                    <h1 class="hero-title">Unlock Your True Destiny</h1>
-                    <p class="hero-subtitle">Guidance for a Happier, Healthier Life by Acharya Subhadip</p>
+            <!-- 1. HERO -->
+            <div class="home-section hero-card" style="margin-bottom: 24px; padding: 0;">
+                <div style="padding: 40px 20px;">
+                    <h1 class="hero-title">Guidance for a Better Tomorrow</h1>
+                    <p class="hero-subtitle">100% Accurate Predictions & Remedies from India's Trusted Astrologer.</p>
                     <div class="trust-row">
                         <span class="trust-chip">⭐ 10+ Yrs Exp</span>
-                        <span class="trust-chip">👥 10k+ Clients</span>
-                        <span class="trust-chip">🛡️ Verified</span>
+                        <span class="trust-chip">👥 10,000+ Clients</span>
+                        <span class="trust-chip">💯 Verified Results</span>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <h3 class="section-title">👤 Your Details</h3>
+            <!-- 2. SERVICES -->
+            <div class="home-section">
+                <div class="section-header">Our Expertise</div>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <div class="service-icon">🕉️</div>
+                        <div class="service-info">
+                            <h4>Vedic Astrology</h4>
+                            <p>Kundli Analysis, Career, Marriage, Finance & Future Guidance.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">🔢</div>
+                        <div class="service-info">
+                            <h4>Numerology</h4>
+                            <p>Lucky Number, Name Correction, Life Path & Business Name.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">✋</div>
+                        <div class="service-info">
+                            <h4>Palmistry</h4>
+                            <p>Life Line, Heart Line, Head Line & Complete Hand Reading.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. WHY CHOOSE REAL ASTRO -->
+            <div class="home-section">
+                <div class="section-header">Why Choose Us?</div>
+                <ul class="feature-list">
+                    <li><span>⏱️</span> Fixed Duration (No Per-Minute Rush)</li>
+                    <li><span>💎</span> 100% Personal & Focused Guidance</li>
+                    <li><span>🔒</span> Complete Privacy Guaranteed</li>
+                    <li><span>💡</span> Practical & Easy Remedies</li>
+                </ul>
+            </div>
+
+            <!-- 4. PROFILE -->
+            <div class="home-section profile-box">
+                <div class="profile-avatar">🕉️</div>
+                <h3 class="profile-name">Acharya Subhadip</h3>
+                <div class="profile-tag">Vedic Astrologer • Numerologist</div>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                    With over a decade of deep astrological research and practice, Acharya Subhadip has transformed the lives of 10,000+ individuals globally through authentic Vedic wisdom.
+                </p>
+            </div>
+
+            <!-- 5. HOW IT WORKS -->
+            <div class="home-section">
+                <div class="section-header">How It Works</div>
+                <div class="step-container">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <h4>Enter Details</h4>
+                            <p>Enter your name in the booking section below.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <h4>Select Plan & Pay</h4>
+                            <p>Choose your duration (10, 20, or 30 mins) and pay securely via UPI.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <h4>Connect Instantly</h4>
+                            <p>Click Chat, Audio, or Video Call to begin your private session.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. BOOKING SECTION (Functional Logic Area) -->
+            <div class="home-section booking-highlight" id="booking-area">
+                <div class="section-header">Start Your Consultation</div>
+                
                 <div class="input-group">
-                    <span class="text-hint">Enter Name to Proceed</span>
+                    <span class="text-hint">Step 1: Enter Your Name</span>
                     <input type="text" id="username" class="form-control" placeholder="e.g. Rahul Sharma" />
                 </div>
-            </div>
 
-            <div class="card">
-                <h3 class="section-title">💳 Select Plan & Pay</h3>
-                <div class="plan-grid">
-                    <div class="plan-card" onclick="makePayment(100, 10)">
-                        <div class="plan-info">
-                            <span class="plan-time">10 Minutes</span>
-                            <span class="text-hint" style="margin:0;">Minimum Consultation</span>
+                <div class="input-group" style="margin-top: 24px;">
+                    <span class="text-hint">Step 2: Select Plan & Pay (UPI)</span>
+                    <div class="plan-grid">
+                        <div class="plan-card" onclick="makePayment(100, 10)">
+                            <div class="plan-info">
+                                <span class="plan-time">10 Minutes</span>
+                                <span class="text-hint" style="margin:0; font-weight: normal;">Basic Query</span>
+                            </div>
+                            <div class="plan-price">₹100</div>
                         </div>
-                        <div class="plan-price">₹100</div>
-                    </div>
-                    
-                    <div class="plan-card" onclick="makePayment(150, 20)">
-                        <div class="plan-info">
-                            <span class="plan-time">20 Minutes</span>
-                            <span class="plan-save">Save ₹50</span>
+                        <div class="plan-card" onclick="makePayment(150, 20)">
+                            <div class="plan-info">
+                                <span class="plan-time">20 Minutes</span>
+                                <span class="plan-save">Save ₹50</span>
+                            </div>
+                            <div class="plan-price"><del>₹200</del> ₹150</div>
                         </div>
-                        <div class="plan-price"><del>₹200</del> ₹150</div>
+                        <div class="plan-card" onclick="makePayment(200, 30)">
+                            <div class="plan-info">
+                                <span class="plan-time">30 Minutes</span>
+                                <span class="plan-save">Save ₹100</span>
+                            </div>
+                            <div class="plan-price"><del>₹300</del> ₹200</div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="plan-card" onclick="makePayment(200, 30)">
-                        <div class="plan-info">
-                            <span class="plan-time">30 Minutes</span>
-                            <span class="plan-save">Save ₹100</span>
-                        </div>
-                        <div class="plan-price"><del>₹300</del> ₹200</div>
+                <div class="input-group" style="margin-top: 24px;">
+                    <span class="text-hint">Step 3: Connect (After Payment)</span>
+                    <div class="connect-grid">
+                        <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
+                        <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+                        <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <h3 class="section-title">📞 Connect (After Payment)</h3>
-                <div class="connect-grid">
-                    <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
-                    <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
-                    <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
+            <!-- 7. REVIEWS -->
+            <div class="home-section">
+                <div class="section-header">Client Reviews</div>
+                <div style="text-align: center; margin-bottom: 16px;">
+                    <h2 style="font-size: 36px; color: var(--primary-dark); margin:0;">4.9</h2>
+                    <div style="color: #f59e0b; font-size: 16px; margin: 4px 0;">⭐⭐⭐⭐⭐</div>
+                    <p style="font-size: 13px; color: var(--text-muted); margin:0;">Based on 10,000+ Consultations</p>
+                </div>
+                
+                <div class="review-scroll">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Ananya Roy</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Acharya Subhadip ji ki predictions ekdum sateek hoti hain. Bohot badiya guidance mili mere career ke liye!"</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Vikram Malhotra</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Inhone Kundli dekh kar itne aasan remedies bataye ki ab business mein sab thik chal raha hai. Highly recommended."</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Pooja Sharma</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Numerology aur palmistry reading zabardast thi. Bohot hi polite astrologer hain, sab dhyaan se sunte hain."</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Rahul Desai</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"I was facing marriage issues. Acharya ji guided me beautifully. The 30 mins session felt very fulfilling."</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Sneha Kapoor</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Best thing is they don't charge per minute. 10 minutes is enough for one direct question. Genuine service."</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Amit Verma</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Audio call feature was very smooth. Clear predictions and no hidden charges. Thank you Real Astro!"</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- TAB 2: KUNDLI -->
+            <!-- 8. FAQ -->
+            <div class="home-section">
+                <div class="section-header">FAQs</div>
+                <details>
+                    <summary>How do I book a consultation?</summary>
+                    <div class="faq-text">Simply enter your name in the booking section, click on your preferred time plan (10, 20, or 30 mins) to pay via UPI, and then click on Chat, Audio, or Video call.</div>
+                </details>
+                <details>
+                    <summary>Is my payment secure?</summary>
+                    <div class="faq-text">Yes, all payments are processed securely through your own trusted UPI app (GPay, PhonePe, Paytm, etc.).</div>
+                </details>
+                <details>
+                    <summary>Are my details kept private?</summary>
+                    <div class="faq-text">100%. Your birth details, questions, and personal identity are kept strictly confidential and never shared.</div>
+                </details>
+                <details>
+                    <summary>What if the call disconnects?</summary>
+                    <div class="faq-text">If a network issue occurs, you can rejoin the room or contact support via WhatsApp to complete your remaining time.</div>
+                </details>
+            </div>
+
+            <!-- 9. FINAL CTA -->
+            <div style="text-align: center; margin: 30px 0 20px 0;">
+                <h3 style="color: var(--primary-dark); font-size: 20px; font-weight: 700; margin-bottom: 12px;">Don't leave your future to chance.</h3>
+                <button class="btn btn-primary" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">
+                    Book Your Session Now
+                </button>
+            </div>
+
+        </div> <!-- END TAB HOME -->
+
+
+        <!-- 📱 TAB 2: KUNDLI -->
         <div id="tab-kundli" class="section-card">
-            <div class="card">
-                <h3 class="section-title">📜 Free Kundli Report</h3>
-                <p>Enter your birth details below. Acharya Subhadip will analyze your Kundli and guide you personally.</p>
+            <div class="home-section">
+                <div class="section-header">Free Kundli Report</div>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Enter your birth details below. Acharya Subhadip will analyze your Kundli and guide you personally.</p>
                 
                 <div class="input-group">
                     <span class="text-hint">Full Name</span>
                     <input type="text" id="k-name" class="form-control" placeholder="Enter your name" />
                 </div>
-
                 <div class="input-group">
                     <span class="text-hint">Date of Birth</span>
                     <input type="date" id="k-dob" class="form-control" />
                 </div>
-
                 <div class="input-group">
                     <span class="text-hint">Time of Birth</span>
                     <input type="time" id="k-time" class="form-control" />
                 </div>
-
                 <div class="input-group">
                     <span class="text-hint">Place of Birth</span>
                     <input type="text" id="k-place" class="form-control" placeholder="City, State" />
                 </div>
-
-                <button class="btn btn-whatsapp" onclick="requestKundli()">Get Report via WhatsApp ➔</button>
+                <button class="btn" style="background-color: var(--whatsapp); color: white;" onclick="requestKundli()">Get Report via WhatsApp ➔</button>
             </div>
         </div>
 
-        <!-- TAB 3: ABOUT -->
-        <div id="tab-about" class="section-card">
-            <div class="card">
-                <h3 class="section-title">🌟 Meet Acharya Subhadip</h3>
-                <p><strong>Acharya Subhadip</strong> is a Vedic Astrologer, Numerologist & Palmistry Expert with <strong>10+ years of experience</strong> and <strong>10,000+ consultations</strong>.</p>
-            </div>
-            
-            <h3 class="section-title" style="margin-left: 8px;">Our Expertise</h3>
-            
-            <details>
-                <summary>🕉️ Vedic Astrology</summary>
-                <div class="sub-text">
-                    <ul>
-                        <li>Detailed Horoscope (Kundli)</li>
-                        <li>Life Prediction & Future Guidance</li>
-                        <li>Career & Business Guidance</li>
-                        <li>Marriage & Relationship Analysis</li>
-                    </ul>
-                </div>
-            </details>
-            <details>
-                <summary>🔢 Numerology</summary>
-                <div class="sub-text">
-                    <ul>
-                        <li>Life Path Number Analysis</li>
-                        <li>Name Correction (Lucky Name)</li>
-                        <li>Personality & Character Analysis</li>
-                        <li>Lucky Numbers & Colors</li>
-                    </ul>
-                </div>
-            </details>
-            <details>
-                <summary>✋ Palmistry</summary>
-                <div class="sub-text">
-                    <ul>
-                        <li>Life Line Analysis (Health)</li>
-                        <li>Heart Line (Love & Relationships)</li>
-                        <li>Head Line (Mind & Career)</li>
-                        <li>Complete Hand Reading</li>
-                    </ul>
-                </div>
-            </details>
-        </div>
-
-        <!-- TAB 4: REVIEWS -->
-        <div id="tab-reviews" class="section-card">
-            <div class="card" style="text-align: center;">
-                <h2 style="font-size: 32px; color: var(--primary-dark);">4.9</h2>
-                <div class="review-stars" style="font-size: 16px; margin: 4px 0;">⭐⭐⭐⭐⭐</div>
-                <p style="margin:0;">Based on 10,000+ Consultations</p>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="review-name">Ananya Roy</span>
-                    <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                </div>
-                <div class="review-text">"Acharya Subhadip ji ki predictions ekdum sateek hoti hain. Bohot badiya guidance mili!"</div>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="review-name">Vikram Malhotra</span>
-                    <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                </div>
-                <div class="review-text">"Inhone Kundli dekh kar itne aasan remedies bataye ki ab sab thik chal raha hai."</div>
-            </div>
-
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="review-name">Pooja Sharma</span>
-                    <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                </div>
-                <div class="review-text">"Numerology aur palmistry reading zabardast thi. Bohot hi polite astrologer hain."</div>
-            </div>
-        </div>
-
-        <!-- TAB 5: SUPPORT -->
+        <!-- 📱 TAB 3: SUPPORT/ACCOUNT -->
         <div id="tab-support" class="section-card">
-            <div class="card">
-                <h3 class="section-title">📞 Contact & Support</h3>
-                <p>Support is available via WhatsApp Chat.</p>
-                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1; text-align: center; margin-bottom: 16px;">
-                    <span class="text-hint" style="margin:0;">UPI ID</span>
-                    <strong style="color: var(--primary-dark);">bengaliblogger144@okhdfcbank</strong>
+            <div class="home-section">
+                <div class="section-header">Contact & Support</div>
+                <p style="font-size: 14px; text-align: center; color: var(--text-muted);">Support is available via WhatsApp Chat.</p>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px dashed #cbd5e1; text-align: center; margin: 20px 0;">
+                    <span class="text-hint" style="margin:0;">UPI ID for Manual Payments</span>
+                    <strong style="color: var(--primary-dark); font-size: 16px;">bengaliblogger144@okhdfcbank</strong>
                 </div>
-                <button class="btn btn-chat" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support</button>
+                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1;" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support</button>
             </div>
             
-            <div class="card">
-                <h3 class="section-title">📜 Terms & Conditions</h3>
+            <div class="home-section">
+                <div class="section-header">Terms & Conditions</div>
                 <ul style="padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-                    <li style="margin-bottom: 8px;">All payments made via UPI are final.</li>
+                    <li style="margin-bottom: 8px;">All payments made via UPI are final and non-refundable.</li>
                     <li style="margin-bottom: 8px;">Client birth details are kept strictly confidential.</li>
                     <li>Consultations are meant for guidance and positive direction.</li>
                 </ul>
@@ -432,14 +424,14 @@
     <div class="bottom-nav">
         <button class="nav-btn active" onclick="switchTab('home', this)"><span>🏠</span>Home</button>
         <button class="nav-btn" onclick="switchTab('kundli', this)"><span>📜</span>Kundli</button>
-        <button class="nav-btn" onclick="switchTab('about', this)"><span>🌟</span>About</button>
-        <button class="nav-btn" onclick="switchTab('reviews', this)"><span>⭐</span>Reviews</button>
         <button class="nav-btn" onclick="switchTab('support', this)"><span>⚙️</span>Account</button>
     </div>
 
+    <!-- ZEGOCLOUD SDK -->
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
     <script>
+        // CORE BUSINESS LOGIC (UNTOUCHED)
         const ASTROLOGER_WHATSAPP = "919339199974"; 
 
         function switchTab(tabId, element) {
