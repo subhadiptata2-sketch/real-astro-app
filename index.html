@@ -412,7 +412,7 @@
                     <span class="text-hint" style="margin:0;">UPI ID</span>
                     <strong style="color: var(--primary-dark);">bengaliblogger144@okhdfcbank</strong>
                 </div>
-                <button class="btn btn-chat" onclick="window.open(https://wa.me/919339199974?text=Need%20Support, _blank)">Contact Support</button>
+                <button class="btn btn-chat" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support</button>
             </div>
             
             <div class="card">
@@ -431,4 +431,103 @@
     <!-- BOTTOM NAVIGATION MENU BAR -->
     <div class="bottom-nav">
         <button class="nav-btn active" onclick="switchTab('home', this)"><span>🏠</span>Home</button>
-        <button class="nav-btn" onclick="
+        <button class="nav-btn" onclick="switchTab('kundli', this)"><span>📜</span>Kundli</button>
+        <button class="nav-btn" onclick="switchTab('about', this)"><span>🌟</span>About</button>
+        <button class="nav-btn" onclick="switchTab('reviews', this)"><span>⭐</span>Reviews</button>
+        <button class="nav-btn" onclick="switchTab('support', this)"><span>⚙️</span>Account</button>
+    </div>
+
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+
+    <script>
+        const ASTROLOGER_WHATSAPP = "919339199974"; 
+
+        function switchTab(tabId, element) {
+            const tabs = document.querySelectorAll('.section-card');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerText = message;
+            statusDiv.style.display = 'block';
+            if(type === 'error') {
+                statusDiv.style.background = '#fef2f2';
+                statusDiv.style.color = '#b91c1c';
+                statusDiv.style.border = '1px solid #fecaca';
+            } else {
+                statusDiv.style.background = '#f0fdf4';
+                statusDiv.style.color = '#15803d';
+                statusDiv.style.border = '1px solid #bbf7d0';
+            }
+            setTimeout(() => { statusDiv.style.display = 'none'; }, 4000);
+        }
+
+        function requestKundli() {
+            const name = document.getElementById('k-name').value.trim();
+            const dob = document.getElementById('k-dob').value;
+            const time = document.getElementById('k-time').value;
+            const place = document.getElementById('k-place').value.trim();
+
+            if (!name || !dob || !time || !place) {
+                showStatus("Please fill all details.", 'error');
+                return;
+            }
+
+            const message = `Namaste Acharya ji! 🙏\nI want my Kundli analysis. Here are my birth details:\n\n*Name:* ${name}\n*DOB:* ${dob}\n*Time:* ${time}\n*Place:* ${place}`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function makePayment(amount, minutes) {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) {
+                showStatus("Enter your name first!", 'error');
+                document.getElementById('username').focus();
+                return;
+            }
+            const upiId = "bengaliblogger144@okhdfcbank";
+            const payeeName = "Acharya Subhadip (" + minutes + " Mins)";
+            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR`;
+            
+            showStatus(`Opening UPI for ₹${amount}...`, 'success');
+            setTimeout(() => { window.location.href = upiLink; }, 500);
+        }
+
+        function startChat() {
+            const nameField = document.getElementById('username').value.trim();
+            if (!nameField) {
+                showStatus("Enter your name first!", 'error');
+                document.getElementById('username').focus();
+                return;
+            }
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(nameField)}. I want to start my consultation chat.`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function startAudioCall() {
+            const userName = document.getElementById('username').value.trim();
+            if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const appID = 1009897816; 
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", String(Math.floor(Math.random() * 100000)), userName));
+            zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.OneONoneCall }, turnOnCameraWhenJoining: false, showMyCameraToggleButton: false });
+        }
+
+        function startVideoCall() {
+            const userName = document.getElementById('username').value.trim();
+            if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const appID = 1009897816; 
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", String(Math.floor(Math.random() * 100000)), userName));
+            zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
+        }
+    </script>
+</body>
+</html>
