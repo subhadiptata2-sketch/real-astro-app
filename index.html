@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Astro - Client Portal</title>
+    <title>Real Astro - Client App</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,39 +13,75 @@
             --bg-color: #f4f5f9;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-color); color: #333; }
-        
-        .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary-accent)); color: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); }
-        .header h1 { font-size: 24px; color: var(--gold); }
-        
-        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
-        
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .card h2 { color: var(--primary-dark); font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        
-        .remedy-box { background: #fffbeb; border-left: 4px solid var(--gold); padding: 15px; border-radius: 8px; }
-        .remedy-title { font-weight: 600; color: #b45309; margin-bottom: 5px; }
-        .remedy-desc { font-size: 14px; color: #451a03; }
+        body { background-color: var(--bg-color); color: #333; padding-bottom: 70px; }
 
-        .slot { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px; }
-        .slot-time { font-weight: 600; color: var(--primary-dark); font-size: 15px; }
-        
-        .btn { padding: 8px 16px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; color: white; background: #27ae60; transition: 0.2s; font-size: 14px; }
+        /* App Header */
+        .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary-accent)); color: white; padding: 25px 20px 20px; text-align: center; border-bottom: 3px solid var(--gold); border-radius: 0 0 20px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header h1 { font-size: 26px; color: var(--gold); margin-bottom: 5px; }
+
+        .container { padding: 15px; max-width: 600px; margin: 0 auto; }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; margin-top: 10px;}
+        .service-card { background: white; padding: 20px 10px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer; transition: 0.2s; border: 1px solid #f1f5f9; }
+        .service-card:active { transform: scale(0.96); }
+        .service-icon { font-size: 32px; margin-bottom: 10px; }
+        .service-title { font-weight: 600; font-size: 14px; color: var(--primary-dark); }
+
+        /* Cards and Sections */
+        .section-title { font-size: 18px; color: var(--primary-dark); margin-bottom: 15px; font-weight: 700; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+
+        /* Live Remedy */
+        .remedy-box { background: #fffbeb; border-left: 4px solid var(--gold); padding: 15px; border-radius: 8px; }
+        .remedy-title { font-weight: 700; color: #b45309; margin-bottom: 5px; font-size: 15px; }
+        .remedy-desc { font-size: 13.5px; color: #451a03; line-height: 1.5; }
+
+        /* Slots */
+        .slot { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; }
+        .slot-time { font-weight: 600; color: var(--primary-dark); font-size: 14px; }
+        .btn { padding: 8px 18px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; color: white; background: #27ae60; transition: 0.2s; font-size: 13px; }
         .btn.disabled { background: #cbd5e1; cursor: not-allowed; color: #64748b; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 15px rgba(0,0,0,0.08); z-index: 1000; border-top: 1px solid #f1f5f9; }
+        .nav-item { text-align: center; color: #64748b; font-size: 12px; cursor: pointer; font-weight: 500;}
+        .nav-item.active { color: var(--primary-dark); font-weight: 700; }
+        .nav-icon { font-size: 22px; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>🕉️ Real Astro</h1>
-        <p style="font-size: 14px; opacity: 0.9;">Consult Acharya Subhadip</p>
+        <p style="font-size: 14px; opacity: 0.9;">Guidance by Acharya Subhadip</p>
     </div>
 
     <div class="container">
         
+        <!-- Top Services -->
+        <div class="services-grid">
+            <div class="service-card" onclick="alert('Chat feature coming soon!')">
+                <div class="service-icon">💬</div>
+                <div class="service-title">Chat with Astrologer</div>
+            </div>
+            <div class="service-card" onclick="alert('Call feature coming soon!')">
+                <div class="service-icon">📞</div>
+                <div class="service-title">Call Astrologer</div>
+            </div>
+            <div class="service-card" onclick="alert('Kundli software coming soon!')">
+                <div class="service-icon">📜</div>
+                <div class="service-title">Free Kundli</div>
+            </div>
+            <div class="service-card" onclick="alert('Matchmaking coming soon!')">
+                <div class="service-icon">❤️</div>
+                <div class="service-title">Matchmaking</div>
+            </div>
+        </div>
+
         <!-- Live Remedy Section -->
         <div class="card">
-            <h2>Today's Guidance & Remedy</h2>
+            <h2 class="section-title">Today's Guidance & Remedy</h2>
             <div class="remedy-box" id="remedy-container">
                 <div class="remedy-title" id="remedy-title">Loading...</div>
                 <div class="remedy-desc" id="remedy-desc">Fetching latest guidance...</div>
@@ -54,23 +90,20 @@
 
         <!-- Live Booking Section -->
         <div class="card">
-            <h2>Book a Consultation</h2>
-            <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Live availability status:</p>
+            <h2 class="section-title">Book a Consultation</h2>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Live availability status. Click "Book Now" to proceed.</p>
             
-            <div class="slot">
-                <span class="slot-time">11:00 AM - 11:30 AM</span>
-                <button id="btn-1100" class="btn disabled">Checking...</button>
-            </div>
-            <div class="slot">
-                <span class="slot-time">11:30 AM - 12:00 PM</span>
-                <button id="btn-1130" class="btn disabled">Checking...</button>
-            </div>
-            <div class="slot">
-                <span class="slot-time">12:00 PM - 12:30 PM</span>
-                <button id="btn-1200" class="btn disabled">Checking...</button>
-            </div>
+            <div class="slot"><span class="slot-time">11:00 AM - 11:30 AM</span><button id="btn-1100" class="btn disabled">Checking...</button></div>
+            <div class="slot"><span class="slot-time">11:30 AM - 12:00 PM</span><button id="btn-1130" class="btn disabled">Checking...</button></div>
+            <div class="slot"><span class="slot-time">12:00 PM - 12:30 PM</span><button id="btn-1200" class="btn disabled">Checking...</button></div>
         </div>
+    </div>
 
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">💳</div>Wallet</div>
+        <div class="nav-item"><div class="nav-icon">👤</div>Profile</div>
     </div>
 
     <!-- FIREBASE CLIENT SCRIPT (Real-Time Listener) -->
