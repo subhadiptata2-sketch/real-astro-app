@@ -118,7 +118,6 @@
         .account-menu li::after { content: '›'; margin-left: auto; font-size: 22px; color: #cbd5e1; font-weight: 300; }
         .account-header-bg { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); color: white; padding: 24px 20px; border-radius: var(--border-radius) var(--border-radius) 0 0; text-align: center; }
 
-        /* 🌟 OPTION A KUNDLI STYLES 🌟 */
         .spinner {
             width: 44px; height: 44px;
             border: 4px solid #e2e8f0;
@@ -160,7 +159,6 @@
         
         <!-- 📱 TAB 1: HOME -->
         <div id="tab-home" class="section-card active">
-            <!-- (Home content exactly same as Step 2 & 3) -->
             <div class="home-section hero-card" style="margin-bottom: 24px; padding: 0;">
                 <div style="padding: 40px 20px;">
                     <h1 class="hero-title">Guidance for a Better Tomorrow</h1>
@@ -171,6 +169,13 @@
                         <span class="trust-chip">💯 Verified Results</span>
                     </div>
                 </div>
+            </div>
+
+            <!-- 🔥 NEW: LIVE REMEDY SECTION (Automatically updates from Admin Panel) -->
+            <div class="home-section" id="live-remedy-section" style="display: none; background: #fffbeb; border: 1px solid #fde68a; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);">
+                <div class="section-header" style="color: #b45309; margin-bottom: 12px;">Today's Guidance & Remedy</div>
+                <h4 id="client-rem-title" style="color: #92400e; margin-bottom: 6px; font-size: 16px; font-weight: 700;">Loading...</h4>
+                <p id="client-rem-desc" style="font-size: 14px; color: #78350f; line-height: 1.6; margin: 0;">Fetching live guidance...</p>
             </div>
 
             <div class="home-section">
@@ -252,6 +257,25 @@
                 <div class="input-group">
                     <span class="text-hint">Step 1: Enter Your Name</span>
                     <input type="text" id="username" class="form-control" placeholder="e.g. Rahul Sharma" />
+                </div>
+
+                <!-- 🔥 NEW: LIVE AVAILABILITY SECTION (Connected to Admin Panel) -->
+                <div class="input-group" style="margin-top: 24px; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
+                    <span class="text-hint" style="color: var(--primary-dark); font-size: 14px;">Live Consultation Slots</span>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;">
+                            <span style="font-size: 14px; font-weight: 600; color: var(--text-main);">11:00 AM - 11:30 AM</span>
+                            <span id="slot-status-1100" style="font-size: 12px; font-weight: 700; background: #e2e8f0; padding: 4px 8px; border-radius: 12px;">Checking...</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;">
+                            <span style="font-size: 14px; font-weight: 600; color: var(--text-main);">11:30 AM - 12:00 PM</span>
+                            <span id="slot-status-1130" style="font-size: 12px; font-weight: 700; background: #e2e8f0; padding: 4px 8px; border-radius: 12px;">Checking...</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 14px; font-weight: 600; color: var(--text-main);">12:00 PM - 12:30 PM</span>
+                            <span id="slot-status-1200" style="font-size: 12px; font-weight: 700; background: #e2e8f0; padding: 4px 8px; border-radius: 12px;">Checking...</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="input-group" style="margin-top: 24px;">
@@ -336,11 +360,9 @@
             </div>
         </div>
 
-
-        <!-- 📱 TAB 2: KUNDLI GENERATION (OPTION A - SECURE/MANUAL FLOW) -->
+        <!-- 📱 TAB 2: KUNDLI GENERATION -->
         <div id="tab-kundli" class="section-card">
             
-            <!-- STEP 1: INPUT FORM -->
             <div id="kundli-input-section" class="home-section">
                 <div class="section-header">Kundli Analysis</div>
                 <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Vedic calculations require precision. Enter your exact birth details for accurate analysis.</p>
@@ -365,18 +387,15 @@
                 <button class="btn btn-primary" style="margin-top: 8px;" onclick="generateKundliUI()">✨ Analyze Details</button>
             </div>
 
-            <!-- STEP 2: LOADING ANIMATION (Hidden by default) -->
             <div id="kundli-loading-section" class="home-section" style="display: none; text-align: center; padding: 60px 20px;">
                 <div class="spinner"></div>
                 <h4 style="color: var(--primary-dark); margin-top: 24px; font-size: 16px;">Verifying Details...</h4>
                 <p style="font-size: 13px; color: var(--text-muted);">Preparing data for Acharya Subhadip.</p>
             </div>
 
-            <!-- STEP 3: KUNDLI RESULT (OPTION A - Push for manual analysis) -->
             <div id="kundli-result-section" class="home-section" style="display: none; text-align: center;">
                 <div class="section-header">Details Verified</div>
                 
-                <!-- Secure Notification Box instead of empty chart -->
                 <div class="secure-data-box">
                     <div class="secure-icon">🔒</div>
                     <h3 style="color: var(--primary-dark); font-size: 16px; margin-bottom: 8px;">Planetary Data Prepared</h3>
@@ -399,7 +418,6 @@
                 <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); margin-top: 8px;" onclick="resetKundliUI()">Modify Details</button>
             </div>
         </div>
-
 
         <!-- 📱 TAB 3: ACCOUNT & PROFILE -->
         <div id="tab-support" class="section-card">
@@ -471,6 +489,7 @@
     <!-- ZEGOCLOUD SDK -->
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
+    <!-- ORIGINAL APP LOGIC -->
     <script>
         const ASTROLOGER_WHATSAPP = "919339199974"; 
 
@@ -511,7 +530,6 @@
             showStatus(featureName + " will be available soon!", "success");
         }
 
-        // 🌟 OPTION A - KUNDLI UI FLOW LOGIC 🌟
         function generateKundliUI() {
             const name = document.getElementById('k-name').value.trim();
             const dob = document.getElementById('k-dob').value;
@@ -523,16 +541,13 @@
                 return;
             }
 
-            // Hide form, Show loading spinner
             document.getElementById('kundli-input-section').style.display = 'none';
             document.getElementById('kundli-loading-section').style.display = 'block';
 
-            // Simulate quick verification delay (1.5 seconds)
             setTimeout(() => {
                 document.getElementById('kundli-loading-section').style.display = 'none';
                 document.getElementById('kundli-result-section').style.display = 'block';
                 
-                // Populate result details for review
                 document.getElementById('res-name').innerText = "Client: " + name;
                 document.getElementById('res-details').innerText = `${dob} | ${time} | ${place}`;
             }, 1500);
@@ -554,7 +569,6 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // ORIGINAL PAYMENT & CALLING LOGIC
         function makePayment(amount, minutes) {
             const userName = document.getElementById('username').value.trim();
             if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
@@ -587,6 +601,57 @@
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", String(Math.floor(Math.random() * 100000)), userName));
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
+        }
+    </script>
+
+    <!-- 🔥 NEW: FIREBASE LIVE CONNECTION SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbHdnVt9ST7vbJpEA1B8f76FglZo5zfav",
+            authDomain: "real-astro-c8d6e.firebaseapp.com",
+            projectId: "real-astro-c8d6e",
+            storageBucket: "real-astro-c8d6e.appspot.com",
+            messagingSenderId: "972015683245",
+            appId: "1-972015683245-web:f4279a5b783d923of3a824",
+            measurementId: "G-5F29HE5B1D"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fetch Live Remedy from Admin
+        onSnapshot(doc(db, "remedies", "latest"), (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('live-remedy-section').style.display = 'block';
+                document.getElementById('client-rem-title').innerText = data.title;
+                document.getElementById('client-rem-desc').innerText = data.desc;
+            }
+        });
+
+        // Fetch Live Availability Slots from Admin
+        onSnapshot(doc(db, "settings", "availability"), (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                updateSlotStatus('slot-status-1100', data.slot1100);
+                updateSlotStatus('slot-status-1130', data.slot1130);
+                updateSlotStatus('slot-status-1200', data.slot1200);
+            }
+        });
+
+        function updateSlotStatus(elementId, isAvailable) {
+            const el = document.getElementById(elementId);
+            if (isAvailable) {
+                el.innerText = "🟢 Available";
+                el.style.color = "var(--success)";
+                el.style.background = "#dcfce7";
+            } else {
+                el.innerText = "🔴 Booked";
+                el.style.color = "#ef4444";
+                el.style.background = "#fee2e2";
+            }
         }
     </script>
 </body>
