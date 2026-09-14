@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Real Astro - Premium Guidance</title>
-    <!-- Google Fonts for Modern Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
         :root {
             --primary-dark: #100b38;
             --primary-accent: #2a0845;
@@ -31,7 +29,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
         body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 90px; }
 
-        /* 🌟 APP BAR 🌟 */
         .app-bar { 
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); 
             color: var(--gold); padding: 16px 20px; font-size: 20px; font-weight: 700; 
@@ -42,24 +39,20 @@
 
         .container { max-width: 600px; margin: 0 auto; padding: 16px; overflow-x: hidden; }
 
-        /* 🌟 TABS 🌟 */
         .section-card { display: none; animation: fadeIn 0.4s ease forwards; }
         .section-card.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 🌟 CARDS & SECTIONS 🌟 */
         .home-section { background: var(--surface); border-radius: var(--border-radius); padding: 24px 20px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
         .section-header { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .section-header::after { content: ''; width: 40px; height: 3px; background: var(--gold); border-radius: 2px; }
         
-        /* HERO SECTION */
         .hero-card { background: linear-gradient(135deg, var(--primary-dark) 0%, #3a0d5c 100%); color: white; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.2); padding: 40px 20px; }
         .hero-title { font-size: 28px; color: var(--gold); margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
         .hero-subtitle { font-size: 15px; font-weight: 300; opacity: 0.9; margin-bottom: 20px; }
         .trust-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .trust-chip { background: rgba(255, 255, 255, 0.1); color: var(--gold-light); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.3); backdrop-filter: blur(4px); }
 
-        /* SERVICES & PROFILE */
         .service-grid { display: grid; gap: 12px; }
         .service-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
         .service-icon { font-size: 24px; background: #fffbeb; padding: 10px; border-radius: 50%; color: var(--gold-dark); border: 1px solid #fde68a; }
@@ -79,7 +72,6 @@
         .step-text h4 { font-size: 15px; color: var(--primary-dark); margin-bottom: 4px; margin-top: 8px;}
         .step-text p { font-size: 13px; color: var(--text-muted); }
 
-        /* BOOKING SECTION */
         .booking-highlight { border: 2px solid var(--gold); box-shadow: var(--shadow-md); }
         .input-group { margin-bottom: 16px; text-align: left;}
         .text-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 600;}
@@ -104,7 +96,6 @@
         .btn-primary { background: linear-gradient(to right, var(--orange), var(--orange-hover)); color: white; box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3); font-size: 16px; padding: 16px;}
         .btn-whatsapp { background-color: var(--whatsapp); color: white; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); }
 
-        /* REVIEWS & FAQ */
         .review-scroll { display: flex; flex-direction: column; gap: 12px; }
         .review-card { background: #f8fafc; padding: 16px; border-radius: 12px; border-left: 4px solid var(--gold); text-align: left;}
         .review-header { display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;}
@@ -119,7 +110,6 @@
         details[open] summary::after { transform: rotate(180deg); color: var(--gold-dark); }
         .faq-text { padding: 0 16px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.5;}
 
-        /* ACCOUNT MENU STYLES */
         .account-menu { list-style: none; padding: 0; margin: 0; }
         .account-menu li { display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid #f1f5f9; font-size: 15px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: var(--transition); }
         .account-menu li:last-child { border-bottom: none; }
@@ -128,7 +118,7 @@
         .account-menu li::after { content: '›'; margin-left: auto; font-size: 22px; color: #cbd5e1; font-weight: 300; }
         .account-header-bg { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); color: white; padding: 24px 20px; border-radius: var(--border-radius) var(--border-radius) 0 0; text-align: center; }
 
-        /* 🌟 NEW: KUNDLI SPECIFIC STYLES 🌟 */
+        /* 🌟 OPTION A KUNDLI STYLES 🌟 */
         .spinner {
             width: 44px; height: 44px;
             border: 4px solid #e2e8f0;
@@ -139,17 +129,19 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .kundli-chart-box {
-            width: 140px; height: 140px;
-            margin: 0 auto 16px;
-            background: var(--primary-dark);
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            padding: 12px;
-            box-shadow: 0 8px 20px rgba(255,215,0,0.15);
+        .secure-data-box {
+            background: linear-gradient(135deg, #fff9e6, #fff0c2);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 153, 51, 0.1);
+        }
+        .secure-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
         }
 
-        /* BOTTOM NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; padding: 10px 0 16px 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 1000; }
         .nav-btn { background: none; border: none; font-size: 11px; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-weight: 600; flex: 1; transition: var(--transition); }
         .nav-btn span { font-size: 22px; margin-bottom: 4px; filter: grayscale(100%) opacity(0.5); transition: var(--transition); }
@@ -345,13 +337,13 @@
         </div>
 
 
-        <!-- 📱 TAB 2: KUNDLI GENERATION (NEW FLOW) -->
+        <!-- 📱 TAB 2: KUNDLI GENERATION (OPTION A - SECURE/MANUAL FLOW) -->
         <div id="tab-kundli" class="section-card">
             
             <!-- STEP 1: INPUT FORM -->
             <div id="kundli-input-section" class="home-section">
-                <div class="section-header">Generate Kundli</div>
-                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Enter your exact birth details to generate your Vedic astrological chart.</p>
+                <div class="section-header">Kundli Analysis</div>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Vedic calculations require precision. Enter your exact birth details for accurate analysis.</p>
                 
                 <div class="input-group">
                     <span class="text-hint">Full Name</span>
@@ -366,49 +358,45 @@
                     <input type="time" id="k-time" class="form-control" />
                 </div>
                 <div class="input-group">
-                    <span class="text-hint">Place of Birth</span>
-                    <input type="text" id="k-place" class="form-control" placeholder="City, State" />
+                    <span class="text-hint">Place of Birth (City & State)</span>
+                    <input type="text" id="k-place" class="form-control" placeholder="e.g. Kolkata, West Bengal" />
                 </div>
                 
-                <button class="btn btn-primary" style="margin-top: 8px;" onclick="generateKundliUI()">✨ Generate Kundli</button>
+                <button class="btn btn-primary" style="margin-top: 8px;" onclick="generateKundliUI()">✨ Analyze Details</button>
             </div>
 
             <!-- STEP 2: LOADING ANIMATION (Hidden by default) -->
             <div id="kundli-loading-section" class="home-section" style="display: none; text-align: center; padding: 60px 20px;">
                 <div class="spinner"></div>
-                <h4 style="color: var(--primary-dark); margin-top: 24px; font-size: 16px;">Calculating Planetary Positions...</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Aligning stars based on your birth time.</p>
+                <h4 style="color: var(--primary-dark); margin-top: 24px; font-size: 16px;">Verifying Details...</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Preparing data for Acharya Subhadip.</p>
             </div>
 
-            <!-- STEP 3: KUNDLI RESULT (Hidden by default) -->
+            <!-- STEP 3: KUNDLI RESULT (OPTION A - Push for manual analysis) -->
             <div id="kundli-result-section" class="home-section" style="display: none; text-align: center;">
-                <div class="section-header">Your Kundli Profile</div>
+                <div class="section-header">Details Verified</div>
                 
-                <!-- Mock Kundli North Indian Chart Graphic using SVG -->
-                <div class="kundli-chart-box">
-                    <svg viewBox="0 0 100 100" style="width:100%; height:100%; stroke:var(--gold); stroke-width:1; fill:none;">
-                        <rect x="0" y="0" width="100" height="100"></rect>
-                        <line x1="0" y1="0" x2="100" y2="100"></line>
-                        <line x1="0" y1="100" x2="100" y2="0"></line>
-                        <line x1="50" y1="0" x2="100" y2="50"></line>
-                        <line x1="100" y1="50" x2="50" y2="100"></line>
-                        <line x1="50" y1="100" x2="0" y2="50"></line>
-                        <line x1="0" y1="50" x2="50" y2="0"></line>
-                    </svg>
-                </div>
-                
-                <h3 id="res-name" style="color: var(--primary-dark); margin-top: 16px; font-size: 18px;"></h3>
-                <p id="res-details" style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;"></p>
-                
-                <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 16px; border-radius: 12px; margin-bottom: 20px; text-align: left;">
-                    <p style="font-size: 13px; color: #b45309; margin: 0; font-weight: 500; line-height: 1.5;">
-                        <strong style="display:block; margin-bottom: 6px;">Chart Generated Successfully! ✅</strong>
-                        For an accurate interpretation, dosha analysis, and personalized remedies, this chart needs to be analyzed by an expert.
+                <!-- Secure Notification Box instead of empty chart -->
+                <div class="secure-data-box">
+                    <div class="secure-icon">🔒</div>
+                    <h3 style="color: var(--primary-dark); font-size: 16px; margin-bottom: 8px;">Planetary Data Prepared</h3>
+                    <p style="font-size: 13px; color: #b45309; margin-bottom: 12px; font-weight: 500; line-height: 1.5;">
+                        True Vedic Kundli requires deep manual analysis to study Doshas, Mahadashas, and planetary alignments accurately. 
+                    </p>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 0;">
+                        We do not rely on automatic software for crucial life predictions.
                     </p>
                 </div>
+                
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 12px; margin-bottom: 20px; text-align: left;">
+                    <h4 id="res-name" style="color: var(--primary-dark); font-size: 15px; margin-bottom: 4px;"></h4>
+                    <p id="res-details" style="font-size: 13px; color: var(--text-muted); font-weight: 500; margin:0;"></p>
+                </div>
 
-                <button class="btn btn-whatsapp" onclick="sendKundliWhatsApp()">Send to Acharya for Analysis ➔</button>
-                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); margin-top: 8px;" onclick="resetKundliUI()">Create New Kundli</button>
+                <p style="font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 12px;">Send this secure data to Acharya Subhadip for full reading.</p>
+
+                <button class="btn btn-whatsapp" onclick="sendKundliWhatsApp()">Send for Expert Analysis ➔</button>
+                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); margin-top: 8px;" onclick="resetKundliUI()">Modify Details</button>
             </div>
         </div>
 
@@ -513,7 +501,6 @@
             setTimeout(() => { statusDiv.style.display = 'none'; }, 3000);
         }
 
-        // ACCOUNT LOGIC
         function saveProfile() {
             const name = document.getElementById('p-name').value;
             if(!name) { showStatus("Please enter your name.", "error"); return; }
@@ -524,7 +511,7 @@
             showStatus(featureName + " will be available soon!", "success");
         }
 
-        // 🌟 NEW KUNDLI UI FLOW LOGIC 🌟
+        // 🌟 OPTION A - KUNDLI UI FLOW LOGIC 🌟
         function generateKundliUI() {
             const name = document.getElementById('k-name').value.trim();
             const dob = document.getElementById('k-dob').value;
@@ -540,31 +527,29 @@
             document.getElementById('kundli-input-section').style.display = 'none';
             document.getElementById('kundli-loading-section').style.display = 'block';
 
-            // Simulate API processing delay (1.5 seconds)
+            // Simulate quick verification delay (1.5 seconds)
             setTimeout(() => {
                 document.getElementById('kundli-loading-section').style.display = 'none';
                 document.getElementById('kundli-result-section').style.display = 'block';
                 
-                // Populate result details
-                document.getElementById('res-name').innerText = name + "'s Chart";
+                // Populate result details for review
+                document.getElementById('res-name').innerText = "Client: " + name;
                 document.getElementById('res-details').innerText = `${dob} | ${time} | ${place}`;
             }, 1500);
         }
 
         function resetKundliUI() {
-            // Go back to input form
             document.getElementById('kundli-result-section').style.display = 'none';
             document.getElementById('kundli-input-section').style.display = 'block';
         }
 
         function sendKundliWhatsApp() {
-            // Keep original business logic to send to WhatsApp
             const name = document.getElementById('k-name').value.trim();
             const dob = document.getElementById('k-dob').value;
             const time = document.getElementById('k-time').value;
             const place = document.getElementById('k-place').value.trim();
             
-            const message = `Namaste Acharya ji! 🙏\nI have generated my basic Kundli on Real Astro. Please provide a detailed analysis based on these details:\n\n*Name:* ${name}\n*DOB:* ${dob}\n*Time:* ${time}\n*Place:* ${place}`;
+            const message = `Namaste Acharya ji! 🙏\nI need an expert Kundli analysis. Here is my verified data:\n\n*Name:* ${name}\n*DOB:* ${dob}\n*Time:* ${time}\n*Place:* ${place}\n\nPlease let me know the process for consultation.`;
             const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
