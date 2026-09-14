@@ -42,7 +42,7 @@
 
         .container { max-width: 600px; margin: 0 auto; padding: 16px; overflow-x: hidden; }
 
-        /* 🌟 TABS (Only Home is complex now) 🌟 */
+        /* 🌟 TABS 🌟 */
         .section-card { display: none; animation: fadeIn 0.4s ease forwards; }
         .section-card.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -52,32 +52,26 @@
         .section-header { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .section-header::after { content: ''; width: 40px; height: 3px; background: var(--gold); border-radius: 2px; }
         
-        /* 1. HERO SECTION */
+        /* HERO SECTION */
         .hero-card { background: linear-gradient(135deg, var(--primary-dark) 0%, #3a0d5c 100%); color: white; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.2); padding: 40px 20px; }
         .hero-title { font-size: 28px; color: var(--gold); margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
         .hero-subtitle { font-size: 15px; font-weight: 300; opacity: 0.9; margin-bottom: 20px; }
         .trust-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .trust-chip { background: rgba(255, 255, 255, 0.1); color: var(--gold-light); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.3); backdrop-filter: blur(4px); }
 
-        /* 2. SERVICES */
+        /* SERVICES & PROFILE */
         .service-grid { display: grid; gap: 12px; }
         .service-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
         .service-icon { font-size: 24px; background: #fffbeb; padding: 10px; border-radius: 50%; color: var(--gold-dark); border: 1px solid #fde68a; }
         .service-info h4 { color: var(--primary-dark); font-size: 16px; margin-bottom: 4px; }
         .service-info p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5; }
-
-        /* 3. WHY CHOOSE US */
         .feature-list { list-style: none; padding: 0; }
         .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 14px; font-weight: 500; color: var(--text-main); background: #f0fdf4; padding: 12px; border-radius: 10px; border: 1px solid #bbf7d0; }
         .feature-list li span { color: var(--success); font-size: 18px; }
-
-        /* 4. PROFILE */
         .profile-box { text-align: center; }
         .profile-avatar { width: 90px; height: 90px; background: linear-gradient(135deg, var(--gold), var(--orange)); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white; box-shadow: 0 4px 10px rgba(255, 153, 51, 0.3); }
         .profile-name { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
         .profile-tag { font-size: 13px; color: var(--gold-dark); font-weight: 600; margin-bottom: 12px; }
-        
-        /* 5. HOW IT WORKS */
         .step-container { display: flex; flex-direction: column; gap: 16px; position: relative; }
         .step-container::before { content: ''; position: absolute; left: 19px; top: 10px; bottom: 10px; width: 2px; background: #e2e8f0; z-index: 0; }
         .step { display: flex; gap: 16px; position: relative; z-index: 1; }
@@ -85,7 +79,7 @@
         .step-text h4 { font-size: 15px; color: var(--primary-dark); margin-bottom: 4px; margin-top: 8px;}
         .step-text p { font-size: 13px; color: var(--text-muted); }
 
-        /* 6. BOOKING SECTION (Functional) */
+        /* BOOKING SECTION */
         .booking-highlight { border: 2px solid var(--gold); box-shadow: var(--shadow-md); }
         .input-group { margin-bottom: 16px; }
         .text-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 600;}
@@ -109,15 +103,13 @@
         .btn-video { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
         .btn-primary { background: linear-gradient(to right, var(--orange), var(--orange-hover)); color: white; box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3); font-size: 16px; padding: 16px;}
 
-        /* 7. REVIEWS */
+        /* REVIEWS & FAQ */
         .review-scroll { display: flex; flex-direction: column; gap: 12px; }
         .review-card { background: #f8fafc; padding: 16px; border-radius: 12px; border-left: 4px solid var(--gold); }
         .review-header { display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;}
         .review-name { font-weight: 600; font-size: 14px; color: var(--primary-dark); }
         .review-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px;}
         .review-text { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.5;}
-
-        /* 8. FAQ */
         details { background: #f8fafc; margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; transition: var(--transition); }
         details[open] { border-color: var(--gold-light); background: white; }
         summary { font-weight: 600; color: var(--primary-dark); padding: 16px; cursor: pointer; font-size: 14px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
@@ -126,6 +118,15 @@
         details[open] summary::after { transform: rotate(180deg); color: var(--gold-dark); }
         .faq-text { padding: 0 16px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.5;}
 
+        /* 🌟 NEW: ACCOUNT MENU STYLES 🌟 */
+        .account-menu { list-style: none; padding: 0; margin: 0; }
+        .account-menu li { display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid #f1f5f9; font-size: 15px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: var(--transition); }
+        .account-menu li:last-child { border-bottom: none; }
+        .account-menu li:active { background: #f8fafc; }
+        .account-menu li span { margin-right: 14px; font-size: 20px; width: 24px; text-align: center; }
+        .account-menu li::after { content: '›'; margin-left: auto; font-size: 22px; color: #cbd5e1; font-weight: 300; }
+        .account-header-bg { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); color: white; padding: 24px 20px; border-radius: var(--border-radius) var(--border-radius) 0 0; text-align: center; }
+
         /* BOTTOM NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; padding: 10px 0 16px 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 1000; }
         .nav-btn { background: none; border: none; font-size: 11px; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-weight: 600; flex: 1; transition: var(--transition); }
@@ -133,7 +134,7 @@
         .nav-btn.active { color: var(--gold-dark); transform: translateY(-2px); }
         .nav-btn.active span { filter: grayscale(0%) opacity(1); }
 
-        #status { margin-top: 15px; font-weight: 600; font-size: 14px; text-align: center; padding: 10px; border-radius: 8px; display: none;}
+        #status { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1100; font-weight: 600; font-size: 14px; text-align: center; padding: 12px 24px; border-radius: 30px; display: none; box-shadow: var(--shadow-md); white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -143,10 +144,9 @@
     
     <div class="container">
         
-        <!-- 📱 TAB 1: HOME (COMPREHENSIVE LANDING PAGE) -->
+        <!-- 📱 TAB 1: HOME -->
         <div id="tab-home" class="section-card active">
             
-            <!-- 1. HERO -->
             <div class="home-section hero-card" style="margin-bottom: 24px; padding: 0;">
                 <div style="padding: 40px 20px;">
                     <h1 class="hero-title">Guidance for a Better Tomorrow</h1>
@@ -159,7 +159,6 @@
                 </div>
             </div>
 
-            <!-- 2. SERVICES -->
             <div class="home-section">
                 <div class="section-header">Our Expertise</div>
                 <div class="service-grid">
@@ -187,7 +186,6 @@
                 </div>
             </div>
 
-            <!-- 3. WHY CHOOSE REAL ASTRO -->
             <div class="home-section">
                 <div class="section-header">Why Choose Us?</div>
                 <ul class="feature-list">
@@ -198,7 +196,6 @@
                 </ul>
             </div>
 
-            <!-- 4. PROFILE -->
             <div class="home-section profile-box">
                 <div class="profile-avatar">🕉️</div>
                 <h3 class="profile-name">Acharya Subhadip</h3>
@@ -208,7 +205,6 @@
                 </p>
             </div>
 
-            <!-- 5. HOW IT WORKS -->
             <div class="home-section">
                 <div class="section-header">How It Works</div>
                 <div class="step-container">
@@ -236,7 +232,6 @@
                 </div>
             </div>
 
-            <!-- 6. BOOKING SECTION (Functional Logic Area) -->
             <div class="home-section booking-highlight" id="booking-area">
                 <div class="section-header">Start Your Consultation</div>
                 
@@ -282,7 +277,6 @@
                 </div>
             </div>
 
-            <!-- 7. REVIEWS -->
             <div class="home-section">
                 <div class="section-header">Client Reviews</div>
                 <div style="text-align: center; margin-bottom: 16px;">
@@ -320,24 +314,9 @@
                         </div>
                         <div class="review-text">"I was facing marriage issues. Acharya ji guided me beautifully. The 30 mins session felt very fulfilling."</div>
                     </div>
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Sneha Kapoor</span>
-                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="review-text">"Best thing is they don't charge per minute. 10 minutes is enough for one direct question. Genuine service."</div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Amit Verma</span>
-                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="review-text">"Audio call feature was very smooth. Clear predictions and no hidden charges. Thank you Real Astro!"</div>
-                    </div>
                 </div>
             </div>
 
-            <!-- 8. FAQ -->
             <div class="home-section">
                 <div class="section-header">FAQs</div>
                 <details>
@@ -352,13 +331,8 @@
                     <summary>Are my details kept private?</summary>
                     <div class="faq-text">100%. Your birth details, questions, and personal identity are kept strictly confidential and never shared.</div>
                 </details>
-                <details>
-                    <summary>What if the call disconnects?</summary>
-                    <div class="faq-text">If a network issue occurs, you can rejoin the room or contact support via WhatsApp to complete your remaining time.</div>
-                </details>
             </div>
 
-            <!-- 9. FINAL CTA -->
             <div style="text-align: center; margin: 30px 0 20px 0;">
                 <h3 style="color: var(--primary-dark); font-size: 20px; font-weight: 700; margin-bottom: 12px;">Don't leave your future to chance.</h3>
                 <button class="btn btn-primary" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">
@@ -395,26 +369,86 @@
             </div>
         </div>
 
-        <!-- 📱 TAB 3: SUPPORT/ACCOUNT -->
+        <!-- 📱 TAB 3: ACCOUNT & PROFILE -->
         <div id="tab-support" class="section-card">
-            <div class="home-section">
-                <div class="section-header">Contact & Support</div>
-                <p style="font-size: 14px; text-align: center; color: var(--text-muted);">Support is available via WhatsApp Chat.</p>
-                <div style="background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px dashed #cbd5e1; text-align: center; margin: 20px 0;">
-                    <span class="text-hint" style="margin:0;">UPI ID for Manual Payments</span>
-                    <strong style="color: var(--primary-dark); font-size: 16px;">bengaliblogger144@okhdfcbank</strong>
-                </div>
-                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1;" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support</button>
-            </div>
             
+            <!-- MY PROFILE FORM -->
             <div class="home-section">
-                <div class="section-header">Terms & Conditions</div>
-                <ul style="padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-                    <li style="margin-bottom: 8px;">All payments made via UPI are final and non-refundable.</li>
-                    <li style="margin-bottom: 8px;">Client birth details are kept strictly confidential.</li>
-                    <li>Consultations are meant for guidance and positive direction.</li>
+                <div class="section-header">My Profile</div>
+                
+                <div class="input-group">
+                    <span class="text-hint">Name</span>
+                    <input type="text" id="p-name" class="form-control" placeholder="Your full name" />
+                </div>
+                
+                <div class="input-group">
+                    <span class="text-hint">Mobile Number</span>
+                    <input type="tel" id="p-mobile" class="form-control" placeholder="+91 XXXXX XXXXX" />
+                </div>
+
+                <div class="input-group">
+                    <span class="text-hint">Email Address</span>
+                    <input type="email" id="p-email" class="form-control" placeholder="you@email.com" />
+                </div>
+
+                <div class="input-group">
+                    <span class="text-hint">Date of Birth</span>
+                    <input type="date" id="p-dob" class="form-control" />
+                </div>
+
+                <div class="input-group">
+                    <span class="text-hint">Birth Time</span>
+                    <input type="time" id="p-time" class="form-control" />
+                </div>
+
+                <div class="input-group">
+                    <span class="text-hint">Birth Place</span>
+                    <input type="text" id="p-place" class="form-control" placeholder="City, State, Country" />
+                </div>
+
+                <button class="btn btn-primary" style="margin-top: 8px;" onclick="saveProfile()">Save Profile</button>
+            </div>
+
+            <!-- MY ACCOUNT MENU -->
+            <div class="home-section" style="padding: 0; overflow: hidden;">
+                <div class="account-header-bg">
+                    <h3 style="margin: 0; font-size: 18px; font-weight: 600;">My Account</h3>
+                </div>
+                <ul class="account-menu">
+                    <li onclick="document.getElementById('p-name').focus()">
+                        <span>👤</span> Profile
+                    </li>
+                    <li onclick="showComingSoon('Bookings')">
+                        <span>📅</span> Bookings
+                    </li>
+                    <li onclick="switchTab('kundli', document.querySelectorAll('.nav-btn')[1])">
+                        <span>📜</span> Kundli
+                    </li>
+                    <li onclick="showComingSoon('Reports')">
+                        <span>📊</span> Reports
+                    </li>
+                    <li onclick="showComingSoon('Payments')">
+                        <span>💳</span> Payments
+                    </li>
+                    <li onclick="switchTab('home', document.querySelectorAll('.nav-btn')[0]); setTimeout(()=>window.scrollTo(0, document.body.scrollHeight/1.5), 100);">
+                        <span>⭐</span> Reviews
+                    </li>
+                    <li onclick="showComingSoon('Settings')">
+                        <span>⚙️</span> Settings
+                    </li>
                 </ul>
             </div>
+
+            <!-- RETAINED HELP & SUPPORT SO IT ISN'T LOST -->
+            <div class="home-section">
+                <div class="section-header" style="font-size: 16px;">Help & Support</div>
+                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1; text-align: center; margin-bottom: 12px;">
+                    <span class="text-hint" style="margin:0;">UPI ID</span>
+                    <strong style="color: var(--primary-dark); font-size: 14px;">bengaliblogger144@okhdfcbank</strong>
+                </div>
+                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; padding: 10px; font-size: 13px;" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support on WhatsApp</button>
+            </div>
+
         </div>
 
         <div id="status"></div>
@@ -424,7 +458,7 @@
     <div class="bottom-nav">
         <button class="nav-btn active" onclick="switchTab('home', this)"><span>🏠</span>Home</button>
         <button class="nav-btn" onclick="switchTab('kundli', this)"><span>📜</span>Kundli</button>
-        <button class="nav-btn" onclick="switchTab('support', this)"><span>⚙️</span>Account</button>
+        <button class="nav-btn" onclick="switchTab('support', this)"><span>👤</span>Account</button>
     </div>
 
     <!-- ZEGOCLOUD SDK -->
@@ -445,6 +479,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Notification System
         function showStatus(message, type) {
             const statusDiv = document.getElementById('status');
             statusDiv.innerText = message;
@@ -458,7 +493,22 @@
                 statusDiv.style.color = '#15803d';
                 statusDiv.style.border = '1px solid #bbf7d0';
             }
-            setTimeout(() => { statusDiv.style.display = 'none'; }, 4000);
+            setTimeout(() => { statusDiv.style.display = 'none'; }, 3000);
+        }
+
+        // 🌟 MOCK FUNCTION FOR PROFILE SAVE (Frontend Only)
+        function saveProfile() {
+            const name = document.getElementById('p-name').value;
+            if(!name) {
+                showStatus("Please enter your name.", "error");
+                return;
+            }
+            showStatus("Profile saved successfully!", "success");
+        }
+
+        // 🌟 MOCK FUNCTION FOR MENU ITEMS
+        function showComingSoon(featureName) {
+            showStatus(featureName + " will be available soon!", "success");
         }
 
         function requestKundli() {
