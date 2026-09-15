@@ -35,7 +35,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; 
             display: flex; align-items: center; justify-content: center; letter-spacing: 0.5px;
         }
-        .app-bar span { margin-right: 8px; font-size: 24px; }
+        .app-bar img, .app-bar .brand-icon { margin-right: 8px; font-size: 24px; }
 
         .container { max-width: 600px; margin: 0 auto; padding: 16px; overflow-x: hidden; }
 
@@ -47,45 +47,65 @@
         .section-header { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .section-header::after { content: ''; width: 40px; height: 3px; background: var(--gold); border-radius: 2px; }
         
-        .hero-card { background: linear-gradient(135deg, var(--primary-dark) 0%, #3a0d5c 100%); color: white; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.2); padding: 40px 20px; }
-        .hero-title { font-size: 28px; color: var(--gold); margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
-        .hero-subtitle { font-size: 15px; font-weight: 300; opacity: 0.9; margin-bottom: 20px; }
-        .trust-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .trust-chip { background: rgba(255, 255, 255, 0.1); color: var(--gold-light); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.3); backdrop-filter: blur(4px); }
+        /* Hero Section */
+        .hero-card { background: linear-gradient(135deg, var(--primary-dark) 0%, #3a0d5c 100%); color: white; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.2); padding: 36px 20px; }
+        .hero-profile-container { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--gold); margin: 0 auto 16px; overflow: hidden; background: #2a0845; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .hero-profile-container img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-title { font-size: 26px; color: var(--gold); margin-bottom: 10px; font-weight: 700; line-height: 1.3; }
+        .hero-subtitle { font-size: 14.5px; font-weight: 400; opacity: 0.95; margin-bottom: 20px; line-height: 1.5; color: #f1f5f9; }
+        .hero-cta-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
+
+        .trust-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+        .trust-chip { background: rgba(255, 255, 255, 0.1); color: var(--gold-light); font-size: 11.5px; font-weight: 600; padding: 5px 10px; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.3); backdrop-filter: blur(4px); }
 
         .service-grid { display: grid; gap: 12px; }
         .service-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
-        .service-icon { font-size: 24px; background: #fffbeb; padding: 10px; border-radius: 50%; color: var(--gold-dark); border: 1px solid #fde68a; }
-        .service-info h4 { color: var(--primary-dark); font-size: 16px; margin-bottom: 4px; }
+        .service-icon { font-size: 22px; background: #fffbeb; padding: 10px; border-radius: 50%; color: var(--gold-dark); border: 1px solid #fde68a; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; }
+        .service-info h4 { color: var(--primary-dark); font-size: 15px; margin-bottom: 4px; }
         .service-info p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5; }
+        
         .feature-list { list-style: none; padding: 0; }
-        .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 14px; font-weight: 500; color: var(--text-main); background: #f0fdf4; padding: 12px; border-radius: 10px; border: 1px solid #bbf7d0; }
-        .feature-list li span { color: var(--success); font-size: 18px; }
+        .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 13.5px; font-weight: 500; color: var(--text-main); background: #f0fdf4; padding: 12px; border-radius: 10px; border: 1px solid #bbf7d0; }
+        .feature-list li .f-icon { color: var(--success); font-size: 16px; }
+
         .profile-box { text-align: center; }
-        .profile-avatar { width: 90px; height: 90px; background: linear-gradient(135deg, var(--gold), var(--orange)); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white; box-shadow: 0 4px 10px rgba(255, 153, 51, 0.3); }
+        .profile-avatar { width: 90px; height: 90px; background: linear-gradient(135deg, var(--gold), var(--orange)); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white; box-shadow: 0 4px 10px rgba(255, 153, 51, 0.3); overflow: hidden; border: 2px solid var(--gold); }
+        .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .profile-name { font-size: 20px; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px; }
         .profile-tag { font-size: 13px; color: var(--gold-dark); font-weight: 600; margin-bottom: 12px; }
-        .step-container { display: flex; flex-direction: column; gap: 16px; position: relative; }
-        .step-container::before { content: ''; position: absolute; left: 19px; top: 10px; bottom: 10px; width: 2px; background: #e2e8f0; z-index: 0; }
-        .step { display: flex; gap: 16px; position: relative; z-index: 1; }
-        .step-num { width: 40px; height: 40px; background: var(--primary-dark); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
-        .step-text h4 { font-size: 15px; color: var(--primary-dark); margin-bottom: 4px; margin-top: 8px;}
-        .step-text p { font-size: 13px; color: var(--text-muted); }
+
+        /* How it works 4 steps */
+        .step-container { display: flex; flex-direction: column; gap: 14px; position: relative; }
+        .step { display: flex; gap: 14px; align-items: flex-start; background: #f8fafc; padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .step-num { width: 34px; height: 34px; background: var(--primary-dark); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .step-text h4 { font-size: 14.5px; color: var(--primary-dark); margin-bottom: 3px; font-weight: 600; }
+        .step-text p { font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.4; }
 
         .booking-highlight { border: 2px solid var(--gold); box-shadow: var(--shadow-md); }
-        .input-group { margin-bottom: 16px; text-align: left;}
-        .text-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 600;}
+        .input-group { margin-bottom: 16px; text-align: left; }
+        .text-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; display: block; font-weight: 600; }
         .form-control { width: 100%; padding: 14px 16px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; transition: var(--transition); }
         .form-control:focus { outline: none; border-color: var(--orange); background: white; box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.15); }
         
-        .plan-grid { display: grid; gap: 12px; margin-bottom: 20px;}
+        /* Selectable Slot Styling */
+        .slot-selection-box { padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; }
+        .slot-item-card { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: var(--transition); }
+        .slot-item-card:hover { border-color: var(--orange); }
+        .slot-item-card.selected { border-color: var(--success); background: #f0fdf4; box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2); }
+        .slot-status-badge { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
+        .slot-status-badge.available { background: #dcfce7; color: var(--success); }
+        .slot-status-badge.booked { background: #fee2e2; color: #ef4444; }
+
+        /* Selectable Plan Cards */
+        .plan-grid { display: grid; gap: 12px; margin-bottom: 20px; }
         .plan-card { border: 2px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition); background: white; }
-        .plan-card:active { border-color: var(--success); background: #f0fdf4; transform: scale(0.98); }
+        .plan-card:hover { border-color: var(--orange); }
+        .plan-card.selected { border-color: var(--success); background: #f0fdf4; box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15); }
         .plan-info { text-align: left; }
-        .plan-time { font-size: 16px; font-weight: 700; color: var(--text-main); display: block; }
-        .plan-save { font-size: 12px; color: var(--success); font-weight: 700; background: #dcfce7; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
-        .plan-price { font-size: 18px; font-weight: 700; color: var(--success); }
-        del { color: var(--text-muted); font-size: 13px; margin-right: 4px;}
+        .plan-time { font-size: 15px; font-weight: 700; color: var(--text-main); display: block; }
+        .plan-save { font-size: 11.5px; color: var(--success); font-weight: 700; background: #dcfce7; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+        .plan-price { font-size: 17px; font-weight: 700; color: var(--success); }
+        del { color: var(--text-muted); font-size: 12.5px; margin-right: 4px; }
 
         .connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; font-size: 14px; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; transition: var(--transition); }
@@ -93,22 +113,25 @@
         .btn-chat { grid-column: span 2; background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; }
         .btn-audio { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
         .btn-video { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-        .btn-primary { background: linear-gradient(to right, var(--orange), var(--orange-hover)); color: white; box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3); font-size: 16px; padding: 16px;}
+        .btn-primary { background: linear-gradient(to right, var(--orange), var(--orange-hover)); color: white; box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3); font-size: 15px; padding: 15px; }
         .btn-whatsapp { background-color: var(--whatsapp); color: white; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); }
 
+        /* Review Section Polished */
         .review-scroll { display: flex; flex-direction: column; gap: 12px; }
-        .review-card { background: #f8fafc; padding: 16px; border-radius: 12px; border-left: 4px solid var(--gold); text-align: left;}
-        .review-header { display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center;}
-        .review-name { font-weight: 600; font-size: 14px; color: var(--primary-dark); }
-        .review-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px;}
-        .review-text { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.5;}
+        .review-card { background: #f8fafc; padding: 16px; border-radius: 12px; border-left: 4px solid var(--gold); text-align: left; border: 1px solid #e2e8f0; }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 6px; align-items: center; }
+        .review-name { font-weight: 600; font-size: 13.5px; color: var(--primary-dark); }
+        .review-stars { color: #f59e0b; font-size: 11.5px; letter-spacing: 1px; }
+        .review-text { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+
+        /* Accordion FAQ Styling */
         details { background: #f8fafc; margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; transition: var(--transition); text-align: left; }
-        details[open] { border-color: var(--gold-light); background: white; }
-        summary { font-weight: 600; color: var(--primary-dark); padding: 16px; cursor: pointer; font-size: 14px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        details[open] { border-color: var(--gold-light); background: white; box-shadow: var(--shadow-sm); }
+        summary { font-weight: 600; color: var(--primary-dark); padding: 15px 16px; cursor: pointer; font-size: 13.5px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
         summary::-webkit-details-marker { display: none; }
-        summary::after { content: '▼'; font-size: 12px; color: var(--text-muted); transition: transform 0.3s; }
+        summary::after { content: '▼'; font-size: 11px; color: var(--text-muted); transition: transform 0.3s; }
         details[open] summary::after { transform: rotate(180deg); color: var(--gold-dark); }
-        .faq-text { padding: 0 16px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.5;}
+        .faq-text { padding: 0 16px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
         .account-menu { list-style: none; padding: 0; margin: 0; }
         .account-menu li { display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid #f1f5f9; font-size: 15px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: var(--transition); }
@@ -118,67 +141,61 @@
         .account-menu li::after { content: '›'; margin-left: auto; font-size: 22px; color: #cbd5e1; font-weight: 300; }
         .account-header-bg { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); color: white; padding: 24px 20px; border-radius: var(--border-radius) var(--border-radius) 0 0; text-align: center; }
 
-        .spinner {
-            width: 44px; height: 44px;
-            border: 4px solid #e2e8f0;
-            border-top: 4px solid var(--orange);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
+        .spinner { width: 44px; height: 44px; border: 4px solid #e2e8f0; border-top: 4px solid var(--orange); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .secure-data-box {
-            background: linear-gradient(135deg, #fff9e6, #fff0c2);
-            border: 1px solid var(--gold);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(255, 153, 51, 0.1);
-        }
-        .secure-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
+        .secure-data-box { background: linear-gradient(135deg, #fff9e6, #fff0c2); border: 1px solid var(--gold); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(255, 153, 51, 0.1); text-align: center; }
+        .secure-icon { font-size: 36px; margin-bottom: 10px; }
 
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; padding: 10px 0 16px 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 1000; }
         .nav-btn { background: none; border: none; font-size: 11px; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-weight: 600; flex: 1; transition: var(--transition); }
-        .nav-btn span { font-size: 22px; margin-bottom: 4px; filter: grayscale(100%) opacity(0.5); transition: var(--transition); }
+        .nav-btn span { font-size: 20px; margin-bottom: 3px; filter: grayscale(100%) opacity(0.5); transition: var(--transition); }
         .nav-btn.active { color: var(--gold-dark); transform: translateY(-2px); }
         .nav-btn.active span { filter: grayscale(0%) opacity(1); }
 
-        #status { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1100; font-weight: 600; font-size: 14px; text-align: center; padding: 12px 24px; border-radius: 30px; display: none; box-shadow: var(--shadow-md); white-space: nowrap; }
+        #status { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 1100; font-weight: 600; font-size: 13.5px; text-align: center; padding: 12px 24px; border-radius: 30px; display: none; box-shadow: var(--shadow-md); white-space: nowrap; }
     </style>
 </head>
 <body>
     <div class="app-bar">
-        <span>✨</span> Real Astro
+        <span class="brand-icon">✨</span> Real Astro
     </div>
     
     <div class="container">
         
         <!-- 📱 TAB 1: HOME -->
         <div id="tab-home" class="section-card active">
-            <div class="home-section hero-card" style="margin-bottom: 24px; padding: 0;">
-                <div style="padding: 40px 20px;">
-                    <h1 class="hero-title">Guidance for a Better Tomorrow</h1>
-                    <p class="hero-subtitle">100% Accurate Predictions & Remedies from India's Trusted Astrologer.</p>
-                    <div class="trust-row">
-                        <span class="trust-chip">⭐ 10+ Yrs Exp</span>
-                        <span class="trust-chip">👥 10,000+ Clients</span>
-                        <span class="trust-chip">💯 Verified Results</span>
-                    </div>
+            
+            <!-- 1. HERO SECTION -->
+            <div class="home-section hero-card" style="margin-bottom: 20px; padding: 32px 16px;">
+                <div class="hero-profile-container">
+                    <!-- Professional astrologer profile photo placeholder / asset -->
+                    <img src="banner.png" alt="Acharya Subhadip" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'90\' height=\'90\'><rect width=\'90\' height=\'90\' fill=\'#2a0845\'/><text x=\'50%\' y=\'55%\' font-size=\'36\' dominant-baseline=\'middle\' text-anchor=\'middle\'>🕉️</text></svg>'">
+                </div>
+                <h1 class="hero-title">Real Astro Consultation</h1>
+                <p class="hero-subtitle">Experienced & Personalized Astrology Guidance</p>
+                
+                <div class="hero-cta-group">
+                    <button class="btn btn-primary" style="width: auto; padding: 12px 22px; font-size: 14px;" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">Book a Consultation</button>
+                    <button class="btn" style="width: auto; padding: 12px 22px; font-size: 14px; background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,215,0,0.35);" onclick="document.getElementById('expertise-section').scrollIntoView({behavior: 'smooth'})">Explore Services</button>
+                </div>
+
+                <div class="trust-row">
+                    <span class="trust-chip">⭐ 10+ Yrs Exp</span>
+                    <span class="trust-chip">👥 10,000+ Clients</span>
+                    <span class="trust-chip">💯 Verified Results</span>
                 </div>
             </div>
 
             <!-- LIVE REMEDY SECTION -->
             <div class="home-section" id="live-remedy-section" style="display: none; background: #fffbeb; border: 1px solid #fde68a; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);">
-                <div class="section-header" style="color: #b45309; margin-bottom: 12px; font-size: 16px;">Today's Guidance & Remedy</div>
+                <div class="section-header" style="color: #b45309; margin-bottom: 10px; font-size: 17px;">Today's Guidance & Remedy</div>
                 <h4 id="client-rem-title" style="color: #92400e; margin-bottom: 6px; font-size: 15px; font-weight: 700;">Loading...</h4>
                 <p id="client-rem-desc" style="font-size: 13.5px; color: #78350f; line-height: 1.6; margin: 0;"></p>
             </div>
 
-            <div class="home-section">
+            <!-- EXPERTISE SECTION -->
+            <div class="home-section" id="expertise-section">
                 <div class="section-header">Our Expertise</div>
                 <div class="service-grid">
                     <div class="service-item">
@@ -208,49 +225,61 @@
             <div class="home-section">
                 <div class="section-header">Why Choose Us?</div>
                 <ul class="feature-list">
-                    <li><span>⏱️</span> Fixed Duration (No Per-Minute Rush)</li>
-                    <li><span>💎</span> 100% Personal & Focused Guidance</li>
-                    <li><span>🔒</span> Complete Privacy Guaranteed</li>
-                    <li><span>💡</span> Practical & Easy Remedies</li>
+                    <li><span class="f-icon">✓</span> Fixed Duration (No Per-Minute Rush)</li>
+                    <li><span class="f-icon">✓</span> 100% Personal & Focused Guidance</li>
+                    <li><span class="f-icon">✓</span> Complete Privacy Guaranteed</li>
+                    <li><span class="f-icon">✓</span> Practical & Easy Remedies</li>
                 </ul>
             </div>
 
+            <!-- 2. ASTROLOGER PROFILE -->
             <div class="home-section profile-box">
-                <div class="profile-avatar">🕉️</div>
+                <div class="profile-avatar">
+                    <img src="banner.png" alt="Acharya Subhadip" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'90\' height=\'90\'><rect width=\'90\' height=\'90\' fill=\'#ffd700\'/><text x=\'50%\' y=\'55%\' font-size=\'36\' dominant-baseline=\'middle\' text-anchor=\'middle\'>🕉️</text></svg>'">
+                </div>
                 <h3 class="profile-name">Acharya Subhadip</h3>
                 <div class="profile-tag">Vedic Astrologer • Numerologist</div>
-                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">
                     With over a decade of deep astrological research and practice, Acharya Subhadip has transformed the lives of 10,000+ individuals globally through authentic Vedic wisdom.
                 </p>
             </div>
 
+            <!-- 3. HOW IT WORKS -->
             <div class="home-section">
                 <div class="section-header">How It Works</div>
                 <div class="step-container">
                     <div class="step">
-                        <div class="step-num">1</div>
+                        <div class="step-num">01</div>
                         <div class="step-text">
-                            <h4>Enter Details</h4>
-                            <p>Enter your name in the booking section below.</p>
+                            <h4>Choose Your Service</h4>
+                            <p>Select from our core astrological expertise.</p>
                         </div>
                     </div>
                     <div class="step">
-                        <div class="step-num">2</div>
+                        <div class="step-num">02</div>
                         <div class="step-text">
-                            <h4>Select Plan & Pay</h4>
-                            <p>Choose your duration (10, 20, or 30 mins) and pay securely via UPI.</p>
+                            <h4>Select Date & Time</h4>
+                            <p>Pick your preferred date and available slot.</p>
                         </div>
                     </div>
                     <div class="step">
-                        <div class="step-num">3</div>
+                        <div class="step-num">03</div>
                         <div class="step-text">
-                            <h4>Connect Instantly</h4>
-                            <p>Click Chat, Audio, or Video Call to begin your private session.</p>
+                            <h4>Select Duration & Pay</h4>
+                            <p>Choose your plan (10, 20, or 30 mins) and pay securely via UPI.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">04</div>
+                        <div class="step-text">
+                            <h4>Consult Acharya</h4>
+                            <p>Connect instantly via Chat, Audio, or Video Call.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- 4. BOOKING UI & 6. PRICING -->
             <div class="home-section booking-highlight" id="booking-area">
                 <div class="section-header">Start Your Consultation</div>
                 
@@ -259,37 +288,40 @@
                     <input type="text" id="username" class="form-control" placeholder="e.g. Rahul Sharma" />
                 </div>
 
-                <!-- 🔥 LIVE AVAILABILITY & DATE PICKER SECTION -->
-                <div class="input-group" style="margin-top: 24px; padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #cbd5e1; padding-bottom: 10px; margin-bottom: 10px;">
-                        <span style="color: var(--primary-dark); font-size: 14px; font-weight: 700;">Select Date:</span>
-                        <input type="date" id="client-date" style="padding: 6px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Poppins'; font-size: 13px;">
-                    </div>
-                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px; text-align: center;">Available Slots for selected date:</p>
-                    
-                    <div id="client-slot-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto;">
-                        <div style="font-size: 13px; color: var(--text-muted); text-align: center;">Loading slots...</div>
+                <!-- Live Date & Selectable Time Slots -->
+                <div class="input-group" style="margin-top: 20px;">
+                    <span class="text-hint">Step 2: Select Date & Time Slot</span>
+                    <div class="slot-selection-box">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0;">
+                            <span style="font-size: 13.5px; font-weight: 600; color: var(--primary-dark);">Date:</span>
+                            <input type="date" id="client-date" style="padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: 'Poppins'; font-size: 13px;">
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px; text-align: center;">Tap an available slot to select it:</p>
+                        <div id="client-slot-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 190px; overflow-y: auto;">
+                            <div style="font-size: 13px; color: var(--text-muted); text-align: center; padding: 10px;">Loading available slots...</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="input-group" style="margin-top: 24px;">
-                    <span class="text-hint">Step 2: Select Plan & Pay (UPI)</span>
+                <!-- Selectable Pricing Plans -->
+                <div class="input-group" style="margin-top: 20px;">
+                    <span class="text-hint">Step 3: Select Duration & Pay (UPI)</span>
                     <div class="plan-grid">
-                        <div class="plan-card" onclick="makePayment(100, 10)">
+                        <div class="plan-card" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
                             <div class="plan-info">
                                 <span class="plan-time">10 Minutes</span>
                                 <span class="text-hint" style="margin:0; font-weight: normal;">Basic Query</span>
                             </div>
                             <div class="plan-price">₹100</div>
                         </div>
-                        <div class="plan-card" onclick="makePayment(150, 20)">
+                        <div class="plan-card" id="plan-20" onclick="selectPlan(150, 20, 'plan-20')">
                             <div class="plan-info">
                                 <span class="plan-time">20 Minutes</span>
                                 <span class="plan-save">Save ₹50</span>
                             </div>
                             <div class="plan-price"><del>₹200</del> ₹150</div>
                         </div>
-                        <div class="plan-card" onclick="makePayment(200, 30)">
+                        <div class="plan-card" id="plan-30" onclick="selectPlan(200, 30, 'plan-30')">
                             <div class="plan-info">
                                 <span class="plan-time">30 Minutes</span>
                                 <span class="plan-save">Save ₹100</span>
@@ -299,8 +331,8 @@
                     </div>
                 </div>
 
-                <div class="input-group" style="margin-top: 24px;">
-                    <span class="text-hint">Step 3: Connect (After Payment)</span>
+                <div class="input-group" style="margin-top: 20px;">
+                    <span class="text-hint">Step 4: Connect Instantly</span>
                     <div class="connect-grid">
                         <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
                         <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
@@ -309,13 +341,9 @@
                 </div>
             </div>
 
+            <!-- 7. REVIEWS (Polished without unbacked fabricated numbers) -->
             <div class="home-section">
-                <div class="section-header">Client Reviews</div>
-                <div style="text-align: center; margin-bottom: 16px;">
-                    <h2 style="font-size: 36px; color: var(--primary-dark); margin:0;">4.9</h2>
-                    <div style="color: #f59e0b; font-size: 16px; margin: 4px 0;">⭐⭐⭐⭐⭐</div>
-                    <p style="font-size: 13px; color: var(--text-muted); margin:0;">Based on 10,000+ Consultations</p>
-                </div>
+                <div class="section-header">Client Experiences</div>
                 <div class="review-scroll">
                     <div class="review-card">
                         <div class="review-header">
@@ -334,20 +362,25 @@
                 </div>
             </div>
 
+            <!-- 8. FAQ ACCORDION -->
             <div class="home-section">
-                <div class="section-header">FAQs</div>
+                <div class="section-header">Frequently Asked Questions</div>
                 <details>
                     <summary>How do I book a consultation?</summary>
-                    <div class="faq-text">Simply enter your name in the booking section, click on your preferred time plan to pay via UPI, and then click Connect.</div>
+                    <div class="faq-text">Simply enter your name, pick an available date & time slot, select your duration plan to pay securely via UPI, and click your preferred connect option.</div>
                 </details>
                 <details>
                     <summary>Is my payment secure?</summary>
-                    <div class="faq-text">Yes, all payments are processed securely through your own trusted UPI app.</div>
+                    <div class="faq-text">Yes, all payments are processed securely through your own trusted UPI application.</div>
+                </details>
+                <details>
+                    <summary>How do video and audio calls work?</summary>
+                    <div class="faq-text">Calls are powered securely through high-quality encrypted audio-video channels directly in your browser.</div>
                 </details>
             </div>
 
             <div style="text-align: center; margin: 30px 0 20px 0;">
-                <h3 style="color: var(--primary-dark); font-size: 20px; font-weight: 700; margin-bottom: 12px;">Don't leave your future to chance.</h3>
+                <h3 style="color: var(--primary-dark); font-size: 18px; font-weight: 700; margin-bottom: 12px;">Don't leave your future to chance.</h3>
                 <button class="btn btn-primary" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">
                     Book Your Session Now
                 </button>
@@ -482,8 +515,26 @@
     <!-- ZEGOCLOUD SDK -->
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
+    <!-- INTERACTION & SELECTION LOGIC -->
     <script>
         const ASTROLOGER_WHATSAPP = "919339199974"; 
+        let selectedPlanAmount = 100;
+        let selectedPlanMinutes = 10;
+        let selectedSlotLabel = null;
+
+        function selectPlan(amount, minutes, elementId) {
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById(elementId).classList.add('selected');
+            selectedPlanAmount = amount;
+            selectedPlanMinutes = minutes;
+        }
+
+        function selectSlot(element, slotLabel) {
+            document.querySelectorAll('.slot-item-card').forEach(s => s.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedSlotLabel = slotLabel;
+            showStatus("Selected Slot: " + slotLabel, "success");
+        }
 
         function switchTab(tabId, element) {
             const tabs = document.querySelectorAll('.section-card');
@@ -561,21 +612,23 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        function makePayment(amount, minutes) {
+        // UPI PAYMENT LOGIC (Using selected plan)
+        function makePayment() {
             const userName = document.getElementById('username').value.trim();
             if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             const upiId = "bengaliblogger144@okhdfcbank";
-            const payeeName = "Acharya Subhadip (" + minutes + " Mins)";
-            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR`;
+            const payeeName = "Acharya Subhadip (" + selectedPlanMinutes + " Mins)";
+            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedPlanAmount}&cu=INR`;
             
-            showStatus(`Opening UPI for ₹${amount}...`, 'success');
+            showStatus(`Opening UPI for ₹${selectedPlanAmount}...`, 'success');
             setTimeout(() => { window.location.href = upiLink; }, 500);
         }
 
         function startChat() {
             const nameField = document.getElementById('username').value.trim();
             if (!nameField) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(nameField)}. I want to start my consultation chat.`;
+            const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(nameField)}.${encodeURIComponent(slotText)} I want to start my consultation chat.`;
             window.open(whatsappUrl, '_blank');
         }
 
@@ -631,7 +684,7 @@
             }
         }
 
-        // Fetch Slots based on Selected Date
+        // Fetch Slots based on Selected Date with Selectable UI State
         const clientDate = document.getElementById('client-date');
         clientDate.value = new Date().toISOString().split('T')[0];
 
@@ -640,7 +693,7 @@
             const date = clientDate.value;
             if(!date) return;
             const list = document.getElementById('client-slot-list');
-            list.innerHTML = '<div style="font-size: 13px; color: var(--text-muted); text-align: center;">Loading slots...</div>';
+            list.innerHTML = '<div style="font-size: 13px; color: var(--text-muted); text-align: center; padding: 10px;">Loading slots...</div>';
             
             if(unsubSlots) unsubSlots();
             
@@ -652,9 +705,9 @@
                     timeSlots.forEach(s => {
                         if(data[s.key]) {
                             found = true;
-                            list.innerHTML += `<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;">
+                            list.innerHTML += `<div class="slot-item-card" onclick="selectSlot(this, '${s.label}')">
                                 <span style="font-size: 13.5px; font-weight: 600; color: var(--text-main);">${s.label}</span>
-                                <span style="font-size: 11.5px; font-weight: 700; background: #dcfce7; color: var(--success); padding: 3px 8px; border-radius: 10px;">🟢 Available</span>
+                                <span class="slot-status-badge available">🟢 Available</span>
                             </div>`;
                         }
                     });
