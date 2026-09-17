@@ -756,7 +756,6 @@
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             const dateVal = document.getElementById('client-date').value;
 
-            // Trigger Database Save Background Task
             if(window.saveClientBooking) {
                 window.saveClientBooking("UPI", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
             }
@@ -776,7 +775,6 @@
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             const dateVal = document.getElementById('client-date').value;
 
-            // Trigger Database Save Background Task
             if(window.saveClientBooking) {
                 window.saveClientBooking("Card/Netbanking", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
             }
@@ -826,12 +824,15 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // --- 1-on-1 AUDIO/VIDEO CALL LOGIC ---
+        // --- 1-on-1 AUDIO/VIDEO CALL LOGIC (FIXED TEST TOKEN) ---
         function startAudioCall() {
             const userName = document.getElementById('username').value.trim();
             if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", String(Math.floor(Math.random() * 100000)), userName));
+            const userID = String(Math.floor(Math.random() * 100000));
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_consultation_room", userID, userName);
+            
+            const zp = ZegoUIKitPrebuilt.create(token);
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.OneONoneCall }, turnOnCameraWhenJoining: false, showMyCameraToggleButton: false });
         }
 
@@ -839,18 +840,24 @@
             const userName = document.getElementById('username').value.trim();
             if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", String(Math.floor(Math.random() * 100000)), userName));
+            const userID = String(Math.floor(Math.random() * 100000));
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_consultation_room", userID, userName);
+            
+            const zp = ZegoUIKitPrebuilt.create(token);
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
         }
 
-        // --- NEW: JOIN ASTROLOGER LIVE STREAM LOGIC (As Audience) ---
+        // --- NEW: JOIN ASTROLOGER LIVE STREAM LOGIC (As Audience) (FIXED TEST TOKEN) ---
         function joinLiveStream() {
             let userName = document.getElementById('username').value.trim();
             if(!userName) userName = "Guest_" + Math.floor(Math.random() * 1000);
             
             const appID = 1009897816; 
             const serverSecret = "30cf208a168057120577256aa90fba8c";
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_live_room", String(Math.floor(Math.random() * 100000)), userName));
+            const userID = String(Math.floor(Math.random() * 100000));
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_live_room", userID, userName);
+            
+            const zp = ZegoUIKitPrebuilt.create(token);
             
             zp.joinRoom({ 
                 container: document.body, 
@@ -922,7 +929,7 @@
         });
         const db = getFirestore(app);
 
-        // 🌟 NEW: Save Client Booking to DB
+        // Save Client Booking to DB
         window.saveClientBooking = async (paymentMethod, userName, date, slot, planMins, planAmt) => {
             try {
                 await addDoc(collection(db, "bookings"), {
