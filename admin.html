@@ -49,6 +49,15 @@
             <div class="slot-grid" id="slots-container"></div>
             <button class="btn-primary" onclick="window.saveSlots()">Save Slots for Date</button>
         </div>
+
+        <!-- 🌟 NEW: RECENT BOOKINGS TRACKER -->
+        <div class="card">
+            <h2>📋 Recent Bookings</h2>
+            <p style="font-size: 12px; color: #64748b; margin-top: 0; margin-bottom: 12px;">Check your bank SMS for payment confirmation before joining.</p>
+            <div id="admin-bookings-list" style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                <div style="font-size: 13px; color: #64748b; text-align: center;">Loading bookings...</div>
+            </div>
+        </div>
         
         <!-- 4. JOIN 1-ON-1 CALL -->
         <div class="card">
@@ -64,7 +73,7 @@
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const app = initializeApp({
             apiKey: "AIzaSyCbHdnVt9ST7vbJpEA1B8f76FglZo5zfav",
@@ -81,7 +90,6 @@
             const topic = document.getElementById('live-topic').value;
             const time = document.getElementById('live-time').value;
             if(!topic || !time) return alert("Please enter both Topic and Schedule Time.");
-            
             await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: topic, scheduleTime: time });
             alert("Schedule updated successfully! It is now visible on the Client App.");
         };
@@ -89,18 +97,12 @@
         window.startLive = async () => {
             await setDoc(doc(db, "live_status", "main"), { isLive: true, topic: "LIVE NOW", scheduleTime: "LIVE NOW" });
             alert("You are now LIVE! Clients will see the Red Banner. Opening Studio...");
-            
-            // ZegoCloud Host Logic
             const appID = 1009897816;
             const serverSecret = "30cf208a168057120577256aa90fba8c";
             const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_live_room", "admin_host", "Acharya Subhadip (Host)"));
-            
             zp.joinRoom({
                 container: document.body,
-                scenario: { 
-                    mode: ZegoUIKitPrebuilt.LiveStreaming, 
-                    config: { role: ZegoUIKitPrebuilt.Host } 
-                },
+                scenario: { mode: ZegoUIKitPrebuilt.LiveStreaming, config: { role: ZegoUIKitPrebuilt.Host } },
                 showTurnOffRemoteCameraButton: true,
                 showTurnOffRemoteMicrophoneButton: true,
                 showRemoveUserButton: true
@@ -163,6 +165,30 @@
             await setDoc(doc(db, "availability_dates", date), data);
             alert("Slots saved for " + date);
         };
+
+        // 🌟 NEW: FETCH RECENT BOOKINGS LIVE
+        const bookingsQ = query(collection(db, "bookings"), orderBy("timestamp", "desc"), limit(20));
+        onSnapshot(bookingsQ, (snapshot) => {
+            const list = document.getElementById('admin-bookings-list');
+            list.innerHTML = '';
+            if (snapshot.empty) {
+                list.innerHTML = '<div style="font-size: 13px; color: #64748b; text-align: center; padding: 10px;">No recent bookings yet.</div>';
+                return;
+            }
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const bookedAt = new Date(data.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' });
+                list.innerHTML += `
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: left;">
+                        <div style="font-weight: 700; color: #100b38; font-size: 14.5px; margin-bottom: 4px;">👤 Client: ${data.clientName}</div>
+                        <div style="font-size: 12.5px; color: #475569; margin-bottom: 2px;">📅 <b>Date:</b> ${data.date}</div>
+                        <div style="font-size: 12.5px; color: #475569; margin-bottom: 2px;">⏰ <b>Slot:</b> ${data.slot}</div>
+                        <div style="font-size: 12.5px; color: #27ae60; margin-bottom: 2px;">💳 <b>Plan:</b> ${data.planMinutes} Mins (₹${data.planAmount}) - ${data.paymentMethod}</div>
+                        <div style="font-size: 11px; color: #94a3b8; margin-top: 6px; text-align: right;">Booked on: ${bookedAt}</div>
+                    </div>
+                `;
+            });
+        });
 
         // --- 1-ON-1 CALL LOGIC ---
         window.joinOneOnOne = () => {
