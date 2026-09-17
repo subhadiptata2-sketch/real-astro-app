@@ -645,7 +645,8 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" style="margin-top: 8px;" onclick="generateKundliUI()">✨ Analyze Details</button>
+                <!-- 🔥 MODIFIED: DIRECT WHATSAPP BUTTON 🔥 -->
+                <button class="btn btn-primary" style="margin-top: 8px;" onclick="sendKundliWhatsApp()">✨ Kundli Analysis With Acharya Ji</button>
             </div>
 
             <div id="kundli-loading-section" class="home-section" style="display: none; text-align: center; padding: 60px 20px;">
@@ -952,20 +953,21 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        function generateKundliUI() {
+        // 🔥 MODIFIED: DIRECT WHATSAPP KUNDLI LOGIC 🔥
+        function sendKundliWhatsApp() {
             const name = document.getElementById('k-name').value.trim();
             const dob = document.getElementById('k-dob').value;
             const time = document.getElementById('k-time').value;
-            const place = document.getElementById('k-place').value.trim();
-            if (!name || !dob || !time || !place) { showStatus("Please fill all details.", 'error'); return; }
-            document.getElementById('kundli-input-section').style.display = 'none';
-            document.getElementById('kundli-loading-section').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('kundli-loading-section').style.display = 'none';
-                document.getElementById('kundli-result-section').style.display = 'block';
-                document.getElementById('res-name').innerText = "Client: " + name;
-                document.getElementById('res-details').innerText = `${dob} | ${time} | ${place}`;
-            }, 1500);
+            const place = document.getElementById('p-place').value.trim(); // Reads from the Kundli tab place input
+            
+            if (!name || !dob || !time || !place) { 
+                showStatus("Please fill all details.", 'error'); 
+                return; 
+            }
+            
+            const message = `Namaste Acharya ji! 🙏\nI need an expert Kundli analysis. Here is my birth data:\n\n*Name:* ${name}\n*DOB:* ${dob}\n*Time:* ${time}\n*Place:* ${place}\n\nPlease let me know the process for consultation.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         function resetKundliUI() {
@@ -973,17 +975,7 @@
             document.getElementById('kundli-input-section').style.display = 'block';
         }
 
-        function sendKundliWhatsApp() {
-            const name = document.getElementById('k-name').value.trim();
-            const dob = document.getElementById('k-dob').value;
-            const time = document.getElementById('k-time').value;
-            const place = document.getElementById('k-place').value.trim();
-            const message = `Namaste Acharya ji! 🙏\nI need an expert Kundli analysis. Here is my verified data:\n\n*Name:* ${name}\n*DOB:* ${dob}\n*Time:* ${time}\n*Place:* ${place}\n\nPlease let me know the process for consultation.`;
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // 🔥 MODIFIED: CONNECTION LOGIC (PAYMENT GATE CHECK) 🔥
+        // 🔥 CONNECTION LOGIC (PAYMENT GATE CHECK) 🔥
         function startChat() {
             if (!paymentInitiated) {
                 showStatus("Please complete your payment first!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले स्टेप 3 में अपना पेमेंट पूरा करें!</span>", "error");
