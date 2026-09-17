@@ -3,334 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Astro - Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- ZegoCloud SDK for Admin -->
-    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+    <title>Admin Panel - Real Astro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-dark: #100b38; --primary-accent: #2a0845; --gold: #ffd700; --bg-color: #f4f5f9; --text-main: #2c3e50; --text-muted: #64748b; --success: #27ae60; --orange: #ff9933; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
-
-        /* Responsive Sidebar */
-        .sidebar { width: 250px; background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary-accent) 100%); color: white; padding: 20px 0; display: flex; flex-direction: column; overflow-y: auto; transition: 0.3s; }
-        .sidebar-header { padding: 0 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; text-align: center; }
-        .sidebar-header h2 { font-size: 20px; color: var(--gold); margin: 0; }
-        .nav-menu { list-style: none; flex: 1; }
-        .nav-menu li { padding: 15px 20px; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 12px; border-left: 4px solid transparent; transition: 0.2s; }
-        .nav-menu li:hover { background: rgba(255,255,255,0.05); }
-        .nav-menu li.active { background: rgba(255,255,255,0.1); border-left-color: var(--gold); color: var(--gold); font-weight: 600; }
-        
-        .main-content { flex: 1; padding: 20px 30px; overflow-y: auto; }
-        .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
-        .header-bar h1 { font-size: 24px; color: var(--primary-dark); margin: 0; }
-        .admin-profile { display: flex; align-items: center; gap: 10px; background: white; padding: 8px 16px; border-radius: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-weight: 600; font-size: 14px; color: var(--primary-dark); border: 1px solid #e2e8f0; }
-
-        .panel-section { display: none; }
-        .panel-section.active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #e2e8f0; }
-        
-        /* Stats Grid for Dashboard */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
-        .stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 4px solid var(--gold); }
-        .stat-card h4 { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
-        .stat-card h2 { font-size: 28px; color: var(--primary-dark); margin: 0; }
-
-        .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; margin-bottom: 15px; font-family: 'Poppins';}
-        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: white; background: var(--primary-dark); width: 100%; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn:hover { opacity: 0.9; }
-        .btn-live-video { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-        .btn-live-audio { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
-
-        /* Availability Slots Container */
-        .slot-list-container { max-height: 400px; overflow-y: auto; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; margin-bottom: 15px; }
-        .slot-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px; }
-        .slot-time { font-weight: 600; font-size: 14px; color: var(--primary-dark); }
-        
-        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--success); }
-        input:checked + .slider:before { transform: translateX(24px); }
-
-        /* Tables for Bookings/Payments */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
-        th { background: #f8fafc; color: var(--text-muted); font-weight: 600; }
-        .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
-        .status-paid { background: #dcfce7; color: var(--success); }
-        .status-pending { background: #fef9c3; color: #a16207; }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; flex-direction: row; padding: 10px; overflow-x: auto; white-space: nowrap; }
-            .sidebar-header { border-bottom: none; border-right: 1px solid rgba(255,255,255,0.1); margin-bottom: 0; padding: 0 15px 0 0; margin-right: 15px; display: flex; align-items: center; }
-            .nav-menu { display: flex; flex-direction: row; }
-            .nav-menu li { padding: 10px; border-left: none; border-bottom: 3px solid transparent; }
-            .nav-menu li.active { border-left: none; border-bottom-color: var(--gold); background: transparent; }
-            .main-content { padding: 15px; }
-        }
+        body { font-family: 'Poppins', sans-serif; background: #f4f5f9; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        h2 { color: #100b38; margin-top: 0; margin-bottom: 15px; font-size: 18px; }
+        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-family: 'Poppins'; font-size: 14px; }
+        button { color: white; border: none; padding: 14px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; margin-bottom: 10px; font-size: 14px; transition: all 0.3s; }
+        button:active { transform: scale(0.98); }
+        .btn-primary { background: linear-gradient(to right, #ff9933, #e68a00); }
+        .btn-red { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+        .btn-gray { background: #64748b; }
+        .slot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;}
+        .slot-label { font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="sidebar-header"><h2>✨ Real Astro</h2></div>
-        <ul class="nav-menu">
-            <li class="active" onclick="switchTab('dashboard', this)">📊 Dashboard</li>
-            <li onclick="switchTab('live', this)">🔴 Go Live</li>
-            <li onclick="switchTab('availability', this)">⏱️ Availability</li>
-            <li onclick="switchTab('bookings', this)">📅 Bookings</li>
-            <li onclick="switchTab('payments', this)">💳 Payments</li>
-            <li onclick="switchTab('remedies', this)">📝 Remedies</li>
-        </ul>
-    </div>
+    <div class="container">
+        <h1 style="text-align: center; color: #100b38; font-size: 22px; margin-bottom: 24px;">✨ Real Astro Admin</h1>
 
-    <div class="main-content">
-        <div class="header-bar">
-            <h1 id="page-title">Admin Dashboard</h1>
-            <div class="admin-profile">🕉️ Acharya Subhadip</div>
+        <!-- 1. LIVE STREAM CONTROL -->
+        <div class="card" style="border: 2px solid #fca5a5; background: #fff5f5;">
+            <h2 style="color: #b91c1c;">🔴 Live Stream Control</h2>
+            <input type="text" id="live-topic" placeholder="Topic (e.g. Career & Wealth Guidance)" />
+            <input type="text" id="live-time" placeholder="Schedule (e.g. Today at 8:00 PM)" />
+            <button class="btn-primary" onclick="window.updateSchedule()">📅 Update Schedule (Offline)</button>
+            <button class="btn-red" onclick="window.startLive()">📺 Go LIVE Now</button>
+            <button class="btn-gray" onclick="window.endLive()">⏹️ End Live / Reset</button>
         </div>
 
-        <!-- 1. DASHBOARD -->
-        <div id="sec-dashboard" class="panel-section active">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h4>Today's Bookings</h4>
-                    <h2>0</h2>
-                </div>
-                <div class="stat-card">
-                    <h4>Active Slots (Today)</h4>
-                    <h2 id="dash-active-slots">--</h2>
-                </div>
-                <div class="stat-card">
-                    <h4>Total Clients</h4>
-                    <h2>10,000+</h2>
-                </div>
-            </div>
-            <div class="card">
-                <h3 style="color: var(--primary-dark); margin-bottom: 10px;">Welcome Acharya ji! 🙏</h3>
-                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-                    Here you can manage your entire digital clinic. Set your availability, update daily remedies, track bookings, and connect with clients instantly via the 'Go Live' tab.
-                </p>
-            </div>
+        <!-- 2. DAILY REMEDY -->
+        <div class="card">
+            <h2>✨ Daily Remedy Update</h2>
+            <input type="text" id="rem-title" placeholder="Remedy Title" />
+            <textarea id="rem-desc" rows="3" placeholder="Remedy Description"></textarea>
+            <button class="btn-primary" onclick="window.updateRemedy()">Update Remedy</button>
         </div>
 
-        <!-- 2. GO LIVE (ZEGOCLOUD) -->
-        <div id="sec-live" class="panel-section">
-            <div class="card" style="text-align: center; padding: 40px 20px;">
-                <div style="font-size: 40px; margin-bottom: 15px;">📹</div>
-                <h3 style="color: var(--primary-dark); margin-bottom: 10px;">Consultation Room</h3>
-                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 25px;">When your client pays and joins the room, click below to connect with them instantly.</p>
-                
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn btn-live-video" style="width: auto;" onclick="startAdminVideo()">📹 Start Video Call</button>
-                    <button class="btn btn-live-audio" style="width: auto;" onclick="startAdminAudio()">📞 Start Audio Call</button>
-                </div>
-            </div>
+        <!-- 3. SLOTS MANAGEMENT -->
+        <div class="card">
+            <h2>📅 Manage Available Slots</h2>
+            <input type="date" id="slot-date" />
+            <div class="slot-grid" id="slots-container"></div>
+            <button class="btn-primary" onclick="window.saveSlots()">Save Slots for Date</button>
         </div>
-
-        <!-- 3. AVAILABILITY SETUP (FIREBASE) -->
-        <div id="sec-availability" class="panel-section">
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                    <h3 style="color: var(--primary-dark);">Manage Schedule</h3>
-                    <input type="date" id="admin-date" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Poppins';">
-                </div>
-                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Select a date and toggle the 24-hour slots ON/OFF. Changes reflect live on the client app.</p>
-                
-                <div class="slot-list-container" id="admin-slot-list">
-                    <!-- 24H Slots injected via JS -->
-                </div>
-                <button class="btn" onclick="saveAvailability()">Save Schedule to Database</button>
-            </div>
-        </div>
-
-        <!-- 4. BOOKINGS (PLACEHOLDER) -->
-        <div id="sec-bookings" class="panel-section">
-            <div class="card">
-                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">Recent Bookings</h3>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Client Name</th>
-                                <th>Date & Time</th>
-                                <th>Duration</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 20px;">No new bookings yet. Details will appear here once database syncing is complete.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. PAYMENTS (PLACEHOLDER) -->
-        <div id="sec-payments" class="panel-section">
-            <div class="card">
-                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">UPI Payment Logs</h3>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Transaction ID</th>
-                                <th>Client Name</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 20px;">Please check your HDFC/UPI App for real-time payment confirmations.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 6. REMEDIES (FIREBASE) -->
-        <div id="sec-remedies" class="panel-section">
-            <div class="card">
-                <h3 style="margin-bottom: 15px; color: var(--primary-dark);">Post Daily Guidance & Remedy</h3>
-                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">This will appear on the client app's home page instantly.</p>
-                
-                <input type="text" id="rem-title" class="form-control" placeholder="E.g. Thursday Remedy for Jupiter">
-                <textarea id="rem-desc" class="form-control" placeholder="Write detailed instructions..." style="height: 120px;"></textarea>
-                <button class="btn" onclick="publishRemedy()">🚀 Publish to Client App</button>
-            </div>
+        
+        <!-- 4. JOIN 1-ON-1 CALL -->
+        <div class="card">
+            <h2>📞 Join 1-on-1 Consultation</h2>
+            <p style="font-size: 12px; color: #64748b; margin-top: 0;">Enter client's name to connect to their private room.</p>
+            <input type="text" id="client-name" placeholder="Client Name (e.g. Rahul)" />
+            <button class="btn-primary" onclick="window.joinOneOnOne()">Join Video Call</button>
         </div>
     </div>
 
-    <!-- FIREBASE AND APP LOGIC -->
+    <!-- ZEGOCLOUD SDK -->
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        const firebaseConfig = {
+        const app = initializeApp({
             apiKey: "AIzaSyCbHdnVt9ST7vbJpEA1B8f76FglZo5zfav",
             authDomain: "real-astro-c8d6e.firebaseapp.com",
             projectId: "real-astro-c8d6e",
             storageBucket: "real-astro-c8d6e.appspot.com",
             messagingSenderId: "972015683245",
             appId: "1-972015683245-web:f4279a5b783d923of3a824"
-        };
-        const app = initializeApp(firebaseConfig);
+        });
         const db = getFirestore(app);
 
-        // Generate 48 slots (24 hours)
+        // --- LIVE STREAM LOGIC ---
+        window.updateSchedule = async () => {
+            const topic = document.getElementById('live-topic').value;
+            const time = document.getElementById('live-time').value;
+            if(!topic || !time) return alert("Please enter both Topic and Schedule Time.");
+            
+            await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: topic, scheduleTime: time });
+            alert("Schedule updated successfully! It is now visible on the Client App.");
+        };
+
+        window.startLive = async () => {
+            await setDoc(doc(db, "live_status", "main"), { isLive: true, topic: "LIVE NOW", scheduleTime: "LIVE NOW" });
+            alert("You are now LIVE! Clients will see the Red Banner. Opening Studio...");
+            
+            // ZegoCloud Host Logic
+            const appID = 1009897816;
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_live_room", "admin_host", "Acharya Subhadip (Host)"));
+            
+            zp.joinRoom({
+                container: document.body,
+                scenario: { 
+                    mode: ZegoUIKitPrebuilt.LiveStreaming, 
+                    config: { role: ZegoUIKitPrebuilt.Host } 
+                },
+                showTurnOffRemoteCameraButton: true,
+                showTurnOffRemoteMicrophoneButton: true,
+                showRemoveUserButton: true
+            });
+        };
+
+        window.endLive = async () => {
+            await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: "", scheduleTime: "Currently Offline" });
+            alert("Live ended! Client app will reset to normal.");
+            location.reload();
+        };
+
+        // --- REMEDY LOGIC ---
+        window.updateRemedy = async () => {
+            const title = document.getElementById('rem-title').value;
+            const desc = document.getElementById('rem-desc').value;
+            if(!title || !desc) return alert("Fill both fields!");
+            await setDoc(doc(db, "remedies", "latest"), { title, desc });
+            alert("Remedy Updated!");
+        };
+
+        // --- SLOTS LOGIC ---
         const timeSlots = [];
         for(let h=0; h<24; h++) {
             for(let m=0; m<60; m+=30) {
-                let ampm = h >= 12 ? 'PM' : 'AM';
-                let hour12 = h % 12 || 12;
-                let mins = m === 0 ? '00' : '30';
-                
-                let nextH = m === 30 ? h + 1 : h;
-                let nextM = m === 30 ? 0 : 30;
-                let nextAmpm = (nextH % 24) >= 12 ? 'PM' : 'AM';
-                let nextHour12 = (nextH % 12) || 12;
-                let nextMins = nextM === 0 ? '00' : '30';
-                
-                let timeLabel = `${hour12}:${mins} ${ampm} - ${nextHour12}:${nextMins} ${nextAmpm}`;
-                let dbKey = `slot_${h.toString().padStart(2,'0')}${mins}`;
-                timeSlots.push({ label: timeLabel, key: dbKey });
+                let ampm = h >= 12 ? 'PM' : 'AM'; let hour12 = h % 12 || 12; let mins = m === 0 ? '00' : '30';
+                let nextH = m === 30 ? h + 1 : h; let nextM = m === 30 ? 0 : 30;
+                let nextAmpm = (nextH % 24) >= 12 ? 'PM' : 'AM'; let nextHour12 = (nextH % 12) || 12; let nextMins = nextM === 0 ? '00' : '30';
+                timeSlots.push({ label: `${hour12}:${mins} ${ampm} - ${nextHour12}:${nextMins} ${nextAmpm}`, key: `slot_${h.toString().padStart(2,'0')}${mins}` });
             }
         }
 
-        // Render slots
-        const listContainer = document.getElementById('admin-slot-list');
-        timeSlots.forEach(slot => {
-            listContainer.innerHTML += `
-            <div class="slot-item">
-                <span class="slot-time">${slot.label}</span>
-                <label class="switch"><input type="checkbox" id="${slot.key}"><span class="slider"></span></label>
-            </div>`;
+        const slotContainer = document.getElementById('slots-container');
+        timeSlots.forEach(s => {
+            slotContainer.innerHTML += `<label class="slot-label"><input type="checkbox" id="${s.key}" value="true"> ${s.label}</label>`;
         });
 
-        let unsub = null;
-        const dateInput = document.getElementById('admin-date');
-        dateInput.value = new Date().toISOString().split('T')[0]; // Set today
+        const dateInput = document.getElementById('slot-date');
+        dateInput.value = new Date().toISOString().split('T')[0];
 
-        function loadSlots() {
+        const loadAdminSlots = async () => {
             const date = dateInput.value;
             if(!date) return;
-            if(unsub) unsub();
-            
-            unsub = onSnapshot(doc(db, "availability_dates", date), (docSnap) => {
-                timeSlots.forEach(s => document.getElementById(s.key).checked = false); // reset
-                let activeCount = 0;
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    timeSlots.forEach(s => {
-                        if(data[s.key]) {
-                            document.getElementById(s.key).checked = true;
-                            activeCount++;
-                        }
-                    });
-                }
-                // Update Dashboard stats
-                if(date === new Date().toISOString().split('T')[0]) {
-                    document.getElementById('dash-active-slots').innerText = activeCount;
-                }
-            });
-        }
-        dateInput.addEventListener('change', loadSlots);
-        loadSlots(); // load on start
+            timeSlots.forEach(s => document.getElementById(s.key).checked = false); // Uncheck all
+            const docSnap = await getDoc(doc(db, "availability_dates", date));
+            if(docSnap.exists()) {
+                const data = docSnap.data();
+                timeSlots.forEach(s => { if(data[s.key]) document.getElementById(s.key).checked = true; });
+            }
+        };
+        
+        dateInput.addEventListener('change', loadAdminSlots);
+        loadAdminSlots(); // Load for today on startup
 
-        window.saveAvailability = async function() {
+        window.saveSlots = async () => {
             const date = dateInput.value;
-            const dataToSave = { updatedAt: new Date() };
-            timeSlots.forEach(s => {
-                dataToSave[s.key] = document.getElementById(s.key).checked;
-            });
-            try {
-                await setDoc(doc(db, "availability_dates", date), dataToSave);
-                alert("Schedule saved successfully for " + date + "!");
-            } catch (e) { alert("Error: " + e.message); }
+            if(!date) return alert("Select a date!");
+            const data = {};
+            timeSlots.forEach(s => { if(document.getElementById(s.key).checked) data[s.key] = true; });
+            await setDoc(doc(db, "availability_dates", date), data);
+            alert("Slots saved for " + date);
         };
 
-        window.publishRemedy = async function() {
-            const title = document.getElementById('rem-title').value;
-            const desc = document.getElementById('rem-desc').value;
-            if(!title || !desc) return alert("Fill all fields");
-            try {
-                await setDoc(doc(db, "remedies", "latest"), { title, desc, updatedAt: new Date() });
-                alert("Remedy published successfully to Client App!");
-                document.getElementById('rem-title').value = '';
-                document.getElementById('rem-desc').value = '';
-            } catch (e) { alert("Error: " + e.message); }
-        };
-
-        // ZegoCloud Admin Calls
-        const appID = 1009897816; 
-        const serverSecret = "30cf208a168057120577256aa90fba8c";
-        const ROOM_ID = "real_astro_consultation_room"; // Must match client room ID
-
-        window.startAdminVideo = function() {
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, ROOM_ID, "admin_subhadip", "Acharya Subhadip"));
+        // --- 1-ON-1 CALL LOGIC ---
+        window.joinOneOnOne = () => {
+            const clientName = document.getElementById('client-name').value.trim();
+            if(!clientName) return alert("Enter client name to connect to their room!");
+            const appID = 1009897816;
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", "admin_private", "Acharya Subhadip"));
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
         };
-
-        window.startAdminAudio = function() {
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, ROOM_ID, "admin_subhadip", "Acharya Subhadip"));
-            zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.OneONoneCall }, turnOnCameraWhenJoining: false, showMyCameraToggleButton: false });
-        };
-
-        window.switchTab = function(tabId, element) {
-            document.querySelectorAll('.nav-menu li').forEach(li => li.classList.remove('active'));
-            element.classList.add('active');
-            document.querySelectorAll('.panel-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById('sec-' + tabId).classList.add('active');
-            document.getElementById('page-title').innerText = element.innerText.split(' ').slice(1).join(' ');
-        }
     </script>
 </body>
 </html>
