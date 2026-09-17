@@ -50,7 +50,7 @@
             <button class="btn-primary" onclick="window.saveSlots()">Save Slots for Date</button>
         </div>
 
-        <!-- 🌟 NEW: RECENT BOOKINGS TRACKER -->
+        <!-- 🌟 RECENT BOOKINGS TRACKER -->
         <div class="card">
             <h2>📋 Recent Bookings</h2>
             <p style="font-size: 12px; color: #64748b; margin-top: 0; margin-bottom: 12px;">Check your bank SMS for payment confirmation before joining.</p>
@@ -85,7 +85,7 @@
         });
         const db = getFirestore(app);
 
-        // --- LIVE STREAM LOGIC ---
+        // --- LIVE STREAM LOGIC (FIXED TEST TOKEN) ---
         window.updateSchedule = async () => {
             const topic = document.getElementById('live-topic').value;
             const time = document.getElementById('live-time').value;
@@ -96,10 +96,17 @@
 
         window.startLive = async () => {
             await setDoc(doc(db, "live_status", "main"), { isLive: true, topic: "LIVE NOW", scheduleTime: "LIVE NOW" });
-            alert("You are now LIVE! Clients will see the Red Banner. Opening Studio...");
+            alert("You are now LIVE! Opening Studio...");
+            
             const appID = 1009897816;
-            const serverSecret = "30cf208a168057120577256aa90fba8c";
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_live_room", "admin_host", "Acharya Subhadip (Host)"));
+            const roomID = "real_astro_live_room";
+            const userID = "admin_host_" + Math.floor(Math.random() * 1000);
+            const userName = "Acharya Subhadip (Host)";
+            
+            // Using Zego's official test token generation method for zero auth errors
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, "30cf208a168057120577256aa90fba8c", roomID, userID, userName);
+            
+            const zp = ZegoUIKitPrebuilt.create(token);
             zp.joinRoom({
                 container: document.body,
                 scenario: { mode: ZegoUIKitPrebuilt.LiveStreaming, config: { role: ZegoUIKitPrebuilt.Host } },
@@ -146,7 +153,7 @@
         const loadAdminSlots = async () => {
             const date = dateInput.value;
             if(!date) return;
-            timeSlots.forEach(s => document.getElementById(s.key).checked = false); // Uncheck all
+            timeSlots.forEach(s => document.getElementById(s.key).checked = false);
             const docSnap = await getDoc(doc(db, "availability_dates", date));
             if(docSnap.exists()) {
                 const data = docSnap.data();
@@ -155,7 +162,7 @@
         };
         
         dateInput.addEventListener('change', loadAdminSlots);
-        loadAdminSlots(); // Load for today on startup
+        loadAdminSlots();
 
         window.saveSlots = async () => {
             const date = dateInput.value;
@@ -166,7 +173,7 @@
             alert("Slots saved for " + date);
         };
 
-        // 🌟 NEW: FETCH RECENT BOOKINGS LIVE
+        // BOOKINGS LISTENER
         const bookingsQ = query(collection(db, "bookings"), orderBy("timestamp", "desc"), limit(20));
         onSnapshot(bookingsQ, (snapshot) => {
             const list = document.getElementById('admin-bookings-list');
@@ -190,13 +197,19 @@
             });
         });
 
-        // --- 1-ON-1 CALL LOGIC ---
+        // --- 1-ON-1 CALL LOGIC (FIXED TEST TOKEN) ---
         window.joinOneOnOne = () => {
             const clientName = document.getElementById('client-name').value.trim();
             if(!clientName) return alert("Enter client name to connect to their room!");
+            
             const appID = 1009897816;
-            const serverSecret = "30cf208a168057120577256aa90fba8c";
-            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", "admin_private", "Acharya Subhadip"));
+            const roomID = "real_astro_consultation_room";
+            const userID = "admin_private_" + Math.floor(Math.random() * 1000);
+            const userName = "Acharya Subhadip";
+            
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, "30cf208a168057120577256aa90fba8c", roomID, userID, userName);
+            const zp = ZegoUIKitPrebuilt.create(token);
+            
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
         };
     </script>
