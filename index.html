@@ -749,24 +749,55 @@
             showStatus(featureName + " will be available soon!", "success");
         }
 
+        // UPI PAYMENT LOGIC (With Booking DB Save)
+        function makePayment() {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
+            const dateVal = document.getElementById('client-date').value;
+
+            // Trigger Database Save Background Task
+            if(window.saveClientBooking) {
+                window.saveClientBooking("UPI", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
+            }
+
+            const upiId = "bengaliblogger144@okhdfcbank";
+            const payeeName = "Acharya Subhadip (" + selectedPlanMinutes + " Mins)";
+            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedPlanAmount}&cu=INR`;
+            
+            showStatus(`Opening UPI for ₹${selectedPlanAmount}...`, 'success');
+            setTimeout(() => { window.location.href = upiLink; }, 500);
+        }
+
+        // CARD PAYMENT REQUEST LOGIC (With Booking DB Save)
+        function requestCardPayment() {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
+            const dateVal = document.getElementById('client-date').value;
+
+            // Trigger Database Save Background Task
+            if(window.saveClientBooking) {
+                window.saveClientBooking("Card/Netbanking", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
+            }
+
+            const slotText = ` [Slot: ${selectedSlotLabel} on ${dateVal}]`;
+            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}.${slotText}\nI want to book the *${selectedPlanMinutes} Minutes plan (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         function generateKundliUI() {
             const name = document.getElementById('k-name').value.trim();
             const dob = document.getElementById('k-dob').value;
             const time = document.getElementById('k-time').value;
             const place = document.getElementById('k-place').value.trim();
-
-            if (!name || !dob || !time || !place) {
-                showStatus("Please fill all details.", 'error');
-                return;
-            }
-
+            if (!name || !dob || !time || !place) { showStatus("Please fill all details.", 'error'); return; }
             document.getElementById('kundli-input-section').style.display = 'none';
             document.getElementById('kundli-loading-section').style.display = 'block';
-
             setTimeout(() => {
                 document.getElementById('kundli-loading-section').style.display = 'none';
                 document.getElementById('kundli-result-section').style.display = 'block';
-                
                 document.getElementById('res-name').innerText = "Client: " + name;
                 document.getElementById('res-details').innerText = `${dob} | ${time} | ${place}`;
             }, 1500);
@@ -782,30 +813,7 @@
             const dob = document.getElementById('k-dob').value;
             const time = document.getElementById('k-time').value;
             const place = document.getElementById('k-place').value.trim();
-            
             const message = `Namaste Acharya ji! 🙏\nI need an expert Kundli analysis. Here is my verified data:\n\n*Name:* ${name}\n*DOB:* ${dob}\n*Time:* ${time}\n*Place:* ${place}\n\nPlease let me know the process for consultation.`;
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // UPI PAYMENT LOGIC (Using selected plan)
-        function makePayment() {
-            const userName = document.getElementById('username').value.trim();
-            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
-            const upiId = "bengaliblogger144@okhdfcbank";
-            const payeeName = "Acharya Subhadip (" + selectedPlanMinutes + " Mins)";
-            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedPlanAmount}&cu=INR`;
-            
-            showStatus(`Opening UPI for ₹${selectedPlanAmount}...`, 'success');
-            setTimeout(() => { window.location.href = upiLink; }, 500);
-        }
-
-        // NEW: CARD PAYMENT REQUEST LOGIC
-        function requestCardPayment() {
-            const userName = document.getElementById('username').value.trim();
-            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
-            const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
-            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}.${slotText}\nI want to book the *${selectedPlanMinutes} Minutes plan (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
             const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
@@ -874,7 +882,6 @@
                             const data = await response.json();
                             const city = data.address.city || data.address.town || data.address.village || data.address.county || data.address.state_district || "";
                             const state = data.address.state || "";
-                            
                             let locationString = "";
                             if(city && state) locationString = `${city}, ${state}`;
                             else if(city) locationString = city;
@@ -903,7 +910,7 @@
     <!-- FIREBASE LIVE SYNC SCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const app = initializeApp({
             apiKey: "AIzaSyCbHdnVt9ST7vbJpEA1B8f76FglZo5zfav",
@@ -915,7 +922,22 @@
         });
         const db = getFirestore(app);
 
-        // 🌟 NEW: Fetch Astrologer Live Status & Schedule
+        // 🌟 NEW: Save Client Booking to DB
+        window.saveClientBooking = async (paymentMethod, userName, date, slot, planMins, planAmt) => {
+            try {
+                await addDoc(collection(db, "bookings"), {
+                    clientName: userName,
+                    date: date,
+                    slot: slot,
+                    planMinutes: planMins,
+                    planAmount: planAmt,
+                    paymentMethod: paymentMethod,
+                    timestamp: new Date().toISOString()
+                });
+            } catch(e) { console.error("Error saving booking:", e); }
+        };
+
+        // Fetch Astrologer Live Status & Schedule
         onSnapshot(doc(db, "live_status", "main"), (docSnap) => {
             const liveSec = document.getElementById('astrologer-live-section');
             const schedBox = document.getElementById('live-schedule-box');
@@ -923,16 +945,14 @@
             
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                liveSec.style.display = 'block'; // Make section visible if data exists
+                liveSec.style.display = 'block'; 
 
                 if(data.isLive === true) {
-                    // Turn box RED and show Join button
                     schedBox.style.display = 'none';
                     actBox.style.display = 'block';
                     liveSec.style.background = '#fef2f2';
                     liveSec.style.borderColor = '#ef4444';
                 } else {
-                    // Turn box Normal and show Schedule
                     schedBox.style.display = 'block';
                     actBox.style.display = 'none';
                     liveSec.style.background = '#fff5f5';
