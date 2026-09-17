@@ -390,9 +390,9 @@
                     </div>
                 </div>
 
-                <!-- Selectable Pricing Plans & Payment Button -->
+                <!-- Selectable Pricing Plans & Payment Buttons -->
                 <div class="input-group" style="margin-top: 20px;">
-                    <span class="text-hint">Step 3: Select Duration & Pay (UPI)</span>
+                    <span class="text-hint">Step 3: Select Duration & Pay</span>
                     <div class="plan-grid">
                         <div class="plan-card selected" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
                             <div class="plan-info">
@@ -416,8 +416,9 @@
                             <div class="plan-price"><del>₹300</del> ₹200</div>
                         </div>
                     </div>
-                    <!-- NEW PAYMENT BUTTON -->
+                    <!-- UPI & CARD PAYMENT BUTTONS -->
                     <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment()">💳 Pay Securely via UPI</button>
+                    <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment()">💳 Pay via Card / Netbanking</button>
                 </div>
 
                 <div class="input-group" style="margin-top: 20px;">
@@ -797,6 +798,16 @@
             
             showStatus(`Opening UPI for ₹${selectedPlanAmount}...`, 'success');
             setTimeout(() => { window.location.href = upiLink; }, 500);
+        }
+
+        // NEW: CARD PAYMENT REQUEST LOGIC
+        function requestCardPayment() {
+            const userName = document.getElementById('username').value.trim();
+            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
+            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}.${slotText}\nI want to book the *${selectedPlanMinutes} Minutes plan (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         function startChat() {
