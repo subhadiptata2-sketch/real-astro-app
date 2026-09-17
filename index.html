@@ -483,11 +483,10 @@
             <div class="home-section booking-highlight" id="booking-area">
                 <div class="section-header">Start Your Consultation</div>
                 
-                <!-- 🔥 MODIFIED: PHONE NUMBER FIELD ADDED HERE 🔥 -->
                 <div class="input-group">
                     <span class="text-hint">Step 1: Enter Your Details</span>
                     <input type="text" id="username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
-                    <input type="tel" id="userphone" class="form-control" placeholder="WhatsApp Number (e.g. 9876543210)" />
+                    <input type="tel" id="userphone" class="form-control" placeholder="Mobile / WhatsApp Number (e.g. 9876543210)" />
                 </div>
 
                 <!-- Live Date & Selectable Time Slots -->
@@ -509,10 +508,12 @@
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
                     
+                    <!-- 🔥 NEW: DYNAMIC POPULAR SERVICE SELECTION BOX 🔥 -->
                     <div id="popular-selection-display" style="display:none; background: #fffbeb; border: 1px solid #fde68a; padding: 14px; border-radius: 12px; margin-bottom: 12px; text-align: left; animation: fadeIn 0.3s ease;">
                         <!-- JS WILL FILL THIS -->
                     </div>
 
+                    <!-- 🌟 Normal Plans Box 🌟 -->
                     <div class="plan-grid" id="normal-plan-grid">
                         <div class="plan-card selected" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
                             <div class="plan-info">
@@ -536,7 +537,7 @@
                             <div class="plan-price"><del>₹300</del> ₹200</div>
                         </div>
                     </div>
-                    
+                    <!-- UPI & CARD PAYMENT BUTTONS -->
                     <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment()">💳 Pay Securely via UPI</button>
                     <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment()">💳 Pay via Card / Netbanking</button>
                 </div>
@@ -903,13 +904,12 @@
             selectedPlanMinutes = 10;
         }
 
-        // 🔥 MODIFIED: PHONE NUMBER CHECK FOR UPI 🔥
         function makePayment() {
             const userName = document.getElementById('username').value.trim();
             const userPhone = document.getElementById('userphone').value.trim();
             
             if (!userName || !userPhone) { 
-                showStatus("Please enter your Name and WhatsApp Number first!", 'error'); 
+                showStatus("Please enter your Name and Mobile / WhatsApp Number first!", 'error'); 
                 document.getElementById(!userName ? 'username' : 'userphone').focus(); 
                 return; 
             }
@@ -930,13 +930,12 @@
             setTimeout(() => { window.location.href = upiLink; }, 500);
         }
 
-        // 🔥 MODIFIED: PHONE NUMBER CHECK FOR CARD 🔥
         function requestCardPayment() {
             const userName = document.getElementById('username').value.trim();
             const userPhone = document.getElementById('userphone').value.trim();
             
             if (!userName || !userPhone) { 
-                showStatus("Please enter your Name and WhatsApp Number first!", 'error'); 
+                showStatus("Please enter your Name and Mobile / WhatsApp Number first!", 'error'); 
                 document.getElementById(!userName ? 'username' : 'userphone').focus(); 
                 return; 
             }
@@ -993,7 +992,6 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // 🔥 MODIFIED: PHONE NUMBER CHECK FOR CALL/CHAT 🔥
         function startChat() {
             if (!paymentInitiated) {
                 showStatus("Please complete your payment first!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले स्टेप 3 में अपना पेमेंट पूरा करें!</span>", "error");
@@ -1001,7 +999,7 @@
             }
             const userName = document.getElementById('username').value.trim();
             const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) { showStatus("Enter your Name and WhatsApp Number first!", 'error'); return; }
+            if (!userName || !userPhone) { showStatus("Enter your Name and Mobile / WhatsApp Number first!", 'error'); return; }
             
             const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
             const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(userName)}.${encodeURIComponent(slotText)} I want to start my consultation chat.`;
@@ -1015,7 +1013,7 @@
             }
             const userName = document.getElementById('username').value.trim();
             const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) { showStatus("Enter your Name and WhatsApp Number first!", 'error'); return; }
+            if (!userName || !userPhone) { showStatus("Enter your Name and Mobile / WhatsApp Number first!", 'error'); return; }
 
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
@@ -1032,7 +1030,7 @@
             }
             const userName = document.getElementById('username').value.trim();
             const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) { showStatus("Enter your Name and WhatsApp Number first!", 'error'); return; }
+            if (!userName || !userPhone) { showStatus("Enter your Name and Mobile / WhatsApp Number first!", 'error'); return; }
 
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
@@ -1122,7 +1120,6 @@
         });
         const db = getFirestore(app);
 
-        // 🔥 MODIFIED: SENDING PHONE NUMBER TO DATABASE 🔥
         window.saveClientBooking = async (paymentMethod, userName, userPhone, date, slot, planMins, planAmt) => {
             try {
                 await addDoc(collection(db, "bookings"), {
