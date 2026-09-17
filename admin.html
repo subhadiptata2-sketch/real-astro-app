@@ -18,6 +18,7 @@
         .btn-gray { background: #64748b; }
         .slot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;}
         .slot-label { font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .action-row { display: flex; gap: 10px; }
     </style>
 </head>
 <body>
@@ -39,7 +40,10 @@
             <h2>✨ Daily Remedy Update</h2>
             <input type="text" id="rem-title" placeholder="Remedy Title" />
             <textarea id="rem-desc" rows="3" placeholder="Remedy Description"></textarea>
-            <button class="btn-primary" onclick="window.updateRemedy()">Update Remedy</button>
+            <div class="action-row">
+                <button class="btn-primary" onclick="window.updateRemedy()" style="flex: 2;">Update Remedy</button>
+                <button class="btn-gray" onclick="window.removeRemedy()" style="flex: 1; background: #94a3b8; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">🗑️ Remove</button>
+            </div>
         </div>
 
         <!-- 3. SLOTS MANAGEMENT -->
@@ -73,7 +77,7 @@
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, query, orderBy, limit, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const app = initializeApp({
             apiKey: "AIzaSyCbHdnVt9ST7vbJpEA1B8f76FglZo5zfav",
@@ -103,7 +107,6 @@
             const userID = "admin_host_" + Math.floor(Math.random() * 1000);
             const userName = "Acharya Subhadip (Host)";
             
-            // Using Zego's official test token generation method for zero auth errors
             const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, "30cf208a168057120577256aa90fba8c", roomID, userID, userName);
             
             const zp = ZegoUIKitPrebuilt.create(token);
@@ -129,6 +132,18 @@
             if(!title || !desc) return alert("Fill both fields!");
             await setDoc(doc(db, "remedies", "latest"), { title, desc });
             alert("Remedy Updated!");
+        };
+
+        // 🌟 NEW: REMOVE REMEDY LOGIC 🌟
+        window.removeRemedy = async () => {
+            if(confirm("Are you sure you want to remove the current remedy?")) {
+                try {
+                    await deleteDoc(doc(db, "remedies", "latest"));
+                    document.getElementById('rem-title').value = '';
+                    document.getElementById('rem-desc').value = '';
+                    alert("Remedy Removed Successfully! It will no longer appear on your client website.");
+                } catch(e) { console.error("Error removing remedy:", e); }
+            }
         };
 
         // --- SLOTS LOGIC ---
