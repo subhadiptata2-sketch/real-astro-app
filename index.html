@@ -87,6 +87,16 @@
         .service-info h4 { color: var(--primary-dark); font-size: 15px; margin-bottom: 4px; }
         .service-info p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5; }
         
+        /* 🔥 Popular Services Card Styles 🔥 */
+        .pop-card { border: 2px solid #e2e8f0; border-radius: 14px; padding: 16px; background: white; text-align: left; transition: var(--transition); box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .pop-card:hover { border-color: var(--orange); box-shadow: var(--shadow-sm); }
+        .pop-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+        .pop-title { font-size: 14.5px; color: var(--primary-dark); margin: 0; font-weight: 700; line-height: 1.4; padding-right: 10px; }
+        .pop-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
+        .pop-price-box { text-align: right; flex-shrink: 0; background: #f0fdf4; padding: 6px 12px; border-radius: 10px; border: 1px solid #bbf7d0; box-shadow: 0 2px 4px rgba(39, 174, 96, 0.1); }
+        .pop-price-box del { font-size: 11.5px; color: #ef4444; font-weight: 600; display: block; line-height: 1; margin-bottom: 2px; }
+        .pop-price-box span { font-size: 16px; font-weight: 700; color: var(--success); line-height: 1; }
+
         .feature-list { list-style: none; padding: 0; }
         .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 13.5px; font-weight: 500; color: var(--text-main); background: #f0fdf4; padding: 12px; border-radius: 10px; border: 1px solid #bbf7d0; }
         .feature-list li .f-icon { color: var(--success); font-size: 16px; }
@@ -307,6 +317,87 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 🔥 NEW: POPULAR SERVICES SECTION 🔥 -->
+            <div class="home-section">
+                <div class="section-header">🔥 Popular Services</div>
+                
+                <!-- Trust / Marketing Badge -->
+                <div style="background: linear-gradient(135deg, #fff9e6, #fff0c2); border: 1px solid var(--gold); border-radius: 12px; padding: 18px; margin-bottom: 20px; text-align: left; box-shadow: 0 4px 15px rgba(255, 153, 51, 0.1);">
+                    <div style="font-size: 15px; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px;">✨ 100% Personal Guidance by Acharya Ji</div>
+                    <p style="font-size: 13px; color: #b45309; line-height: 1.6; margin: 0; font-weight: 500;">
+                        It is completely my personal guidance based on <b>10 years and 10,000+ Kundli analysis experience.</b> Join our family of <b>1200+ Happy Clients</b> who have taken these services!
+                    </p>
+                </div>
+
+                <div style="display: grid; gap: 14px;">
+                    <!-- Service 1 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">1. Full Kundli Making And Analysis</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <p class="pop-desc">Detailed analysis of major life areas through your birth chart.</p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Full Kundli Making And Analysis')">Book Now on WhatsApp</button>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">2. Marriage Match Making (Kundli Milan)</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <p class="pop-desc">Kundli-based compatibility and deep relationship insights.</p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Marriage Match Making (Kundli Milan)')">Book Now on WhatsApp</button>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">3. Detailed Remedy For Any Problem</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <p class="pop-desc">Detailed Remedy For Finance, Career, Health, Marriage (Gemstone, Rudraksha, Kavaj, Yantra, Mantra).</p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Detailed Remedy For Any Problem')">Book Now on WhatsApp</button>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">4. Spiritual Progress & Sadhana Guidance</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <p class="pop-desc">Spiritual Growth & Inner Guidance. Explore spiritual tendencies, purpose and personal growth.</p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Spiritual Progress And Sadhana Guidance')">Book Now on WhatsApp</button>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">5. Emotional Well-being & Life Guidance</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <p class="pop-desc">Supportive guidance for emotional challenges, stress and deep personal concerns.</p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Emotional Well-being & Life Guidance')">Book Now on WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 🔥 END OF POPULAR SERVICES 🔥 -->
 
             <div class="home-section">
                 <div class="section-header">Why Choose Us?</div>
@@ -747,6 +838,13 @@
 
         function showComingSoon(featureName) {
             showStatus(featureName + " will be available soon!", "success");
+        }
+
+        // 🔥 NEW: POPULAR SERVICE BOOKING LOGIC 🔥
+        function bookPopularService(serviceName) {
+            const message = `Namaste Acharya ji! 🙏\nI want to book your Popular Service:\n*${serviceName}*\n\n*Price:* ₹499 (Offer Price)\n\nPlease guide me with the payment and next steps.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         // UPI PAYMENT LOGIC (With Booking DB Save)
