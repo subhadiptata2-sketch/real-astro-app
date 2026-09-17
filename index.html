@@ -186,7 +186,7 @@
         .nav-btn.active { color: var(--gold-dark); transform: translateY(-2px); }
         .nav-btn.active span { filter: grayscale(0%) opacity(1); }
 
-        /* 🔥 MODIFIED: STATUS POPUP TO ALLOW WRAPPING & LOOK BETTER 🔥 */
+        /* 🔥 STATUS POPUP (ALLOW WRAPPING) 🔥 */
         #status { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 1100; font-weight: 600; font-size: 13.5px; text-align: center; padding: 12px 20px; border-radius: 12px; display: none; box-shadow: var(--shadow-md); width: 90%; max-width: 400px; line-height: 1.4; }
 
         /* LIVE BADGE ANIMATION */
@@ -478,7 +478,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 🔥 END OF MOVED SECTION 🔥 -->
 
             <!-- BOOKING UI & PRICING -->
             <div class="home-section booking-highlight" id="booking-area">
@@ -513,7 +512,7 @@
                         <!-- JS WILL FILL THIS -->
                     </div>
 
-                    <!-- 🌟 Normal Plans Box (Added ID for UI Control) 🌟 -->
+                    <!-- 🌟 Normal Plans Box 🌟 -->
                     <div class="plan-grid" id="normal-plan-grid">
                         <div class="plan-card selected" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
                             <div class="plan-info">
@@ -542,9 +541,13 @@
                     <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment()">💳 Pay via Card / Netbanking</button>
                 </div>
 
+                <!-- 🔥 BUTTON LOCK IMPLEMENTED HERE 🔥 -->
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 4: Connect Instantly</span>
-                    <div class="connect-grid">
+                    <div id="connect-lock-msg" style="font-size: 13px; color: #b45309; background: #fffbeb; padding: 12px; border-radius: 12px; border: 1px dashed #fde68a; text-align: center; margin-bottom: 10px;">
+                        🔒 Click any <b>Pay</b> button in Step 3 to unlock call options.
+                    </div>
+                    <div class="connect-grid" id="connect-buttons" style="display: none;">
                         <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
                         <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
                         <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
@@ -854,7 +857,7 @@
 
         function showStatus(message, type) {
             const statusDiv = document.getElementById('status');
-            statusDiv.innerHTML = message; // Changed to innerHTML to support <br> tags for Hindi subtitle
+            statusDiv.innerHTML = message; 
             statusDiv.style.display = 'block';
             if(type === 'error') {
                 statusDiv.style.background = '#fef2f2';
@@ -865,7 +868,7 @@
                 statusDiv.style.color = '#15803d';
                 statusDiv.style.border = '1px solid #bbf7d0';
             }
-            setTimeout(() => { statusDiv.style.display = 'none'; }, 4000); // Increased to 4 seconds to give time to read
+            setTimeout(() => { statusDiv.style.display = 'none'; }, 4000); 
         }
 
         function saveProfile() {
@@ -910,12 +913,16 @@
             selectedPlanMinutes = 10;
         }
 
-        // UPI PAYMENT LOGIC (With Booking DB Save)
+        // UPI PAYMENT LOGIC (With Booking DB Save & Button Unlock)
         function makePayment() {
             const userName = document.getElementById('username').value.trim();
             if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             const dateVal = document.getElementById('client-date').value;
+
+            // UNLOCK STEP 4 BUTTONS
+            document.getElementById('connect-lock-msg').style.display = 'none';
+            document.getElementById('connect-buttons').style.display = 'grid';
 
             if(window.saveClientBooking) {
                 window.saveClientBooking("UPI", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
@@ -929,12 +936,16 @@
             setTimeout(() => { window.location.href = upiLink; }, 500);
         }
 
-        // CARD PAYMENT REQUEST LOGIC (With Booking DB Save)
+        // CARD PAYMENT REQUEST LOGIC (With Booking DB Save & Button Unlock)
         function requestCardPayment() {
             const userName = document.getElementById('username').value.trim();
             if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             const dateVal = document.getElementById('client-date').value;
+
+            // UNLOCK STEP 4 BUTTONS
+            document.getElementById('connect-lock-msg').style.display = 'none';
+            document.getElementById('connect-buttons').style.display = 'grid';
 
             if(window.saveClientBooking) {
                 window.saveClientBooking("Card/Netbanking", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
