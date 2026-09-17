@@ -483,9 +483,11 @@
             <div class="home-section booking-highlight" id="booking-area">
                 <div class="section-header">Start Your Consultation</div>
                 
+                <!-- 🔥 MODIFIED: PHONE NUMBER FIELD ADDED HERE 🔥 -->
                 <div class="input-group">
-                    <span class="text-hint">Step 1: Enter Your Name</span>
-                    <input type="text" id="username" class="form-control" placeholder="e.g. Rahul Sharma" />
+                    <span class="text-hint">Step 1: Enter Your Details</span>
+                    <input type="text" id="username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
+                    <input type="tel" id="userphone" class="form-control" placeholder="WhatsApp Number (e.g. 9876543210)" />
                 </div>
 
                 <!-- Live Date & Selectable Time Slots -->
@@ -507,12 +509,10 @@
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
                     
-                    <!-- 🔥 NEW: DYNAMIC POPULAR SERVICE SELECTION BOX 🔥 -->
                     <div id="popular-selection-display" style="display:none; background: #fffbeb; border: 1px solid #fde68a; padding: 14px; border-radius: 12px; margin-bottom: 12px; text-align: left; animation: fadeIn 0.3s ease;">
                         <!-- JS WILL FILL THIS -->
                     </div>
 
-                    <!-- 🌟 Normal Plans Box 🌟 -->
                     <div class="plan-grid" id="normal-plan-grid">
                         <div class="plan-card selected" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
                             <div class="plan-info">
@@ -536,12 +536,11 @@
                             <div class="plan-price"><del>₹300</del> ₹200</div>
                         </div>
                     </div>
-                    <!-- UPI & CARD PAYMENT BUTTONS -->
+                    
                     <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment()">💳 Pay Securely via UPI</button>
                     <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment()">💳 Pay via Card / Netbanking</button>
                 </div>
 
-                <!-- 🔥 MODIFIED: BUTTONS VISIBLE BUT SMART LOCKED 🔥 -->
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 4: Connect Instantly</span>
                     <div class="connect-grid" id="connect-buttons">
@@ -645,7 +644,6 @@
                     </div>
                 </div>
                 
-                <!-- 🔥 MODIFIED: DIRECT WHATSAPP BUTTON 🔥 -->
                 <button class="btn btn-primary" style="margin-top: 8px;" onclick="sendKundliWhatsApp()">✨ Kundli Analysis With Acharya Ji</button>
             </div>
 
@@ -784,8 +782,8 @@
         let selectedPlanAmount = 100;
         let selectedPlanMinutes = 10;
         let selectedSlotLabel = null;
-        let isPopularService = false; // Add Popular Service State Tracker
-        let paymentInitiated = false; // Add Payment State Tracker
+        let isPopularService = false; 
+        let paymentInitiated = false; 
 
         // --- MENU LOGIC ---
         function toggleMenu() {
@@ -820,9 +818,7 @@
             setTimeout(() => { document.getElementById('contact-section').scrollIntoView({behavior: 'smooth', block: 'center'}); }, 200);
         }
 
-        // 🔥 MODIFIED: Normal Plan Selection with Popular Service Block & Hindi Text 🔥
         function selectPlan(amount, minutes, elementId) {
-            // Block normal plan click if Popular Service is active
             if (isPopularService) {
                 showStatus("Duration is not required for Popular Service. It's only for normal consultation!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>पॉपुलर सर्विस के लिए समय (Duration) चुनने की आवश्यकता नहीं है!</span>", "error");
                 return;
@@ -880,24 +876,20 @@
             showStatus(featureName + " will be available soon!", "success");
         }
 
-        // 🔥 MODIFIED: POPULAR SERVICE SMART BOOKING ROUTING 🔥
         function bookPopularService(serviceName) {
             isPopularService = true;
             selectedPlanAmount = 499;
             selectedPlanMinutes = "Offer: " + serviceName; 
 
-            // Unselect Normal Plans visually & dim the section
             document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
             document.getElementById('normal-plan-grid').style.opacity = '0.4';
             
-            // Show highlight banner in booking area
             const popDisplay = document.getElementById('popular-selection-display');
             popDisplay.style.display = 'block';
             popDisplay.innerHTML = `⭐ <b>Selected: ${serviceName}</b><br><span style="color: var(--success); font-weight: 700; font-size: 15px; display: block; margin-top: 4px;">Price: ₹499</span><span style="font-size: 11px; font-weight: 500; text-decoration: underline; color: var(--text-muted); cursor: pointer; display: inline-block; margin-top: 8px;" onclick="clearPopularSelection()">Cancel & select normal time plan</span>`;
             
-            // Auto-scroll to form
             document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'});
-            showStatus("Please enter name & select a slot to complete booking.", "success");
+            showStatus("Please enter details & select a slot to complete booking.", "success");
         }
 
         function clearPopularSelection() {
@@ -905,24 +897,29 @@
             document.getElementById('popular-selection-display').style.display = 'none';
             document.getElementById('normal-plan-grid').style.opacity = '1';
             
-            // Force reset to basic normal plan without triggering the block
             document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
             document.getElementById('plan-10').classList.add('selected');
             selectedPlanAmount = 100;
             selectedPlanMinutes = 10;
         }
 
-        // UPI PAYMENT LOGIC
+        // 🔥 MODIFIED: PHONE NUMBER CHECK FOR UPI 🔥
         function makePayment() {
             const userName = document.getElementById('username').value.trim();
-            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const userPhone = document.getElementById('userphone').value.trim();
+            
+            if (!userName || !userPhone) { 
+                showStatus("Please enter your Name and WhatsApp Number first!", 'error'); 
+                document.getElementById(!userName ? 'username' : 'userphone').focus(); 
+                return; 
+            }
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
+            
             const dateVal = document.getElementById('client-date').value;
-
-            paymentInitiated = true; // Unlock call buttons
+            paymentInitiated = true; 
 
             if(window.saveClientBooking) {
-                window.saveClientBooking("UPI", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
+                window.saveClientBooking("UPI", userName, userPhone, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
             }
 
             const upiId = "bengaliblogger144@okhdfcbank";
@@ -933,32 +930,58 @@
             setTimeout(() => { window.location.href = upiLink; }, 500);
         }
 
-        // CARD PAYMENT REQUEST LOGIC
+        // 🔥 MODIFIED: PHONE NUMBER CHECK FOR CARD 🔥
         function requestCardPayment() {
             const userName = document.getElementById('username').value.trim();
-            if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const userPhone = document.getElementById('userphone').value.trim();
+            
+            if (!userName || !userPhone) { 
+                showStatus("Please enter your Name and WhatsApp Number first!", 'error'); 
+                document.getElementById(!userName ? 'username' : 'userphone').focus(); 
+                return; 
+            }
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
+            
             const dateVal = document.getElementById('client-date').value;
-
-            paymentInitiated = true; // Unlock call buttons
+            paymentInitiated = true; 
 
             if(window.saveClientBooking) {
-                window.saveClientBooking("Card/Netbanking", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
+                window.saveClientBooking("Card/Netbanking", userName, userPhone, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
             }
 
             const slotText = ` [Slot: ${selectedSlotLabel} on ${dateVal}]`;
             let planNameStr = isPopularService ? `Service: ${selectedPlanMinutes}` : `${selectedPlanMinutes} Minutes plan`;
-            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}.${slotText}\nI want to book the *${planNameStr} (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
+            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}. My number is ${userPhone}.${slotText}\nI want to book the *${planNameStr} (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
             const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // 🔥 MODIFIED: DIRECT WHATSAPP KUNDLI LOGIC 🔥
+        function generateKundliUI() {
+            const name = document.getElementById('k-name').value.trim();
+            const dob = document.getElementById('k-dob').value;
+            const time = document.getElementById('k-time').value;
+            const place = document.getElementById('p-place').value.trim(); 
+            if (!name || !dob || !time || !place) { showStatus("Please fill all details.", 'error'); return; }
+            document.getElementById('kundli-input-section').style.display = 'none';
+            document.getElementById('kundli-loading-section').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('kundli-loading-section').style.display = 'none';
+                document.getElementById('kundli-result-section').style.display = 'block';
+                document.getElementById('res-name').innerText = "Client: " + name;
+                document.getElementById('res-details').innerText = `${dob} | ${time} | ${place}`;
+            }, 1500);
+        }
+
+        function resetKundliUI() {
+            document.getElementById('kundli-result-section').style.display = 'none';
+            document.getElementById('kundli-input-section').style.display = 'block';
+        }
+
         function sendKundliWhatsApp() {
             const name = document.getElementById('k-name').value.trim();
             const dob = document.getElementById('k-dob').value;
             const time = document.getElementById('k-time').value;
-            const place = document.getElementById('p-place').value.trim(); // Reads from the Kundli tab place input
+            const place = document.getElementById('p-place').value.trim(); 
             
             if (!name || !dob || !time || !place) { 
                 showStatus("Please fill all details.", 'error'); 
@@ -970,21 +993,18 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        function resetKundliUI() {
-            document.getElementById('kundli-result-section').style.display = 'none';
-            document.getElementById('kundli-input-section').style.display = 'block';
-        }
-
-        // 🔥 CONNECTION LOGIC (PAYMENT GATE CHECK) 🔥
+        // 🔥 MODIFIED: PHONE NUMBER CHECK FOR CALL/CHAT 🔥
         function startChat() {
             if (!paymentInitiated) {
                 showStatus("Please complete your payment first!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले स्टेप 3 में अपना पेमेंट पूरा करें!</span>", "error");
                 return;
             }
-            const nameField = document.getElementById('username').value.trim();
-            if (!nameField) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const userName = document.getElementById('username').value.trim();
+            const userPhone = document.getElementById('userphone').value.trim();
+            if (!userName || !userPhone) { showStatus("Enter your Name and WhatsApp Number first!", 'error'); return; }
+            
             const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(nameField)}.${encodeURIComponent(slotText)} I want to start my consultation chat.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(userName)}.${encodeURIComponent(slotText)} I want to start my consultation chat.`;
             window.open(whatsappUrl, '_blank');
         }
 
@@ -994,7 +1014,9 @@
                 return;
             }
             const userName = document.getElementById('username').value.trim();
-            if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const userPhone = document.getElementById('userphone').value.trim();
+            if (!userName || !userPhone) { showStatus("Enter your Name and WhatsApp Number first!", 'error'); return; }
+
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
             const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_consultation_room", userID, userName);
@@ -1009,7 +1031,9 @@
                 return;
             }
             const userName = document.getElementById('username').value.trim();
-            if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
+            const userPhone = document.getElementById('userphone').value.trim();
+            if (!userName || !userPhone) { showStatus("Enter your Name and WhatsApp Number first!", 'error'); return; }
+
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
             const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_consultation_room", userID, userName);
@@ -1018,7 +1042,6 @@
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
         }
 
-        // --- NEW: JOIN ASTROLOGER LIVE STREAM LOGIC (As Audience) (FIXED TEST TOKEN) ---
         function joinLiveStream() {
             let userName = document.getElementById('username').value.trim();
             if(!userName) userName = "Guest_" + Math.floor(Math.random() * 1000);
@@ -1043,7 +1066,6 @@
             });
         }
 
-        // --- FREE LOCATION DETECT LOGIC ---
         function detectLocation(inputId) {
             const inputField = document.getElementById(inputId);
             const originalPlaceholder = inputField.placeholder;
@@ -1100,11 +1122,12 @@
         });
         const db = getFirestore(app);
 
-        // Save Client Booking to DB
-        window.saveClientBooking = async (paymentMethod, userName, date, slot, planMins, planAmt) => {
+        // 🔥 MODIFIED: SENDING PHONE NUMBER TO DATABASE 🔥
+        window.saveClientBooking = async (paymentMethod, userName, userPhone, date, slot, planMins, planAmt) => {
             try {
                 await addDoc(collection(db, "bookings"), {
                     clientName: userName,
+                    clientPhone: userPhone, 
                     date: date,
                     slot: slot,
                     planMinutes: planMins,
@@ -1115,7 +1138,6 @@
             } catch(e) { console.error("Error saving booking:", e); }
         };
 
-        // Fetch Astrologer Live Status & Schedule
         onSnapshot(doc(db, "live_status", "main"), (docSnap) => {
             const liveSec = document.getElementById('astrologer-live-section');
             const schedBox = document.getElementById('live-schedule-box');
@@ -1141,7 +1163,6 @@
             }
         });
 
-        // Fetch Live Remedy
         onSnapshot(doc(db, "remedies", "latest"), (docSnap) => {
             if (docSnap.exists()) {
                 document.getElementById('live-remedy-section').style.display = 'block';
@@ -1150,7 +1171,6 @@
             }
         });
 
-        // 24H Slots Array Builder
         const timeSlots = [];
         for(let h=0; h<24; h++) {
             for(let m=0; m<60; m+=30) {
@@ -1161,7 +1181,6 @@
             }
         }
 
-        // Fetch Slots based on Selected Date with Selectable UI State
         const clientDate = document.getElementById('client-date');
         clientDate.value = new Date().toISOString().split('T')[0];
 
