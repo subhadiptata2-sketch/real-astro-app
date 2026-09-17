@@ -347,7 +347,7 @@
                             <strong style="color: var(--primary-dark);">Complete Birth Chart Analysis</strong><br>
                             A detailed analysis of your complete birth chart, including planets, houses, Dashas and important Yogas. Get personalized insights into career, marriage, finances, family, health tendencies and major life phases.
                         </p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Book Now on WhatsApp</button>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Select & Book Slot (₹499)</button>
                     </div>
 
                     <!-- Service 2 -->
@@ -364,7 +364,7 @@
                             <strong style="color: var(--primary-dark);">Detailed Compatibility Analysis</strong><br>
                             A comparative analysis of both birth charts covering Guna Milan, planetary compatibility, Manglik considerations, relationship dynamics and important astrological factors related to married life.
                         </p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Marriage Match Making (Kundli Milan)')">Book Now on WhatsApp</button>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Marriage Match Making')">Select & Book Slot (₹499)</button>
                     </div>
 
                     <!-- Service 3 -->
@@ -381,13 +381,13 @@
                             <strong style="color: var(--primary-dark);">Personalized Astrological Remedies</strong><br>
                             Based on your specific concern and birth chart, receive personalized traditional remedies. Depending on the situation, guidance may include Mantra, Yantra, Rudraksha, Kavach, Gemstones and other astrological remedies.
                         </p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Detailed Remedy for Any Problem')">Book Now on WhatsApp</button>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Detailed Remedy for Any Problem')">Select & Book Slot (₹499)</button>
                     </div>
 
                     <!-- Service 4 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">🕉️ Spiritual Progress & Sadhana Guidance</h4>
+                            <h4 class="pop-title">🕉️ Spiritual Progress & Sadhana</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
@@ -398,13 +398,13 @@
                             <strong style="color: var(--primary-dark);">Spiritual Growth & Inner Guidance</strong><br>
                             Explore your spiritual tendencies, inner growth, Sadhana suitability and deeper life purpose through your birth chart. Receive personalized guidance on traditional spiritual practices and areas of personal development.
                         </p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Spiritual Progress & Sadhana Guidance')">Book Now on WhatsApp</button>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Spiritual Progress & Sadhana')">Select & Book Slot (₹499)</button>
                     </div>
 
                     <!-- Service 5 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">🌿 Emotional Well-being & Life Guidance</h4>
+                            <h4 class="pop-title">🌿 Emotional Well-being Guidance</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
@@ -415,7 +415,7 @@
                             <strong style="color: var(--primary-dark);">Supportive Personal & Spiritual Guidance</strong><br>
                             Receive personalized guidance from an astrological perspective for navigating stress, uncertainty, relationship concerns and challenging phases of life, with a focus on clarity, self-reflection and inner balance.
                         </p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Emotional Well-being & Life Guidance')">Book Now on WhatsApp</button>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Emotional Well-being Guidance')">Select & Book Slot (₹499)</button>
                     </div>
                 </div>
             </div>
@@ -506,6 +506,12 @@
                 <!-- Selectable Pricing Plans & Payment Buttons -->
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
+                    
+                    <!-- 🔥 NEW: DYNAMIC POPULAR SERVICE SELECTION BOX 🔥 -->
+                    <div id="popular-selection-display" style="display:none; background: #fffbeb; border: 1px solid #fde68a; padding: 14px; border-radius: 12px; margin-bottom: 12px; text-align: left; animation: fadeIn 0.3s ease;">
+                        <!-- JS WILL FILL THIS -->
+                    </div>
+
                     <div class="plan-grid">
                         <div class="plan-card selected" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
                             <div class="plan-info">
@@ -775,6 +781,7 @@
         let selectedPlanAmount = 100;
         let selectedPlanMinutes = 10;
         let selectedSlotLabel = null;
+        let isPopularService = false; // Add Popular Service State Tracker
 
         // --- MENU LOGIC ---
         function toggleMenu() {
@@ -810,6 +817,10 @@
         }
 
         function selectPlan(amount, minutes, elementId) {
+            isPopularService = false;
+            const popDisplay = document.getElementById('popular-selection-display');
+            if (popDisplay) popDisplay.style.display = 'none';
+
             document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
             document.getElementById(elementId).classList.add('selected');
             selectedPlanAmount = amount;
@@ -862,11 +873,29 @@
             showStatus(featureName + " will be available soon!", "success");
         }
 
-        // 🔥 NEW: POPULAR SERVICE BOOKING LOGIC 🔥
+        // 🔥 NEW: POPULAR SERVICE SMART BOOKING ROUTING 🔥
         function bookPopularService(serviceName) {
-            const message = `Namaste Acharya ji! 🙏\nI want to book your Popular Service:\n*${serviceName}*\n\n*Price:* ₹499 (Offer Price)\n\nPlease guide me with the payment and next steps.`;
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            isPopularService = true;
+            selectedPlanAmount = 499;
+            selectedPlanMinutes = "Offer: " + serviceName; // Saves smartly in Admin panel DB
+
+            // Unselect Normal Plans visually
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            
+            // Show highlight banner in booking area
+            const popDisplay = document.getElementById('popular-selection-display');
+            popDisplay.style.display = 'block';
+            popDisplay.innerHTML = `⭐ <b>Selected: ${serviceName}</b><br><span style="color: var(--success); font-weight: 700; font-size: 15px; display: block; margin-top: 4px;">Price: ₹499</span><span style="font-size: 11px; font-weight: 500; text-decoration: underline; color: var(--text-muted); cursor: pointer; display: inline-block; margin-top: 8px;" onclick="clearPopularSelection()">Cancel & select normal time plan</span>`;
+            
+            // Auto-scroll to form
+            document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'});
+            showStatus("Please enter name & select a slot to complete booking.", "success");
+        }
+
+        function clearPopularSelection() {
+            isPopularService = false;
+            document.getElementById('popular-selection-display').style.display = 'none';
+            selectPlan(100, 10, 'plan-10'); // Default back to normal
         }
 
         // UPI PAYMENT LOGIC (With Booking DB Save)
@@ -881,7 +910,7 @@
             }
 
             const upiId = "bengaliblogger144@okhdfcbank";
-            const payeeName = "Acharya Subhadip (" + selectedPlanMinutes + " Mins)";
+            const payeeName = isPopularService ? "Acharya Subhadip (Service)" : "Acharya Subhadip (" + selectedPlanMinutes + " Mins)";
             const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedPlanAmount}&cu=INR`;
             
             showStatus(`Opening UPI for ₹${selectedPlanAmount}...`, 'success');
@@ -900,7 +929,8 @@
             }
 
             const slotText = ` [Slot: ${selectedSlotLabel} on ${dateVal}]`;
-            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}.${slotText}\nI want to book the *${selectedPlanMinutes} Minutes plan (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
+            let planNameStr = isPopularService ? `Service: ${selectedPlanMinutes}` : `${selectedPlanMinutes} Minutes plan`;
+            const message = `Namaste Acharya ji! 🙏\nMy name is ${userName}.${slotText}\nI want to book the *${planNameStr} (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
             const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
