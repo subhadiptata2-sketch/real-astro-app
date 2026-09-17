@@ -177,6 +177,10 @@
         .nav-btn.active span { filter: grayscale(0%) opacity(1); }
 
         #status { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 1100; font-weight: 600; font-size: 13.5px; text-align: center; padding: 12px 24px; border-radius: 30px; display: none; box-shadow: var(--shadow-md); white-space: nowrap; }
+
+        /* LIVE BADGE ANIMATION */
+        .live-badge-anim { animation: pulseLive 1.5s infinite; }
+        @keyframes pulseLive { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -218,7 +222,6 @@
                 <h1 class="hero-title">Acharya Subhadip</h1>
                 <p class="hero-subtitle">Experienced & Personalized Astrology Guidance</p>
                 
-                <!-- 🌟 MARKETING CONVENIENCE HOOK 🌟 -->
                 <div class="experience-highlight-box">
                     <div style="font-weight: 700; color: var(--gold); margin-bottom: 6px; font-size: 14px;">💡 Why Choose Fixed Sessions Instead of Per-Minute Apps?</div>
                     No per-minute rush or timer anxiety! Ask all your questions in one fixed session at a fraction of the cost of expensive per-minute platforms.<br>
@@ -236,6 +239,26 @@
                     <span class="trust-chip">🎯 Fixed-Duration (No Rush)</span>
                     <span class="trust-chip">🔮 Vedic, KP, Numerology</span>
                     <span class="trust-chip">💯 100% Confidential</span>
+                </div>
+            </div>
+
+            <!-- 🌟 NEW: ASTROLOGER LIVE SECTION 🌟 -->
+            <div class="home-section" id="astrologer-live-section" style="border: 2px solid #fca5a5; background: #fff5f5; display: none;">
+                <div class="section-header" style="color: #b91c1c; margin-bottom: 12px; font-size: 18px;">🔴 Astrologer Live</div>
+                
+                <!-- When Offline (Shows Schedule) -->
+                <div id="live-schedule-box" style="text-align: center;">
+                    <p style="font-size: 13px; color: #7f1d1d; margin-bottom: 4px; font-weight: 500;">Next Live Session:</p>
+                    <h4 id="live-time-text" style="color: var(--primary-dark); font-size: 16px; margin-bottom: 4px; font-weight: 700;">Loading schedule...</h4>
+                    <p id="live-topic-text" style="font-size: 13.5px; color: #b91c1c; font-weight: 600; margin-bottom: 12px;"></p>
+                    <button class="btn" style="background: #f8fafc; color: #94a3b8; border: 1px solid #cbd5e1; cursor: not-allowed;" disabled>Not Live Yet</button>
+                </div>
+
+                <!-- When Online (Shows Join Button) -->
+                <div id="live-active-box" style="display: none; text-align: center;">
+                    <p class="live-badge-anim" style="font-size: 14.5px; font-weight: 700; color: #ef4444; margin-bottom: 14px;">Acharya Subhadip is LIVE right now!</p>
+                    <button class="btn" style="background: #ef4444; color: white; font-weight: 700; font-size: 15px; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);" onclick="joinLiveStream()">📺 Join Live Stream</button>
+                    <p style="font-size: 11px; color: #7f1d1d; margin-top: 8px;">(Your camera & mic will be off. You can chat directly.)</p>
                 </div>
             </div>
 
@@ -489,9 +512,13 @@
                     <span class="text-hint">Time of Birth</span>
                     <input type="time" id="k-time" class="form-control" />
                 </div>
+                <!-- 🌟 FREE GPS LOCATION FIELD 🌟 -->
                 <div class="input-group">
-                    <span class="text-hint">Place of Birth (City & State)</span>
-                    <input type="text" id="k-place" class="form-control" placeholder="e.g. Kolkata, West Bengal" />
+                    <span class="text-hint">Place of Birth (City)</span>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="k-place" class="form-control" placeholder="Type your city name" style="margin-bottom: 0;" />
+                        <button class="btn" style="width: auto; padding: 0 16px; background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; font-size: 18px;" onclick="detectLocation('k-place')" title="Detect Location">📍</button>
+                    </div>
                 </div>
                 
                 <button class="btn btn-primary" style="margin-top: 8px;" onclick="generateKundliUI()">✨ Analyze Details</button>
@@ -554,9 +581,13 @@
                     <span class="text-hint">Birth Time</span>
                     <input type="time" id="p-time" class="form-control" />
                 </div>
+                <!-- 🌟 FREE GPS LOCATION FIELD 🌟 -->
                 <div class="input-group">
-                    <span class="text-hint">Birth Place</span>
-                    <input type="text" id="p-place" class="form-control" placeholder="City, State, Country" />
+                    <span class="text-hint">Birth Place (City)</span>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="p-place" class="form-control" placeholder="Type your city name" style="margin-bottom: 0;" />
+                        <button class="btn" style="width: auto; padding: 0 16px; background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; font-size: 18px;" onclick="detectLocation('p-place')" title="Detect Location">📍</button>
+                    </div>
                 </div>
                 <button class="btn btn-primary" style="margin-top: 8px;" onclick="saveProfile()">Save Profile</button>
             </div>
@@ -774,6 +805,7 @@
             window.open(whatsappUrl, '_blank');
         }
 
+        // --- 1-on-1 AUDIO/VIDEO CALL LOGIC ---
         function startAudioCall() {
             const userName = document.getElementById('username').value.trim();
             if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
@@ -788,6 +820,70 @@
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_consultation_room", String(Math.floor(Math.random() * 100000)), userName));
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
+        }
+
+        // --- NEW: JOIN ASTROLOGER LIVE STREAM LOGIC (As Audience) ---
+        function joinLiveStream() {
+            let userName = document.getElementById('username').value.trim();
+            if(!userName) userName = "Guest_" + Math.floor(Math.random() * 1000);
+            
+            const appID = 1009897816; 
+            const serverSecret = "30cf208a168057120577256aa90fba8c";
+            const zp = ZegoUIKitPrebuilt.create(ZegoUIKitPrebuilt.generateKitTokenForProduction(appID, serverSecret, "real_astro_live_room", String(Math.floor(Math.random() * 100000)), userName));
+            
+            zp.joinRoom({ 
+                container: document.body, 
+                scenario: { 
+                    mode: ZegoUIKitPrebuilt.LiveStreaming,
+                    config: { role: ZegoUIKitPrebuilt.Audience }
+                },
+                turnOnCameraWhenJoining: false,
+                turnOnMicrophoneWhenJoining: false,
+                showMyCameraToggleButton: false,
+                showMyMicrophoneToggleButton: false
+            });
+        }
+
+        // --- FREE LOCATION DETECT LOGIC ---
+        function detectLocation(inputId) {
+            const inputField = document.getElementById(inputId);
+            const originalPlaceholder = inputField.placeholder;
+            inputField.placeholder = "Detecting...";
+            inputField.value = "";
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        try {
+                            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                            const data = await response.json();
+                            const city = data.address.city || data.address.town || data.address.village || data.address.county || data.address.state_district || "";
+                            const state = data.address.state || "";
+                            
+                            let locationString = "";
+                            if(city && state) locationString = `${city}, ${state}`;
+                            else if(city) locationString = city;
+                            else if(state) locationString = state;
+                            else locationString = "Location found";
+                            
+                            inputField.value = locationString;
+                            showStatus("Location detected successfully!", "success");
+                        } catch (error) {
+                            inputField.placeholder = originalPlaceholder;
+                            showStatus("Could not fetch city name. Please type manually.", "error");
+                        }
+                    },
+                    (error) => {
+                        inputField.placeholder = originalPlaceholder;
+                        showStatus("Location permission denied. Please type manually.", "error");
+                    },
+                    { timeout: 10000 }
+                );
+            } else {
+                showStatus("Geolocation not supported by this browser.", "error");
+            }
         }
     </script>
 
@@ -805,6 +901,34 @@
             appId: "1-972015683245-web:f4279a5b783d923of3a824"
         });
         const db = getFirestore(app);
+
+        // 🌟 NEW: Fetch Astrologer Live Status & Schedule
+        onSnapshot(doc(db, "live_status", "main"), (docSnap) => {
+            const liveSec = document.getElementById('astrologer-live-section');
+            const schedBox = document.getElementById('live-schedule-box');
+            const actBox = document.getElementById('live-active-box');
+            
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                liveSec.style.display = 'block'; // Make section visible if data exists
+
+                if(data.isLive === true) {
+                    // Turn box RED and show Join button
+                    schedBox.style.display = 'none';
+                    actBox.style.display = 'block';
+                    liveSec.style.background = '#fef2f2';
+                    liveSec.style.borderColor = '#ef4444';
+                } else {
+                    // Turn box Normal and show Schedule
+                    schedBox.style.display = 'block';
+                    actBox.style.display = 'none';
+                    liveSec.style.background = '#fff5f5';
+                    liveSec.style.borderColor = '#fca5a5';
+                    document.getElementById('live-time-text').innerText = data.scheduleTime || "Schedule not updated yet";
+                    document.getElementById('live-topic-text').innerText = data.topic || "";
+                }
+            }
+        });
 
         // Fetch Live Remedy
         onSnapshot(doc(db, "remedies", "latest"), (docSnap) => {
