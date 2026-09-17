@@ -240,7 +240,7 @@
                     </div>
                 </div>
 
-                <!-- 🔥 BUTTON MODIFIED HERE 🔥 -->
+                <!-- 🔥 HERO BUTTONS 🔥 -->
                 <div class="hero-cta-group">
                     <button class="btn btn-primary" style="width: auto; padding: 13px 24px; font-size: 14.5px; font-weight: 700;" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">✨ Book Consultation Now</button>
                     <button class="btn" style="width: auto; padding: 13px 24px; font-size: 14.5px; font-weight: 700; background: #ef4444; color: white; border: none; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);" onclick="document.getElementById('popular-services-section').scrollIntoView({behavior: 'smooth'})">🔥 Book Popular Services</button>
@@ -320,7 +320,7 @@
                 </div>
             </div>
 
-            <!-- 🔥 NEW: POPULAR SERVICES SECTION 🔥 -->
+            <!-- 🔥 NEW: POPULAR SERVICES SECTION (WITH TOGGLE ARROW) 🔥 -->
             <div class="home-section" id="popular-services-section">
                 <div class="section-header">🔥 Popular Services</div>
                 
@@ -336,65 +336,85 @@
                     <!-- Service 1 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">1. Full Kundli Making And Analysis</h4>
+                            <h4 class="pop-title">🔮 Full Kundli Making & Analysis</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <p class="pop-desc">Detailed analysis of major life areas through your birth chart.</p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Full Kundli Making And Analysis')">Book Now on WhatsApp</button>
+                        <div style="font-size: 12.5px; color: #b45309; font-weight: 600; cursor: pointer; margin-bottom: 8px; display: inline-block;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 8px; border-top: 1px dashed #e2e8f0; margin-bottom: 12px;">
+                            <strong style="color: var(--primary-dark);">Complete Birth Chart Analysis</strong><br>
+                            A detailed analysis of your complete birth chart, including planets, houses, Dashas and important Yogas. Get personalized insights into career, marriage, finances, family, health tendencies and major life phases.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Book Now on WhatsApp</button>
                     </div>
 
                     <!-- Service 2 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">2. Marriage Match Making (Kundli Milan)</h4>
+                            <h4 class="pop-title">💍 Marriage Match Making (Kundli Milan)</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <p class="pop-desc">Kundli-based compatibility and deep relationship insights.</p>
+                        <div style="font-size: 12.5px; color: #b45309; font-weight: 600; cursor: pointer; margin-bottom: 8px; display: inline-block;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 8px; border-top: 1px dashed #e2e8f0; margin-bottom: 12px;">
+                            <strong style="color: var(--primary-dark);">Detailed Compatibility Analysis</strong><br>
+                            A comparative analysis of both birth charts covering Guna Milan, planetary compatibility, Manglik considerations, relationship dynamics and important astrological factors related to married life.
+                        </p>
                         <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Marriage Match Making (Kundli Milan)')">Book Now on WhatsApp</button>
                     </div>
 
                     <!-- Service 3 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">3. Detailed Remedy For Any Problem</h4>
+                            <h4 class="pop-title">🪬 Detailed Remedy for Any Problem</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <p class="pop-desc">Detailed Remedy For Finance, Career, Health, Marriage (Gemstone, Rudraksha, Kavaj, Yantra, Mantra).</p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Detailed Remedy For Any Problem')">Book Now on WhatsApp</button>
+                        <div style="font-size: 12.5px; color: #b45309; font-weight: 600; cursor: pointer; margin-bottom: 8px; display: inline-block;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 8px; border-top: 1px dashed #e2e8f0; margin-bottom: 12px;">
+                            <strong style="color: var(--primary-dark);">Personalized Astrological Remedies</strong><br>
+                            Based on your specific concern and birth chart, receive personalized traditional remedies. Depending on the situation, guidance may include Mantra, Yantra, Rudraksha, Kavach, Gemstones and other astrological remedies.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Detailed Remedy for Any Problem')">Book Now on WhatsApp</button>
                     </div>
 
                     <!-- Service 4 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">4. Spiritual Progress & Sadhana Guidance</h4>
+                            <h4 class="pop-title">🕉️ Spiritual Progress & Sadhana Guidance</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <p class="pop-desc">Spiritual Growth & Inner Guidance. Explore spiritual tendencies, purpose and personal growth.</p>
-                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Spiritual Progress And Sadhana Guidance')">Book Now on WhatsApp</button>
+                        <div style="font-size: 12.5px; color: #b45309; font-weight: 600; cursor: pointer; margin-bottom: 8px; display: inline-block;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 8px; border-top: 1px dashed #e2e8f0; margin-bottom: 12px;">
+                            <strong style="color: var(--primary-dark);">Spiritual Growth & Inner Guidance</strong><br>
+                            Explore your spiritual tendencies, inner growth, Sadhana suitability and deeper life purpose through your birth chart. Receive personalized guidance on traditional spiritual practices and areas of personal development.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Spiritual Progress & Sadhana Guidance')">Book Now on WhatsApp</button>
                     </div>
 
                     <!-- Service 5 -->
                     <div class="pop-card">
                         <div class="pop-header">
-                            <h4 class="pop-title">5. Emotional Well-being & Life Guidance</h4>
+                            <h4 class="pop-title">🌿 Emotional Well-being & Life Guidance</h4>
                             <div class="pop-price-box">
                                 <del>₹1200</del>
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <p class="pop-desc">Supportive guidance for emotional challenges, stress and deep personal concerns.</p>
+                        <div style="font-size: 12.5px; color: #b45309; font-weight: 600; cursor: pointer; margin-bottom: 8px; display: inline-block;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 8px; border-top: 1px dashed #e2e8f0; margin-bottom: 12px;">
+                            <strong style="color: var(--primary-dark);">Supportive Personal & Spiritual Guidance</strong><br>
+                            Receive personalized guidance from an astrological perspective for navigating stress, uncertainty, relationship concerns and challenging phases of life, with a focus on clarity, self-reflection and inner balance.
+                        </p>
                         <button class="btn btn-primary" style="padding: 11px; font-size: 13.5px;" onclick="bookPopularService('Emotional Well-being & Life Guidance')">Book Now on WhatsApp</button>
                     </div>
                 </div>
