@@ -541,13 +541,10 @@
                     <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment()">💳 Pay via Card / Netbanking</button>
                 </div>
 
-                <!-- 🔥 BUTTON LOCK IMPLEMENTED HERE 🔥 -->
+                <!-- 🔥 MODIFIED: BUTTONS VISIBLE BUT SMART LOCKED 🔥 -->
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 4: Connect Instantly</span>
-                    <div id="connect-lock-msg" style="font-size: 13px; color: #b45309; background: #fffbeb; padding: 12px; border-radius: 12px; border: 1px dashed #fde68a; text-align: center; margin-bottom: 10px;">
-                        🔒 Click any <b>Pay</b> button in Step 3 to unlock call options.
-                    </div>
-                    <div class="connect-grid" id="connect-buttons" style="display: none;">
+                    <div class="connect-grid" id="connect-buttons">
                         <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
                         <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
                         <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
@@ -787,6 +784,7 @@
         let selectedPlanMinutes = 10;
         let selectedSlotLabel = null;
         let isPopularService = false; // Add Popular Service State Tracker
+        let paymentInitiated = false; // Add Payment State Tracker
 
         // --- MENU LOGIC ---
         function toggleMenu() {
@@ -913,16 +911,14 @@
             selectedPlanMinutes = 10;
         }
 
-        // UPI PAYMENT LOGIC (With Booking DB Save & Button Unlock)
+        // UPI PAYMENT LOGIC
         function makePayment() {
             const userName = document.getElementById('username').value.trim();
             if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             const dateVal = document.getElementById('client-date').value;
 
-            // UNLOCK STEP 4 BUTTONS
-            document.getElementById('connect-lock-msg').style.display = 'none';
-            document.getElementById('connect-buttons').style.display = 'grid';
+            paymentInitiated = true; // Unlock call buttons
 
             if(window.saveClientBooking) {
                 window.saveClientBooking("UPI", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
@@ -936,16 +932,14 @@
             setTimeout(() => { window.location.href = upiLink; }, 500);
         }
 
-        // CARD PAYMENT REQUEST LOGIC (With Booking DB Save & Button Unlock)
+        // CARD PAYMENT REQUEST LOGIC
         function requestCardPayment() {
             const userName = document.getElementById('username').value.trim();
             if (!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             const dateVal = document.getElementById('client-date').value;
 
-            // UNLOCK STEP 4 BUTTONS
-            document.getElementById('connect-lock-msg').style.display = 'none';
-            document.getElementById('connect-buttons').style.display = 'grid';
+            paymentInitiated = true; // Unlock call buttons
 
             if(window.saveClientBooking) {
                 window.saveClientBooking("Card/Netbanking", userName, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
@@ -989,7 +983,12 @@
             window.open(whatsappUrl, '_blank');
         }
 
+        // 🔥 MODIFIED: CONNECTION LOGIC (PAYMENT GATE CHECK) 🔥
         function startChat() {
+            if (!paymentInitiated) {
+                showStatus("Please complete your payment first!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले स्टेप 3 में अपना पेमेंट पूरा करें!</span>", "error");
+                return;
+            }
             const nameField = document.getElementById('username').value.trim();
             if (!nameField) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
@@ -997,8 +996,11 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // --- 1-on-1 AUDIO/VIDEO CALL LOGIC (FIXED TEST TOKEN) ---
         function startAudioCall() {
+            if (!paymentInitiated) {
+                showStatus("Please complete your payment first!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले स्टेप 3 में अपना पेमेंट पूरा करें!</span>", "error");
+                return;
+            }
             const userName = document.getElementById('username').value.trim();
             if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
@@ -1010,6 +1012,10 @@
         }
 
         function startVideoCall() {
+            if (!paymentInitiated) {
+                showStatus("Please complete your payment first!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले स्टेप 3 में अपना पेमेंट पूरा करें!</span>", "error");
+                return;
+            }
             const userName = document.getElementById('username').value.trim();
             if(!userName) { showStatus("Enter your name first!", 'error'); document.getElementById('username').focus(); return; }
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
