@@ -524,26 +524,25 @@
                     </div>
 
                     <div class="plan-grid" id="normal-plan-grid">
-                        <div class="plan-card selected" id="plan-10" onclick="selectPlan(100, 10, 'plan-10')">
+                        <div class="plan-card selected" id="plan-10" onclick="selectPlan(99, 10, 'plan-10')">
                             <div class="plan-info">
                                 <span class="plan-time">10 Minutes</span>
-                                <span class="text-hint" style="margin:0; font-weight: normal;">Basic Query</span>
                             </div>
-                            <div class="plan-price">₹100</div>
+                            <div class="plan-price">₹99</div>
                         </div>
-                        <div class="plan-card" id="plan-20" onclick="selectPlan(150, 20, 'plan-20')">
+                        <div class="plan-card" id="plan-20" onclick="selectPlan(149, 20, 'plan-20')">
                             <div class="plan-info">
                                 <span class="plan-time">20 Minutes</span>
                                 <span class="plan-save">Save ₹50</span>
                             </div>
-                            <div class="plan-price"><del>₹200</del> ₹150</div>
+                            <div class="plan-price"><del>₹200</del> ₹149</div>
                         </div>
-                        <div class="plan-card" id="plan-30" onclick="selectPlan(200, 30, 'plan-30')">
+                        <div class="plan-card" id="plan-30" onclick="selectPlan(199, 30, 'plan-30')">
                             <div class="plan-info">
                                 <span class="plan-time">30 Minutes</span>
                                 <span class="plan-save">Save ₹100</span>
                             </div>
-                            <div class="plan-price"><del>₹300</del> ₹200</div>
+                            <div class="plan-price"><del>₹300</del> ₹199</div>
                         </div>
                     </div>
                     
@@ -803,7 +802,7 @@
     <!-- ALL INTERACTION SCRIPT -->
     <script>
         const ASTROLOGER_WHATSAPP = "919339199974"; 
-        let selectedPlanAmount = 100;
+        let selectedPlanAmount = 99;
         let selectedPlanMinutes = 10;
         let selectedSlotLabel = null;
         let isPopularService = false; 
@@ -924,7 +923,7 @@
             
             document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
             document.getElementById('plan-10').classList.add('selected');
-            selectedPlanAmount = 100;
+            selectedPlanAmount = 99;
             selectedPlanMinutes = 10;
         }
 
