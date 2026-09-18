@@ -800,7 +800,7 @@
     <!-- ZEGOCLOUD SDK -->
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 
-    <!-- ALL INTERACTION SCRIPT (RESTORED) -->
+    <!-- ALL INTERACTION SCRIPT -->
     <script>
         const ASTROLOGER_WHATSAPP = "919339199974"; 
         let selectedPlanAmount = 100;
@@ -873,7 +873,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Make showStatus globally available for all modules
         window.showStatus = function(message, type) {
             const statusDiv = document.getElementById('status');
             statusDiv.innerHTML = message; 
@@ -890,7 +889,6 @@
             setTimeout(() => { statusDiv.style.display = 'none'; }, 4000); 
         };
 
-        // For direct html calling compatibility
         function showStatus(message, type) { window.showStatus(message, type); }
 
         function saveProfile() {
@@ -1243,6 +1241,8 @@
         clientDate.value = new Date().toISOString().split('T')[0];
 
         let unsubSlots = null;
+        
+        // 🔥 MODIFIED LOGIC FOR "BOOKED" SLOTS 🔥
         window.loadClientSlots = () => {
             const date = clientDate.value;
             if(!date) return;
@@ -1257,11 +1257,20 @@
                     const data = docSnap.data();
                     let found = false;
                     timeSlots.forEach(s => {
-                        if(data[s.key]) {
+                        if(data[s.key] === true) {
                             found = true;
                             list.innerHTML += `<div class="slot-item-card" onclick="selectSlot(this, '${s.label}')">
                                 <span style="font-size: 13.5px; font-weight: 600; color: var(--text-main);">${s.label}</span>
                                 <span class="slot-status-badge available">🟢 Available</span>
+                            </div>`;
+                        } else if(data[s.key] === "booked") {
+                            found = true;
+                            list.innerHTML += `<div class="slot-item-card" style="cursor: not-allowed; opacity: 0.8; background: #fff5f5; border-color: #fecaca; display: block;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 13.5px; font-weight: 600; color: #94a3b8; text-decoration: line-through;">${s.label}</span>
+                                    <span class="slot-status-badge booked" style="background: #fee2e2; color: #ef4444;">🔴 Already Booked</span>
+                                </div>
+                                <div style="font-size: 11px; color: #ef4444; font-weight: 500; margin-top: 6px; text-align: left;">Please choose another time</div>
                             </div>`;
                         }
                     });
