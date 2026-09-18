@@ -819,11 +819,9 @@
         // --- NOTIFICATION PERMISSION LOGIC ---
         const messaging = getMessaging(app);
         
-        // Check if permission already granted/denied to hide banner
         if (Notification.permission !== 'default') {
             document.getElementById('notification-banner').style.display = 'none';
         } else {
-            // Show banner if not asked yet
             setTimeout(() => {
                 document.getElementById('notification-banner').style.display = 'block';
             }, 2000);
@@ -834,10 +832,9 @@
                 const permission = await Notification.requestPermission();
                 if (permission === 'granted') {
                     document.getElementById('notification-banner').style.display = 'none';
-                    // Need a VAPID key to generate token securely
-                    const token = await getToken(messaging, { vapidKey: 'BHzT1zXg7w8k-YourVapidKeyNeedsToBeHere' }); 
+                    // 🔥 UPDATED VAPID KEY HERE 🔥
+                    const token = await getToken(messaging, { vapidKey: 'BPUNp8KsY1TGh1lU83wwvCBKFLI9a9dGvzyYLUBfERdGFFgPT2UCXxzhWztta8kmMe-XOTjsYobVnTNjPZFj_64' }); 
                     if (token) {
-                        // Save token to Firebase
                         await setDoc(doc(db, "notification_tokens", token), {
                             token: token,
                             timestamp: new Date().toISOString()
@@ -852,7 +849,6 @@
             }
         };
 
-        // Listen for foreground messages
         onMessage(messaging, (payload) => {
             showStatus("🔔 " + payload.notification.title, "success");
         });
@@ -953,7 +949,6 @@
     </script>
 
     <script>
-        // Make showStatus globally available for modules
         function showStatus(message, type) {
             const statusDiv = document.getElementById('status');
             statusDiv.innerHTML = message; 
