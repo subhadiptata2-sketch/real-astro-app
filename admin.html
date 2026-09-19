@@ -25,14 +25,15 @@
     <div class="container">
         <h1 style="text-align: center; color: #100b38; font-size: 22px; margin-bottom: 24px;">✨ Real Astro Admin</h1>
 
-        <!-- 1. LIVE STREAM CONTROL -->
+        <!-- 1. LIVE STREAM & STATUS CONTROL -->
         <div class="card" style="border: 2px solid #fca5a5; background: #fff5f5;">
-            <h2 style="color: #b91c1c;">🔴 Live Stream Control</h2>
+            <h2 style="color: #b91c1c; margin-bottom: 4px;">🔴 Live Stream & Status Control</h2>
+            <p style="font-size: 11.5px; color: #991b1b; margin-top: 0; margin-bottom: 15px; font-weight: 500;">(Turning this ON also changes your Website Profile Status to "Live")</p>
             <input type="text" id="live-topic" placeholder="Topic (e.g. Career & Wealth Guidance)" />
             <input type="text" id="live-time" placeholder="Schedule (e.g. Today at 8:00 PM)" />
-            <button class="btn-primary" onclick="window.updateSchedule()">📅 Update Schedule (Offline)</button>
-            <button class="btn-red" onclick="window.startLive()">📺 Go LIVE Now</button>
-            <button class="btn-gray" onclick="window.endLive()">⏹️ End Live / Reset</button>
+            <button class="btn-primary" onclick="window.updateSchedule()">📅 Update Schedule (Mark as Busy/Offline)</button>
+            <button class="btn-red" onclick="window.startLive()">📺 Go LIVE Now (Mark as Live)</button>
+            <button class="btn-gray" onclick="window.endLive()">⏹️ End Live / Reset to Busy</button>
         </div>
 
         <!-- 2. DAILY REMEDY -->
@@ -46,7 +47,7 @@
             </div>
         </div>
 
-        <!-- 3. SLOTS MANAGEMENT (MODIFIED) -->
+        <!-- 3. SLOTS MANAGEMENT -->
         <div class="card">
             <h2>📅 Manage Available Slots</h2>
             <input type="date" id="slot-date" />
@@ -54,11 +55,11 @@
             <button class="btn-primary" onclick="window.saveSlots()">Save Slots for Date</button>
         </div>
 
-        <!-- 🌟 RECENT BOOKINGS TRACKER -->
+        <!-- 🌟 RECENT BOOKINGS TRACKER (UPDATED) -->
         <div class="card">
-            <h2>📋 Recent Bookings</h2>
-            <p style="font-size: 12px; color: #64748b; margin-top: 0; margin-bottom: 12px;">Check your bank SMS for payment confirmation before joining.</p>
-            <div id="admin-bookings-list" style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+            <h2>📋 Recent Bookings Tracker</h2>
+            <p style="font-size: 12px; color: #64748b; margin-top: 0; margin-bottom: 12px;">Check the UTR/Transaction ID from the client before connecting.</p>
+            <div id="admin-bookings-list" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
                 <div style="font-size: 13px; color: #64748b; text-align: center;">Loading bookings...</div>
             </div>
         </div>
@@ -95,12 +96,12 @@
             const time = document.getElementById('live-time').value;
             if(!topic || !time) return alert("Please enter both Topic and Schedule Time.");
             await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: topic, scheduleTime: time });
-            alert("Schedule updated successfully! It is now visible on the Client App.");
+            alert("Schedule updated! Website profile will now show 'Busy/Offline'.");
         };
 
         window.startLive = async () => {
             await setDoc(doc(db, "live_status", "main"), { isLive: true, topic: "LIVE NOW", scheduleTime: "LIVE NOW" });
-            alert("You are now LIVE! Opening Studio...");
+            alert("You are now LIVE! Website profile shows 'Live, Connect Quickly'. Opening Studio...");
             
             const appID = 1009897816;
             const roomID = "real_astro_live_room";
@@ -121,7 +122,7 @@
 
         window.endLive = async () => {
             await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: "", scheduleTime: "Currently Offline" });
-            alert("Live ended! Client app will reset to normal.");
+            alert("Live ended! Client app profile will reset to 'Busy'.");
             location.reload();
         };
 
@@ -204,7 +205,7 @@
             alert("Slots saved for " + date);
         };
 
-        // --- BOOKINGS LISTENER ---
+        // --- BOOKINGS LISTENER (UPDATED FOR UTR & TYPE) ---
         const bookingsQ = query(collection(db, "bookings"), orderBy("timestamp", "desc"), limit(20));
         onSnapshot(bookingsQ, (snapshot) => {
             const list = document.getElementById('admin-bookings-list');
@@ -218,14 +219,25 @@
                 const bookedAt = new Date(data.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' });
                 
                 const phoneHtml = data.clientPhone ? `<span style="font-weight: normal; color: #0284c7; font-size: 13px; float: right;">📞 ${data.clientPhone}</span>` : '';
+                
+                // Identify Instant vs Scheduled
+                const isInstant = data.date === 'Instant';
+                const typeBadge = isInstant 
+                    ? `<span style="background: #fee2e2; color: #ef4444; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; margin-left: 6px; vertical-align: middle;">⚡ INSTANT LIVE</span>` 
+                    : `<span style="background: #e0e7ff; color: #3b82f6; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; margin-left: 6px; vertical-align: middle;">📅 SCHEDULED</span>`;
+
+                // Transaction ID / UTR Logic
+                const utrHtml = data.utr 
+                    ? `<div style="font-size: 12.5px; background: #fef3c7; border: 1px solid #fde68a; color: #b45309; padding: 6px 10px; border-radius: 6px; display: inline-block; margin-top: 6px;"><b>✅ UTR / Txn ID:</b> ${data.utr}</div>` 
+                    : `<div style="font-size: 12.5px; background: #fee2e2; border: 1px solid #fca5a5; color: #ef4444; padding: 6px 10px; border-radius: 6px; display: inline-block; margin-top: 6px;"><b>⏳ UTR Pending</b> (Client hasn't submitted yet)</div>`;
 
                 list.innerHTML += `
                     <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: left;">
-                        <div style="font-weight: 700; color: #100b38; font-size: 14.5px; margin-bottom: 4px;">👤 Client: ${data.clientName} ${phoneHtml}</div>
-                        <div style="font-size: 12.5px; color: #475569; margin-bottom: 2px;">📅 <b>Date:</b> ${data.date}</div>
-                        <div style="font-size: 12.5px; color: #475569; margin-bottom: 2px;">⏰ <b>Slot:</b> ${data.slot}</div>
-                        <div style="font-size: 12.5px; color: #27ae60; margin-bottom: 2px;">💳 <b>Plan:</b> ${data.planMinutes} Mins (₹${data.planAmount}) - ${data.paymentMethod}</div>
-                        <div style="font-size: 11px; color: #94a3b8; margin-top: 6px; text-align: right;">Booked on: ${bookedAt}</div>
+                        <div style="font-weight: 700; color: #100b38; font-size: 14.5px; margin-bottom: 6px;">👤 ${data.clientName} ${typeBadge} ${phoneHtml}</div>
+                        <div style="font-size: 12.5px; color: #475569; margin-bottom: 2px;">📆 <b>Date & Slot:</b> ${data.date} | ${data.slot}</div>
+                        <div style="font-size: 12.5px; color: #27ae60; margin-bottom: 2px;">💳 <b>Plan:</b> ${data.planMinutes} Mins (₹${data.planAmount})</div>
+                        ${utrHtml}
+                        <div style="font-size: 11px; color: #94a3b8; margin-top: 8px; text-align: right; border-top: 1px dashed #cbd5e1; padding-top: 6px;">Booked on: ${bookedAt}</div>
                     </div>
                 `;
             });
