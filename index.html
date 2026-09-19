@@ -268,7 +268,7 @@
 
                 <!-- 🔥 HERO BUTTONS 🔥 -->
                 <div class="hero-cta-group">
-                    <button class="btn btn-primary" style="width: auto; padding: 13px 24px; font-size: 14.5px; font-weight: 700;" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">✨ Book Consultation Now</button>
+                    <button class="btn btn-primary" style="width: auto; padding: 13px 24px; font-size: 14.5px; font-weight: 700;" onclick="document.getElementById('instant-booking-area').scrollIntoView({behavior: 'smooth'})">✨ Book Consultation Now</button>
                     <button class="btn" style="width: auto; padding: 13px 24px; font-size: 14.5px; font-weight: 700; background: #ef4444; color: white; border: none; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);" onclick="document.getElementById('popular-services-section').scrollIntoView({behavior: 'smooth'})">🔥 Book Popular Services</button>
                     <button class="btn" style="width: auto; padding: 12px 20px; font-size: 14px; background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,215,0,0.35);" onclick="document.getElementById('expertise-section').scrollIntoView({behavior: 'smooth'})">Explore Services</button>
                 </div>
@@ -366,6 +366,65 @@
                     With nearly a decade of experience and over 10,000 horoscopes analyzed across top national platforms, Acharya Subhadip delivers honest, straightforward astrological clarity for all life hurdles.<br><br>
                     <strong style="color: var(--primary-dark);">🗣️ Languages Spoken:</strong> Hindi, English & Bengali
                 </p>
+            </div>
+
+            <!-- 🌟 NEW: INSTANT LIVE CONSULTATION 🌟 -->
+            <div class="home-section booking-highlight" id="instant-booking-area" style="border-color: #ef4444;">
+                <div class="section-header" style="color: #ef4444;">🔴 Instant Live Consultation</div>
+                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 16px;">Connect with Acharya Ji right now. No waiting for slots.</p>
+
+                <div class="input-group">
+                    <span class="text-hint">Step 1: Enter Your Details</span>
+                    <input type="text" id="inst-username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
+                    <input type="tel" id="inst-userphone" class="form-control" placeholder="Mobile / WhatsApp Number" />
+                </div>
+
+                <div class="input-group" style="margin-top: 20px;">
+                    <span class="text-hint">Step 2: Select Duration & Pay</span>
+                    
+                    <div style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 8px; margin-bottom: 12px; text-align: center; border: 1px dashed #7dd3fc;">
+                        🙏 First 1 minute is absolutely FREE! Feel free to join the session.
+                    </div>
+                    
+                    <div class="plan-grid" id="inst-plan-grid">
+                        <div class="plan-card selected" id="inst-plan-10" onclick="selectPlan(99, 10, 'inst-plan-10', 'instant')">
+                            <div class="plan-info">
+                                <span class="plan-time">10 Minutes</span>
+                            </div>
+                            <div class="plan-price">₹99</div>
+                        </div>
+                        <div class="plan-card" id="inst-plan-20" onclick="selectPlan(149, 20, 'inst-plan-20', 'instant')">
+                            <div class="plan-info">
+                                <span class="plan-time">20 Minutes</span>
+                                <span class="plan-save">Save ₹50</span>
+                            </div>
+                            <div class="plan-price"><del>₹200</del> ₹149</div>
+                        </div>
+                        <div class="plan-card" id="inst-plan-30" onclick="selectPlan(199, 30, 'inst-plan-30', 'instant')">
+                            <div class="plan-info">
+                                <span class="plan-time">30 Minutes</span>
+                                <span class="plan-save">Save ₹100</span>
+                            </div>
+                            <div class="plan-price"><del>₹300</del> ₹199</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment('instant')">💳 Pay via UPI</button>
+                    <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment('instant')">💳 Pay via Card / Netbanking</button>
+                </div>
+
+                <div class="input-group" style="margin-top: 20px;">
+                    <span class="text-hint">Step 3: Connect Instantly</span>
+                    <div class="connect-grid" id="inst-connect-buttons">
+                        <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
+                        <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+                        <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
+                    </div>
+                    <p id="inst-connect-lock-hint" style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.5;">
+                        🔒 Buttons unlock after you submit your payment details.<br>
+                        <span style="color: var(--gold-dark); font-weight: 600; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm', 'instant')">Already paid? Enter Transaction ID</span>
+                    </p>
+                </div>
             </div>
 
             <!-- HOW IT WORKS (4 STEPS) -->
@@ -503,14 +562,15 @@
                 </div>
             </div>
 
-            <!-- BOOKING UI & PRICING -->
+            <!-- 📅 BOOKING UI & PRICING (SCHEDULED) -->
             <div class="home-section booking-highlight" id="booking-area">
-                <div class="section-header">Start Your Consultation</div>
+                <div class="section-header">Book Scheduled Consultation</div>
+                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 16px;">Select a future date and time for your consultation.</p>
                 
                 <div class="input-group">
                     <span class="text-hint">Step 1: Enter Your Details</span>
-                    <input type="text" id="username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
-                    <input type="tel" id="userphone" class="form-control" placeholder="Mobile / WhatsApp Number (e.g. 9876543210)" />
+                    <input type="text" id="sched-username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
+                    <input type="tel" id="sched-userphone" class="form-control" placeholder="Mobile / WhatsApp Number (e.g. 9876543210)" />
                 </div>
 
                 <!-- Live Date & Selectable Time Slots -->
@@ -535,30 +595,25 @@
                 <div class="input-group" style="margin-top: 20px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
                     
-                    <!-- NEW: 1 MINUTE FREE TRUST BOX -->
-                    <div style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 8px; margin-bottom: 12px; text-align: center; border: 1px dashed #7dd3fc;">
-                        🙏 First 1 minute is absolutely FREE! Feel free to join the session.
-                    </div>
-                    
                     <div id="popular-selection-display" style="display:none; background: #fffbeb; border: 1px solid #fde68a; padding: 14px; border-radius: 12px; margin-bottom: 12px; text-align: left; animation: fadeIn 0.3s ease;">
                         <!-- JS WILL FILL THIS -->
                     </div>
 
-                    <div class="plan-grid" id="normal-plan-grid">
-                        <div class="plan-card selected" id="plan-10" onclick="selectPlan(99, 10, 'plan-10')">
+                    <div class="plan-grid" id="sched-plan-grid">
+                        <div class="plan-card selected" id="sched-plan-10" onclick="selectPlan(99, 10, 'sched-plan-10', 'scheduled')">
                             <div class="plan-info">
                                 <span class="plan-time">10 Minutes</span>
                             </div>
                             <div class="plan-price">₹99</div>
                         </div>
-                        <div class="plan-card" id="plan-20" onclick="selectPlan(149, 20, 'plan-20')">
+                        <div class="plan-card" id="sched-plan-20" onclick="selectPlan(149, 20, 'sched-plan-20', 'scheduled')">
                             <div class="plan-info">
                                 <span class="plan-time">20 Minutes</span>
                                 <span class="plan-save">Save ₹50</span>
                             </div>
                             <div class="plan-price"><del>₹200</del> ₹149</div>
                         </div>
-                        <div class="plan-card" id="plan-30" onclick="selectPlan(199, 30, 'plan-30')">
+                        <div class="plan-card" id="sched-plan-30" onclick="selectPlan(199, 30, 'sched-plan-30', 'scheduled')">
                             <div class="plan-info">
                                 <span class="plan-time">30 Minutes</span>
                                 <span class="plan-save">Save ₹100</span>
@@ -567,21 +622,13 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment()">💳 Pay via UPI</button>
-                    <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment()">💳 Pay via Card / Netbanking</button>
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment('scheduled')">💳 Pay via UPI</button>
+                    <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment('scheduled')">💳 Pay via Card / Netbanking</button>
                 </div>
 
                 <div class="input-group" style="margin-top: 20px;">
-                    <span class="text-hint">Step 4: Connect Instantly</span>
-                    <div class="connect-grid" id="connect-buttons">
-                        <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
-                        <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
-                        <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
-                    </div>
-                    <!-- NEW: unlock hint + link to enter transaction ID -->
-                    <p id="connect-lock-hint" style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.5;">
-                        🔒 Buttons unlock after you submit your payment details.<br>
-                        <span style="color: var(--gold-dark); font-weight: 600; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm')">Already paid? Enter Transaction ID</span>
+                    <p id="sched-connect-lock-hint" style="font-size: 13px; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.5; font-weight: 500;">
+                        <span style="color: var(--gold-dark); font-weight: 600; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm', 'scheduled')">Already paid? Enter Transaction ID to Confirm Booking</span>
                     </p>
                 </div>
             </div>
@@ -623,7 +670,7 @@
                 </details>
                 <details>
                     <summary>How do I book a consultation?</summary>
-                    <div class="faq-text">Enter your name, pick an available date & time slot, select your duration plan to pay securely via UPI, and click your preferred connect option.</div>
+                    <div class="faq-text">You can either choose the 'Instant Live Consultation' to connect right now, or the 'Book Scheduled Consultation' to pick a future date & time slot. Pay securely via UPI, and your booking is confirmed.</div>
                 </details>
                 <details>
                     <summary>Is my payment secure?</summary>
@@ -646,7 +693,7 @@
 
             <div style="text-align: center; margin: 30px 0 20px 0;">
                 <h3 style="color: var(--primary-dark); font-size: 18px; font-weight: 700; margin-bottom: 12px;">Don't leave your future to chance.</h3>
-                <button class="btn btn-primary" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">
+                <button class="btn btn-primary" onclick="document.getElementById('instant-booking-area').scrollIntoView({behavior: 'smooth'})">
                     Book Your Session Now
                 </button>
             </div>
@@ -670,7 +717,7 @@
                     <span class="text-hint">Time of Birth</span>
                     <input type="time" id="k-time" class="form-control" />
                 </div>
-                <!-- 🌟 FREE GPS LOCATION FIELD (id fixed: was duplicate "p-place") 🌟 -->
+                <!-- 🌟 FREE GPS LOCATION FIELD 🌟 -->
                 <div class="input-group">
                     <span class="text-hint">Place of Birth (City)</span>
                     <div style="display: flex; gap: 8px;">
@@ -853,11 +900,6 @@
 
     <!-- ALL INTERACTION SCRIPT -->
     <script>
-        /*
-         * ⚠️ SECURITY NOTE: the ZegoCloud serverSecret below is visible to anyone who opens
-         * "View Source", and generateKitTokenForTest() is meant for testing only.
-         * Move token generation to a server (e.g. a Firebase Cloud Function) and rotate this secret.
-         */
         const ASTROLOGER_WHATSAPP = "919339199974"; 
         const UPI_ID = "BHARATPE2C0B0O7O9E00759@unitype";
         const PAYEE_NAME = "Acharya Subhadip";
@@ -866,9 +908,10 @@
         let selectedPlanMinutes = 10;
         let selectedSlotLabel = null;
         let isPopularService = false; 
-        let paymentSubmitted = false;   // true only after the client submits a transaction ID
-        let bookingPromise = null;      // resolves to the Firestore booking id
+        let paymentSubmitted = false;
+        let bookingPromise = null;
         let bookingKey = "";
+        let currentBookingType = 'instant'; // 'instant' or 'scheduled'
 
         // Menu Toggle
         function toggleMenu() {
@@ -903,15 +946,19 @@
             setTimeout(() => { document.getElementById('contact-section').scrollIntoView({behavior: 'smooth', block: 'center'}); }, 200);
         }
 
-        function selectPlan(amount, minutes, elementId) {
-            if (isPopularService) {
-                showStatus("Duration is not required for Popular Service. It's only for normal consultation!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>पॉपुलर सर्विस के लिए समय (Duration) चुनने की आवश्यकता नहीं है!</span>", "error");
+        function selectPlan(amount, minutes, elementId, type) {
+            if (isPopularService && type === 'scheduled') {
+                showStatus("Duration is not required for Popular Service. It's only for normal consultation!", "error");
                 return;
             }
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            
+            const gridId = type === 'instant' ? 'inst-plan-grid' : 'sched-plan-grid';
+            document.querySelectorAll(`#${gridId} .plan-card`).forEach(c => c.classList.remove('selected'));
             document.getElementById(elementId).classList.add('selected');
+            
             selectedPlanAmount = amount;
             selectedPlanMinutes = minutes;
+            currentBookingType = type;
         }
 
         function selectSlot(element, slotLabel) {
@@ -964,11 +1011,12 @@
 
         function bookPopularService(serviceName) {
             isPopularService = true;
+            currentBookingType = 'scheduled';
             selectedPlanAmount = 499;
             selectedPlanMinutes = "Offer: " + serviceName; 
 
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-            document.getElementById('normal-plan-grid').style.opacity = '0.4';
+            document.querySelectorAll('#sched-plan-grid .plan-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('sched-plan-grid').style.opacity = '0.4';
             
             const popDisplay = document.getElementById('popular-selection-display');
             popDisplay.style.display = 'block';
@@ -980,11 +1028,12 @@
 
         function clearPopularSelection() {
             isPopularService = false;
+            currentBookingType = 'scheduled';
             document.getElementById('popular-selection-display').style.display = 'none';
-            document.getElementById('normal-plan-grid').style.opacity = '1';
+            document.getElementById('sched-plan-grid').style.opacity = '1';
             
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-            document.getElementById('plan-10').classList.add('selected');
+            document.querySelectorAll('#sched-plan-grid .plan-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('sched-plan-10').classList.add('selected');
             selectedPlanAmount = 99;
             selectedPlanMinutes = 10;
         }
@@ -995,36 +1044,60 @@
             return isPopularService ? String(selectedPlanMinutes) : (selectedPlanMinutes + " Minutes");
         }
 
-        // Validates Step 1 + Step 2 fields. Returns the details, or null (and shows an error).
-        function getBookingDetails() {
-            const userName = document.getElementById('username').value.trim();
-            const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) {
-                showStatus("Please enter your Name and Mobile / WhatsApp Number first!", 'error');
-                document.getElementById(!userName ? 'username' : 'userphone').focus();
-                return null;
+        // Extracts state purely based on UI elements to prevent cross-section bleeding
+        function updateStateFromUI(type) {
+            if (isPopularService && type === 'scheduled') return;
+            const gridId = type === 'instant' ? 'inst-plan-grid' : 'sched-plan-grid';
+            const selectedEl = document.querySelector(`#${gridId} .plan-card.selected`);
+            if(selectedEl) {
+                if(selectedEl.id.includes('10')) { selectedPlanAmount = 99; selectedPlanMinutes = 10; }
+                if(selectedEl.id.includes('20')) { selectedPlanAmount = 149; selectedPlanMinutes = 20; }
+                if(selectedEl.id.includes('30')) { selectedPlanAmount = 199; selectedPlanMinutes = 30; }
             }
-            if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return null; }
-            const dateVal = document.getElementById('client-date').value;
-            return { userName, userPhone, dateVal };
         }
 
-        // Saves the booking once per unique (date, slot, plan, phone) combination.
-        // Runs in the background (not awaited) so browser pop-up rules keep working.
-        function startBooking(method) {
-            const d = getBookingDetails();
+        // Validates Step 1 + Step 2 fields based on Booking Type (Instant vs Scheduled)
+        function getBookingDetails(type) {
+            const nameId = type === 'instant' ? 'inst-username' : 'sched-username';
+            const phoneId = type === 'instant' ? 'inst-userphone' : 'sched-userphone';
+            
+            const userName = document.getElementById(nameId).value.trim();
+            const userPhone = document.getElementById(phoneId).value.trim();
+            
+            if (!userName || !userPhone) {
+                showStatus("Please enter your Name and Mobile / WhatsApp Number first!", 'error');
+                document.getElementById(!userName ? nameId : phoneId).focus();
+                return null;
+            }
+
+            let dateVal = "Instant";
+            let slotLabel = "Instant Live";
+
+            if (type === 'scheduled') {
+                if (!selectedSlotLabel) { 
+                    showStatus("Please select an available Time Slot first!", 'error'); 
+                    return null; 
+                }
+                dateVal = document.getElementById('client-date').value;
+                slotLabel = selectedSlotLabel;
+            }
+
+            return { userName, userPhone, dateVal, slotLabel };
+        }
+
+        function startBooking(method, type) {
+            const d = getBookingDetails(type);
             if (!d) return null;
-            const key = [d.dateVal, selectedSlotLabel, selectedPlanAmount, selectedPlanMinutes, d.userPhone].join('|');
+            const key = [d.dateVal, d.slotLabel, selectedPlanAmount, selectedPlanMinutes, d.userPhone].join('|');
             if (!bookingPromise || bookingKey !== key) {
                 bookingKey = key;
                 bookingPromise = window.saveClientBooking
-                    ? window.saveClientBooking(method, d.userName, d.userPhone, d.dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount)
+                    ? window.saveClientBooking(method, d.userName, d.userPhone, d.dateVal, d.slotLabel, selectedPlanMinutes, selectedPlanAmount)
                     : Promise.resolve(null);
             }
             return d;
         }
 
-        // Standards-compliant UPI link: encoded values, 2-decimal amount, transaction note.
         function buildUpiLink() {
             const note = isPopularService ? "Real Astro Service" : ("Real Astro " + selectedPlanMinutes + " Min");
             return "upi://pay?pa=" + UPI_ID
@@ -1034,17 +1107,22 @@
                 + "&tn=" + encodeURIComponent(note);
         }
 
-        function makePayment() {
-            openPaySheet('pay');
+        function makePayment(type) {
+            openPaySheet('pay', type);
         }
 
-        function openPaySheet(mode) {
-            const d = startBooking(mode === 'confirm' ? 'UPI/Card' : 'UPI');
+        function openPaySheet(mode, type) {
+            updateStateFromUI(type);
+            currentBookingType = type;
+            const d = startBooking(mode === 'confirm' ? 'UPI/Card' : 'UPI', type);
             if (!d) return;
 
             document.getElementById('pay-upi-id').textContent = UPI_ID;
-            document.getElementById('pay-summary').innerHTML =
-                `<b>${planLabel()}</b> — <b>₹${selectedPlanAmount}</b><br>Slot: ${selectedSlotLabel}${d.dateVal ? ' on ' + d.dateVal : ''}`;
+            
+            let summaryText = `<b>${planLabel()}</b> — <b>₹${selectedPlanAmount}</b><br>Slot: ${d.slotLabel}`;
+            if(d.dateVal !== "Instant") summaryText += ` on ${d.dateVal}`;
+            
+            document.getElementById('pay-summary').innerHTML = summaryText;
             document.getElementById('pay-options').style.display = (mode === 'confirm') ? 'none' : 'block';
             document.getElementById('pay-modal').classList.add('show');
             document.body.style.overflow = 'hidden';
@@ -1080,7 +1158,7 @@
         }
 
         function submitPaymentProof() {
-            const d = getBookingDetails();
+            const d = getBookingDetails(currentBookingType);
             if (!d) return;
             const utr = document.getElementById('pay-utr').value.trim();
             if (!/^[A-Za-z0-9_-]{8,30}$/.test(utr)) {
@@ -1091,46 +1169,56 @@
 
             paymentSubmitted = true;
 
-            // Save the transaction ID with the booking (in the background).
             (bookingPromise || Promise.resolve(null)).then(id => {
                 if (window.attachPaymentProof) return window.attachPaymentProof(id, utr);
             }).catch(e => console.error("Could not save payment proof:", e));
 
-            // Notify Acharya ji on WhatsApp so the payment can be verified.
-            const message = `Namaste Acharya ji! 🙏\nI have made the payment. Please verify.\n\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Slot:* ${selectedSlotLabel}${d.dateVal ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Transaction ID (UTR):* ${utr}`;
+            const message = `Namaste Acharya ji! 🙏\nI have made the payment. Please verify.\n\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Type:* ${currentBookingType.toUpperCase()}\n*Slot:* ${d.slotLabel}${d.dateVal !== 'Instant' ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Transaction ID (UTR):* ${utr}`;
             window.open(`https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
 
             closePaySheet();
-            updateConnectHint();
-            showStatus("Payment details submitted! You can now connect with Acharya ji.", "success");
+            updateConnectHint(currentBookingType);
+            
+            if(currentBookingType === 'instant') {
+                showStatus("Payment details submitted! You can now connect with Acharya ji.", "success");
+            } else {
+                showStatus("Payment details submitted! Your booking is confirmed.", "success");
+            }
         }
 
-        function updateConnectHint() {
-            const hint = document.getElementById('connect-lock-hint');
+        function updateConnectHint(type) {
+            const hintId = type === 'instant' ? 'inst-connect-lock-hint' : 'sched-connect-lock-hint';
+            const hint = document.getElementById(hintId);
             if (!hint) return;
             if (paymentSubmitted) {
-                hint.innerHTML = "✅ Payment details submitted. Acharya ji will verify your Transaction ID before the session.";
+                if(type === 'instant') {
+                    hint.innerHTML = "✅ Payment details submitted. You can now use the connect buttons above.";
+                } else {
+                    hint.innerHTML = "✅ Booking Confirmed! Acharya ji will verify your Transaction ID and contact you.";
+                }
                 hint.style.color = "var(--success)";
             }
         }
 
         function paymentGate() {
             if (paymentSubmitted) return true;
-            showStatus("Please pay first, then submit your Transaction ID (Step 3)!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले पेमेंट करें और Transaction ID submit करें!</span>", "error");
+            showStatus("Please pay first, then submit your Transaction ID!<br><span style='font-size:11.5px; font-weight:500; display:block; margin-top:5px; opacity:0.95;'>कृपया पहले पेमेंट करें और Transaction ID submit करें!</span>", "error");
             return false;
         }
 
-        function requestCardPayment() {
-            const d = startBooking('Card/Netbanking');
+        function requestCardPayment(type) {
+            updateStateFromUI(type);
+            currentBookingType = type;
+            const d = startBooking('Card/Netbanking', type);
             if (!d) return;
 
-            const dateVal = d.dateVal;
-            const slotText = ` [Slot: ${selectedSlotLabel} on ${dateVal}]`;
+            let slotText = type === 'instant' ? " [Instant Live]" : ` [Slot: ${d.slotLabel} on ${d.dateVal}]`;
             let planNameStr = isPopularService ? `Service: ${selectedPlanMinutes}` : `${selectedPlanMinutes} Minutes plan`;
+            
             const message = `Namaste Acharya ji! 🙏\nMy name is ${d.userName}. My number is ${d.userPhone}.${slotText}\nI want to book the *${planNameStr} (₹${selectedPlanAmount})*, but I want to pay using *Credit/Debit Card or Netbanking*. \n\nPlease send me a secure payment link.`;
             const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-            showStatus("After paying via the link, tap 'Already paid? Enter Transaction ID' in Step 4.", "success");
+            showStatus("After paying via the link, tap 'Already paid? Enter Transaction ID' to confirm.", "success");
         }
 
         /* ===================== KUNDLI ===================== */
@@ -1170,23 +1258,21 @@
         }
 
         /* ===================== CONNECT (CHAT / AUDIO / VIDEO / LIVE) ===================== */
+        /* Note: Connect buttons are only for Instant Live now */
 
         function startChat() {
             if (!paymentGate()) return;
-            const userName = document.getElementById('username').value.trim();
-            const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) { showStatus("Enter your Name and Mobile / WhatsApp Number first!", 'error'); return; }
+            const userName = document.getElementById('inst-username').value.trim();
+            if (!userName) { showStatus("Enter your Name first!", 'error'); return; }
             
-            const slotText = selectedSlotLabel ? ` [Slot: ${selectedSlotLabel}]` : '';
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(userName)}.${encodeURIComponent(slotText)} I want to start my consultation chat.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(userName)}.%20[Instant%20Live]%20I%20want%20to%20start%20my%20consultation%20chat.`;
             window.open(whatsappUrl, '_blank');
         }
 
         function startAudioCall() {
             if (!paymentGate()) return;
-            const userName = document.getElementById('username').value.trim();
-            const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) { showStatus("Enter your Name and Mobile / WhatsApp Number first!", 'error'); return; }
+            const userName = document.getElementById('inst-username').value.trim();
+            if (!userName) { showStatus("Enter your Name first!", 'error'); return; }
 
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
@@ -1198,9 +1284,8 @@
 
         function startVideoCall() {
             if (!paymentGate()) return;
-            const userName = document.getElementById('username').value.trim();
-            const userPhone = document.getElementById('userphone').value.trim();
-            if (!userName || !userPhone) { showStatus("Enter your Name and Mobile / WhatsApp Number first!", 'error'); return; }
+            const userName = document.getElementById('inst-username').value.trim();
+            if (!userName) { showStatus("Enter your Name first!", 'error'); return; }
 
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
@@ -1211,7 +1296,8 @@
         }
 
         function joinLiveStream() {
-            let userName = document.getElementById('username').value.trim();
+            let userName = document.getElementById('inst-username').value.trim();
+            if(!userName) userName = document.getElementById('sched-username').value.trim();
             if(!userName) userName = "Guest_" + Math.floor(Math.random() * 1000);
             
             const appID = 1009897816; 
@@ -1328,7 +1414,6 @@
         });
 
         // --- BOOKINGS ---
-        // Saves the booking as "awaiting_payment" and returns its document id.
         window.saveClientBooking = async (paymentMethod, userName, userPhone, date, slot, planMins, planAmt) => {
             try {
                 const ref = await addDoc(collection(db, "bookings"), {
@@ -1349,7 +1434,6 @@
             }
         };
 
-        // Attaches the client's UTR / transaction ID so it can be verified against the bank/UPI history.
         window.attachPaymentProof = async (bookingId, utr) => {
             if (!bookingId) return;
             try {
@@ -1409,7 +1493,6 @@
 
         let unsubSlots = null;
         
-        // 🔥 MODIFIED LOGIC FOR "BOOKED" SLOTS 🔥
         window.loadClientSlots = () => {
             const date = clientDate.value;
             if(!date) return;
