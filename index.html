@@ -946,7 +946,6 @@
             if (!selectedSlotLabel) { showStatus("Please select an available Time Slot first!", 'error'); return; }
             
             const dateVal = document.getElementById('client-date').value;
-            paymentInitiated = true; 
 
             if(window.saveClientBooking) {
                 window.saveClientBooking("UPI", userName, userPhone, dateVal, selectedSlotLabel, selectedPlanMinutes, selectedPlanAmount);
@@ -954,10 +953,18 @@
 
             const upiId = "7908352780@ybl";
             const payeeName = isPopularService ? "Acharya Subhadip (Service)" : "Acharya Subhadip (" + selectedPlanMinutes + " Mins)";
-            const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedPlanAmount}&cu=INR`;
+            const transactionNote = `Real Astro - ${selectedPlanMinutes} Minutes Consultation`;
+            const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&am=${encodeURIComponent(selectedPlanAmount.toFixed(2))}&cu=INR&tn=${encodeURIComponent(transactionNote)}`;
             
+            // Keep the UPI launch inside the user's button tap. Some Android browsers
+            // restrict delayed custom-scheme launches, which can cause UPI apps to
+            // show a security/unsupported-payment error.
             showStatus(`Opening UPI for ₹${selectedPlanAmount}...`, 'success');
-            setTimeout(() => { window.location.href = upiLink; }, 500);
+            window.location.href = upiLink;
+
+            // Payment is marked as initiated only after the UPI app is actually opened.
+            // This keeps the consultation buttons locked until the user has attempted UPI.
+            paymentInitiated = true;
         }
 
         function requestCardPayment() {
