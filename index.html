@@ -285,7 +285,7 @@
 
             <!-- 🌟 NEW: ASTROLOGER LIVE SECTION 🌟 -->
             <div class="home-section" id="astrologer-live-section" style="border: 2px solid #fca5a5; background: #fff5f5; display: none;">
-                <div class="section-header" style="color: #b91c1c; margin-bottom: 12px; font-size: 18px;">🔴 Astrologer Live</div>
+                <div class="section-header" style="color: #b91c1c; margin-bottom: 12px; font-size: 18px;">🔴 Astrologer Live Video</div>
                 
                 <!-- When Offline (Shows Schedule) -->
                 <div id="live-schedule-box" style="text-align: center;">
@@ -405,13 +405,10 @@
                     </span>
                 </p>
 
-                <!-- DYNAMIC LIVE/BUSY STATUS -->
+                <!-- DYNAMIC PROFILE STATUS -->
                 <div style="margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
-                    <div id="profile-status-live" style="display: none; background: #fef2f2; border: 1px solid #fca5a5; color: #e11d48; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 700; animation: pulseLive 1.5s infinite;">
-                        🔴 Acharya Ji Is Live, Connect Quickly
-                    </div>
-                    <div id="profile-status-busy" style="display: block; background: #fffbeb; border: 1px solid #fde68a; color: #b45309; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 700;">
-                        ⏳ Acharya Ji Is Busy, Please Wait 5 Minutes
+                    <div id="profile-status-display" style="display: block; background: #fffbeb; border: 1px solid #fde68a; color: #b45309; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 700; text-align: center;">
+                        ⏳ Acharya Ji Is Busy Please Wait 5 Minutes Or Join Waitlist
                     </div>
                 </div>
             </div>
@@ -1513,14 +1510,36 @@
             } catch(e) { console.error("Error saving payment proof:", e); }
         };
 
+        // NEW: PROFILE STATUS LISTENER
+        onSnapshot(doc(db, "profile_status", "current"), (docSnap) => {
+            const statusDisplay = document.getElementById('profile-status-display');
+            if (docSnap.exists() && statusDisplay) {
+                const data = docSnap.data();
+                statusDisplay.innerText = data.displayText;
+                
+                if(data.state === 'online') {
+                    statusDisplay.style.background = '#fef2f2';
+                    statusDisplay.style.borderColor = '#fca5a5';
+                    statusDisplay.style.color = '#e11d48';
+                    statusDisplay.style.animation = 'pulseLive 1.5s infinite';
+                } else if(data.state === 'offline') {
+                    statusDisplay.style.background = '#f1f5f9';
+                    statusDisplay.style.borderColor = '#cbd5e1';
+                    statusDisplay.style.color = '#475569';
+                    statusDisplay.style.animation = 'none';
+                } else {
+                    statusDisplay.style.background = '#fffbeb';
+                    statusDisplay.style.borderColor = '#fde68a';
+                    statusDisplay.style.color = '#b45309';
+                    statusDisplay.style.animation = 'none';
+                }
+            }
+        });
+
         onSnapshot(doc(db, "live_status", "main"), (docSnap) => {
             const liveSec = document.getElementById('astrologer-live-section');
             const schedBox = document.getElementById('live-schedule-box');
             const actBox = document.getElementById('live-active-box');
-            
-            // NEW Profile Status Elements
-            const profileLive = document.getElementById('profile-status-live');
-            const profileBusy = document.getElementById('profile-status-busy');
             
             if (docSnap.exists()) {
                 const data = docSnap.data();
@@ -1531,9 +1550,6 @@
                     actBox.style.display = 'block';
                     liveSec.style.background = '#fef2f2';
                     liveSec.style.borderColor = '#ef4444';
-                    
-                    if(profileLive) profileLive.style.display = 'block';
-                    if(profileBusy) profileBusy.style.display = 'none';
                 } else {
                     schedBox.style.display = 'block';
                     actBox.style.display = 'none';
@@ -1541,9 +1557,6 @@
                     liveSec.style.borderColor = '#fca5a5';
                     document.getElementById('live-time-text').innerText = data.scheduleTime || "Schedule not updated yet";
                     document.getElementById('live-topic-text').innerText = data.topic || "";
-                    
-                    if(profileLive) profileLive.style.display = 'none';
-                    if(profileBusy) profileBusy.style.display = 'block';
                 }
             }
         });
