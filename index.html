@@ -432,63 +432,74 @@
                     Connect with Acharya Ji right now. <span style="color: #e11d48; font-weight: 700;">No waiting for slots.</span>
                 </p>
 
-                <!-- Trust Badges -->
-                <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 22px;">
-                    <span style="background: white; border: 1px solid #fda4af; color: #be123c; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">🔒 100% Private</span>
-                    <span style="background: white; border: 1px solid #fda4af; color: #be123c; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">✅ Verified Expert</span>
+                <!-- DYNAMIC CONTENT: Shown when Online or Busy -->
+                <div id="inst-form-content">
+                    <!-- Trust Badges -->
+                    <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 22px;">
+                        <span style="background: white; border: 1px solid #fda4af; color: #be123c; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">🔒 100% Private</span>
+                        <span style="background: white; border: 1px solid #fda4af; color: #be123c; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">✅ Verified Expert</span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="text-hint">Step 1: Enter Your Details</span>
+                        <input type="text" id="inst-username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
+                        <input type="tel" id="inst-userphone" class="form-control" placeholder="Mobile / WhatsApp Number" />
+                    </div>
+
+                    <div class="input-group" style="margin-top: 20px;">
+                        <span class="text-hint">Step 2: Select Duration & Pay</span>
+                        
+                        <div style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 8px; margin-bottom: 12px; text-align: center; border: 1px dashed #7dd3fc;">
+                            🙏 First 1 minute is absolutely FREE! Feel free to join the session.
+                        </div>
+                        
+                        <div class="plan-grid" id="inst-plan-grid">
+                            <div class="plan-card selected" id="inst-plan-10" onclick="selectPlan(99, 10, 'inst-plan-10', 'instant')">
+                                <div class="plan-info">
+                                    <span class="plan-time">10 Minutes</span>
+                                </div>
+                                <div class="plan-price">₹99</div>
+                            </div>
+                            <div class="plan-card" id="inst-plan-20" onclick="selectPlan(149, 20, 'inst-plan-20', 'instant')">
+                                <div class="plan-info">
+                                    <span class="plan-time">20 Minutes</span>
+                                    <span class="plan-save">Save ₹50</span>
+                                </div>
+                                <div class="plan-price"><del>₹200</del> ₹149</div>
+                            </div>
+                            <div class="plan-card" id="inst-plan-30" onclick="selectPlan(199, 30, 'inst-plan-30', 'instant')">
+                                <div class="plan-info">
+                                    <span class="plan-time">30 Minutes</span>
+                                    <span class="plan-save">Save ₹100</span>
+                                </div>
+                                <div class="plan-price"><del>₹300</del> ₹199</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment('instant')">💳 Pay via UPI</button>
+                        <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: white; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment('instant')">💳 Pay via Card / Netbanking</button>
+                    </div>
+
+                    <div class="input-group" style="margin-top: 20px;">
+                        <span class="text-hint">Step 3: Connect Instantly</span>
+                        <div class="connect-grid" id="inst-connect-buttons">
+                            <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
+                            <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
+                            <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
+                        </div>
+                        <p id="inst-connect-lock-hint" style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.5;">
+                            🔒 Buttons unlock after you submit your payment details.<br>
+                            <span style="color: var(--gold-dark); font-weight: 600; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm', 'instant')">Already paid? Enter Transaction ID</span>
+                        </p>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <span class="text-hint">Step 1: Enter Your Details</span>
-                    <input type="text" id="inst-username" class="form-control" placeholder="Your Name (e.g. Rahul)" style="margin-bottom: 10px;" />
-                    <input type="tel" id="inst-userphone" class="form-control" placeholder="Mobile / WhatsApp Number" />
-                </div>
-
-                <div class="input-group" style="margin-top: 20px;">
-                    <span class="text-hint">Step 2: Select Duration & Pay</span>
-                    
-                    <div style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 8px; margin-bottom: 12px; text-align: center; border: 1px dashed #7dd3fc;">
-                        🙏 First 1 minute is absolutely FREE! Feel free to join the session.
-                    </div>
-                    
-                    <div class="plan-grid" id="inst-plan-grid">
-                        <div class="plan-card selected" id="inst-plan-10" onclick="selectPlan(99, 10, 'inst-plan-10', 'instant')">
-                            <div class="plan-info">
-                                <span class="plan-time">10 Minutes</span>
-                            </div>
-                            <div class="plan-price">₹99</div>
-                        </div>
-                        <div class="plan-card" id="inst-plan-20" onclick="selectPlan(149, 20, 'inst-plan-20', 'instant')">
-                            <div class="plan-info">
-                                <span class="plan-time">20 Minutes</span>
-                                <span class="plan-save">Save ₹50</span>
-                            </div>
-                            <div class="plan-price"><del>₹200</del> ₹149</div>
-                        </div>
-                        <div class="plan-card" id="inst-plan-30" onclick="selectPlan(199, 30, 'inst-plan-30', 'instant')">
-                            <div class="plan-info">
-                                <span class="plan-time">30 Minutes</span>
-                                <span class="plan-save">Save ₹100</span>
-                            </div>
-                            <div class="plan-price"><del>₹300</del> ₹199</div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%; font-size: 15px;" onclick="makePayment('instant')">💳 Pay via UPI</button>
-                    <button class="btn" style="margin-top: 10px; width: 100%; font-size: 14.5px; background: white; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onclick="requestCardPayment('instant')">💳 Pay via Card / Netbanking</button>
-                </div>
-
-                <div class="input-group" style="margin-top: 20px;">
-                    <span class="text-hint">Step 3: Connect Instantly</span>
-                    <div class="connect-grid" id="inst-connect-buttons">
-                        <button class="btn btn-chat" onclick="startChat()">💬 Chat on WhatsApp</button>
-                        <button class="btn btn-audio" onclick="startAudioCall()">📞 Audio Call</button>
-                        <button class="btn btn-video" onclick="startVideoCall()">📹 Video Call</button>
-                    </div>
-                    <p id="inst-connect-lock-hint" style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.5;">
-                        🔒 Buttons unlock after you submit your payment details.<br>
-                        <span style="color: var(--gold-dark); font-weight: 600; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm', 'instant')">Already paid? Enter Transaction ID</span>
+                <!-- DYNAMIC CONTENT: Shown only when Offline -->
+                <div id="inst-offline-msg" style="display: none; text-align: center; padding: 20px 14px; background: #fff5f5; border: 1px dashed #fda4af; border-radius: 12px; margin-top: 15px;">
+                    <p style="font-size: 14px; color: #be123c; font-weight: 600; margin-bottom: 16px; line-height: 1.6;">
+                        Please wait until Acharya Ji is back online, or Book a Scheduled Consultation as per your preferred Date and Time.
                     </p>
+                    <button class="btn" style="background: white; color: var(--gold-dark); border: 1px solid var(--gold); padding: 12px; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="document.getElementById('booking-area').scrollIntoView({behavior: 'smooth'})">📅 Book Scheduled Consultation</button>
                 </div>
             </div>
 
@@ -1510,28 +1521,46 @@
             } catch(e) { console.error("Error saving payment proof:", e); }
         };
 
-        // NEW: PROFILE STATUS LISTENER
+        // NEW: PROFILE STATUS LISTENER (UPDATED WITH FORM TOGGLE)
         onSnapshot(doc(db, "profile_status", "current"), (docSnap) => {
             const statusDisplay = document.getElementById('profile-status-display');
-            if (docSnap.exists() && statusDisplay) {
+            const instForm = document.getElementById('inst-form-content');
+            const instOfflineMsg = document.getElementById('inst-offline-msg');
+
+            if (docSnap.exists()) {
                 const data = docSnap.data();
-                statusDisplay.innerText = data.displayText;
                 
-                if(data.state === 'online') {
-                    statusDisplay.style.background = '#fef2f2';
-                    statusDisplay.style.borderColor = '#fca5a5';
-                    statusDisplay.style.color = '#e11d48';
-                    statusDisplay.style.animation = 'pulseLive 1.5s infinite';
-                } else if(data.state === 'offline') {
-                    statusDisplay.style.background = '#f1f5f9';
-                    statusDisplay.style.borderColor = '#cbd5e1';
-                    statusDisplay.style.color = '#475569';
-                    statusDisplay.style.animation = 'none';
-                } else {
-                    statusDisplay.style.background = '#fffbeb';
-                    statusDisplay.style.borderColor = '#fde68a';
-                    statusDisplay.style.color = '#b45309';
-                    statusDisplay.style.animation = 'none';
+                if(statusDisplay) {
+                    statusDisplay.innerText = data.displayText;
+                    
+                    if(data.state === 'online') {
+                        statusDisplay.style.background = '#fef2f2';
+                        statusDisplay.style.borderColor = '#fca5a5';
+                        statusDisplay.style.color = '#e11d48';
+                        statusDisplay.style.animation = 'pulseLive 1.5s infinite';
+                        
+                        if(instForm) instForm.style.display = 'block';
+                        if(instOfflineMsg) instOfflineMsg.style.display = 'none';
+                        
+                    } else if(data.state === 'offline') {
+                        statusDisplay.style.background = '#f1f5f9';
+                        statusDisplay.style.borderColor = '#cbd5e1';
+                        statusDisplay.style.color = '#475569';
+                        statusDisplay.style.animation = 'none';
+                        
+                        // Hide instant form, show offline message
+                        if(instForm) instForm.style.display = 'none';
+                        if(instOfflineMsg) instOfflineMsg.style.display = 'block';
+                        
+                    } else { // Busy
+                        statusDisplay.style.background = '#fffbeb';
+                        statusDisplay.style.borderColor = '#fde68a';
+                        statusDisplay.style.color = '#b45309';
+                        statusDisplay.style.animation = 'none';
+                        
+                        if(instForm) instForm.style.display = 'block';
+                        if(instOfflineMsg) instOfflineMsg.style.display = 'none';
+                    }
                 }
             }
         });
