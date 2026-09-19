@@ -25,15 +25,30 @@
     <div class="container">
         <h1 style="text-align: center; color: #100b38; font-size: 22px; margin-bottom: 24px;">✨ Real Astro Admin</h1>
 
+        <!-- 🌟 NEW: PROFILE STATUS CONTROL -->
+        <div class="card" style="border: 2px solid #3b82f6; background: #eff6ff;">
+            <h2 style="color: #1d4ed8; margin-bottom: 4px;">🟢 Profile Status Control</h2>
+            <p style="font-size: 11.5px; color: #1e3a8a; margin-top: 0; margin-bottom: 15px; font-weight: 500;">Set your availability for the Website Profile Section.</p>
+
+            <button class="btn-primary" style="background: #10b981; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);" onclick="window.setProfileStatus('online')">🟢 Mark ONLINE (Live, Hurry Up)</button>
+            <button class="btn-primary" style="background: #f59e0b; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);" onclick="window.setProfileStatus('busy')">⏳ Mark BUSY (Wait 5 Mins)</button>
+
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #bfdbfe;">
+                <label style="font-size: 12.5px; color: #1e3a8a; font-weight: 600; display: block; margin-bottom: 6px;">Set Next Online Time (For Offline Status):</label>
+                <input type="datetime-local" id="offline-calendar" />
+                <button class="btn-gray" style="background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);" onclick="window.setProfileStatus('offline')">🔴 Mark OFFLINE</button>
+            </div>
+        </div>
+
         <!-- 1. LIVE STREAM & STATUS CONTROL -->
         <div class="card" style="border: 2px solid #fca5a5; background: #fff5f5;">
-            <h2 style="color: #b91c1c; margin-bottom: 4px;">🔴 Live Stream & Status Control</h2>
-            <p style="font-size: 11.5px; color: #991b1b; margin-top: 0; margin-bottom: 15px; font-weight: 500;">(Turning this ON also changes your Website Profile Status to "Live")</p>
+            <h2 style="color: #b91c1c; margin-bottom: 4px;">🔴 Live Stream Video Control</h2>
+            <p style="font-size: 11.5px; color: #991b1b; margin-top: 0; margin-bottom: 15px; font-weight: 500;">(This controls the big Live Video Stream box on website)</p>
             <input type="text" id="live-topic" placeholder="Topic (e.g. Career & Wealth Guidance)" />
             <input type="text" id="live-time" placeholder="Schedule (e.g. Today at 8:00 PM)" />
-            <button class="btn-primary" onclick="window.updateSchedule()">📅 Update Schedule (Mark as Busy/Offline)</button>
-            <button class="btn-red" onclick="window.startLive()">📺 Go LIVE Now (Mark as Live)</button>
-            <button class="btn-gray" onclick="window.endLive()">⏹️ End Live / Reset to Busy</button>
+            <button class="btn-primary" onclick="window.updateSchedule()">📅 Update Schedule</button>
+            <button class="btn-red" onclick="window.startLive()">📺 Go LIVE Now</button>
+            <button class="btn-gray" onclick="window.endLive()">⏹️ End Live / Reset</button>
         </div>
 
         <!-- 2. DAILY REMEDY -->
@@ -90,18 +105,53 @@
         });
         const db = getFirestore(app);
 
-        // --- LIVE STREAM LOGIC ---
+        // --- NEW PROFILE STATUS LOGIC ---
+        window.setProfileStatus = async (status) => {
+            let statusText = "";
+            let timeLabel = "";
+
+            if (status === 'online') {
+                statusText = "🟢 Acharya Ji Is Live Hurry Up and Connect";
+            } else if (status === 'busy') {
+                statusText = "⏳ Acharya Ji Is Busy Please Wait 5 Minutes Or Join Waitlist";
+            } else if (status === 'offline') {
+                const timeInput = document.getElementById('offline-calendar').value;
+                if (!timeInput) return alert("Please select Date and Time from the calendar before marking Offline!");
+                
+                // Convert format from YYYY-MM-DDTHH:MM to readable text
+                const dateObj = new Date(timeInput);
+                const formattedTime = dateObj.toLocaleString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit', hour12: true });
+                
+                statusText = `🔴 Acharya Ji Is Offline Next Online ${formattedTime}`;
+                timeLabel = formattedTime;
+            }
+
+            try {
+                await setDoc(doc(db, "profile_status", "current"), { 
+                    state: status, 
+                    displayText: statusText,
+                    nextOnline: timeLabel,
+                    updatedAt: new Date().toISOString()
+                });
+                alert(`Profile Status successfully updated to: ${status.toUpperCase()}\n\nText: ${statusText}`);
+            } catch(e) {
+                console.error("Error updating status:", e);
+                alert("Error updating status! Please check your connection.");
+            }
+        };
+
+        // --- ORIGINAL LIVE STREAM LOGIC ---
         window.updateSchedule = async () => {
             const topic = document.getElementById('live-topic').value;
             const time = document.getElementById('live-time').value;
             if(!topic || !time) return alert("Please enter both Topic and Schedule Time.");
             await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: topic, scheduleTime: time });
-            alert("Schedule updated! Website profile will now show 'Busy/Offline'.");
+            alert("Live Stream Schedule updated successfully!");
         };
 
         window.startLive = async () => {
             await setDoc(doc(db, "live_status", "main"), { isLive: true, topic: "LIVE NOW", scheduleTime: "LIVE NOW" });
-            alert("You are now LIVE! Website profile shows 'Live, Connect Quickly'. Opening Studio...");
+            alert("You are now LIVE! Opening Studio...");
             
             const appID = 1009897816;
             const roomID = "real_astro_live_room";
@@ -122,7 +172,7 @@
 
         window.endLive = async () => {
             await setDoc(doc(db, "live_status", "main"), { isLive: false, topic: "", scheduleTime: "Currently Offline" });
-            alert("Live ended! Client app profile will reset to 'Busy'.");
+            alert("Live ended! Client app profile will reset to Offline.");
             location.reload();
         };
 
