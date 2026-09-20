@@ -1293,7 +1293,6 @@
             return isPopularService ? String(selectedPlanMinutes) : (selectedPlanMinutes + " Minutes");
         }
 
-        // Extracts state purely based on UI elements to prevent cross-section bleeding
         function updateStateFromUI(type) {
             if (isPopularService && type === 'scheduled') return;
             const gridId = type === 'instant' ? 'inst-plan-grid' : 'sched-plan-grid';
@@ -1305,7 +1304,6 @@
             }
         }
 
-        // Validates Step 1 + Step 2 fields based on Booking Type (Instant vs Scheduled)
         function getBookingDetails(type) {
             const nameId = type === 'instant' ? 'inst-username' : 'sched-username';
             const phoneId = type === 'instant' ? 'inst-userphone' : 'sched-userphone';
@@ -1349,8 +1347,11 @@
 
         function buildUpiLink() {
             const note = isPopularService ? "Real Astro Service" : ("Real Astro " + selectedPlanMinutes + " Min");
+            const txnRef = "ASTRO" + Math.floor(Math.random() * 1000000);
             return "upi://pay?pa=" + UPI_ID
                 + "&pn=" + encodeURIComponent(PAYEE_NAME)
+                + "&tr=" + txnRef
+                + "&mc=8999"
                 + "&am=" + Number(selectedPlanAmount).toFixed(2)
                 + "&cu=INR"
                 + "&tn=" + encodeURIComponent(note);
