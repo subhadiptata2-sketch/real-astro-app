@@ -1149,7 +1149,7 @@
         const PAYMENT_LINK = "https://razorpay.me/@realastro";
         
         // 👇 YAHAN APNA RAZORPAY UPI ID YA PERSONAL UPI ID DAALEIN 👇
-        const UPI_ID = "BHARATPE2C0B0O7O9E00759@unitype"; 
+        const UPI_ID = "7908352780@ybl"; 
         
         const PAYEE_NAME = "Acharya Subhadip";
 
@@ -1401,7 +1401,7 @@
         }
 
         function openUpiApp() {
-            if(UPI_ID === "YOUR_UPI_ID_HERE@upi" || !UPI_ID) {
+            if(!UPI_ID) {
                 showStatus("Admin: Please add your UPI ID in the code for direct UPI app opening.", "error");
                 return;
             }
