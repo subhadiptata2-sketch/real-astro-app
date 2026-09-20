@@ -1347,11 +1347,8 @@
 
         function buildUpiLink() {
             const note = isPopularService ? "Real Astro Service" : ("Real Astro " + selectedPlanMinutes + " Min");
-            const txnRef = "ASTRO" + Math.floor(Math.random() * 1000000);
             return "upi://pay?pa=" + UPI_ID
                 + "&pn=" + encodeURIComponent(PAYEE_NAME)
-                + "&tr=" + txnRef
-                + "&mc=8999"
                 + "&am=" + Number(selectedPlanAmount).toFixed(2)
                 + "&cu=INR"
                 + "&tn=" + encodeURIComponent(note);
