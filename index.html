@@ -1113,6 +1113,11 @@
                 
                 <button class="btn" style="margin-top: 12px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1;" onclick="openUpiApp()">📲 Open UPI App Directly</button>
                 
+                <!-- 🔴 NEW WARNING TEXT ADDED HERE -->
+                <p style="font-size: 11.5px; color: #e11d48; text-align: center; margin-top: 6px; font-weight: 600; line-height: 1.4;">
+                    If the button above fails or shows security error, please <u>COPY the UPI ID</u> and paste it in your PhonePe / GPay app to pay.
+                </p>
+
                 <div style="text-align: center; margin-top: 20px;">
                     <img src="50505.jpg" alt="Razorpay QR Code" style="width: 160px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     <p class="pay-hint">Or scan this QR code from any UPI app</p>
@@ -1148,7 +1153,7 @@
         const ASTROLOGER_WHATSAPP = "919339199974"; 
         const PAYMENT_LINK = "https://razorpay.me/@realastro";
         
-        // 👇 YAHAN APNA RAZORPAY UPI ID YA PERSONAL UPI ID DAALEIN 👇
+        // 👇 PERSONAL UPI ID SET HERE 👇
         const UPI_ID = "7908352780@ybl"; 
         
         const PAYEE_NAME = "Acharya Subhadip";
@@ -1347,8 +1352,10 @@
 
         function buildUpiLink() {
             const note = isPopularService ? "Real Astro Service" : ("Real Astro " + selectedPlanMinutes + " Min");
+            // Generic UPI link format without restrictive merchant codes
             return "upi://pay?pa=" + UPI_ID
                 + "&pn=" + encodeURIComponent(PAYEE_NAME)
+                + "&mc=0000"
                 + "&am=" + Number(selectedPlanAmount).toFixed(2)
                 + "&cu=INR"
                 + "&tn=" + encodeURIComponent(note);
@@ -1387,13 +1394,13 @@
                 t.value = link;
                 document.body.appendChild(t);
                 t.select();
-                try { document.execCommand('copy'); showStatus("UPI ID copied!", "success"); }
+                try { document.execCommand('copy'); showStatus("UPI ID copied! Paste in your UPI app.", "success"); }
                 catch (e) { showStatus("Could not copy. Please copy manually.", "error"); }
                 document.body.removeChild(t);
             };
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(link)
-                    .then(() => showStatus("UPI ID copied!", "success"))
+                    .then(() => showStatus("UPI ID copied! Paste in your UPI app.", "success"))
                     .catch(fallback);
             } else {
                 fallback();
