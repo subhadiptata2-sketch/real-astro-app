@@ -121,14 +121,6 @@
             text-transform: uppercase; letter-spacing: 0.5px; 
             box-shadow: 0 4px 15px rgba(255,153,51,0.4); 
         }
-
-        .hero-profile-container { 
-            width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--gold); 
-            margin: 0 auto 16px; overflow: hidden; background: #2a0845; display: flex; 
-            align-items: center; justify-content: center; 
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), inset 0 0 15px rgba(0,0,0,0.5); 
-        }
-        .hero-profile-container img { width: 100%; height: 100%; object-fit: cover; }
         
         .hero-title { font-size: 28px; color: var(--gold); margin-bottom: 8px; font-weight: 800; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .hero-subtitle { font-size: 15px; font-weight: 400; opacity: 0.95; margin-bottom: 20px; line-height: 1.5; color: #fff; }
@@ -622,8 +614,9 @@
                             </div>
                         </div>
                         
-                        <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="makePayment('instant')">💳 Pay via UPI</button>
-                        <button class="btn" style="margin-top: 12px; width: 100%; font-size: 15px; background: white; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="requestCardPayment('instant')">💳 Pay via Card / Netbanking</button>
+                        <!-- UPI Direct Flow updated here -->
+                        <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="openPaySheet('pay', 'instant')">💳 Pay via UPI App Direct</button>
+                        <button class="btn" style="margin-top: 12px; width: 100%; font-size: 15px; background: white; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="requestCardPayment('instant')">🔗 Pay via Card / Netbanking</button>
                     </div>
 
                     <div class="input-group" style="margin-top: 24px;">
@@ -853,8 +846,9 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="makePayment('scheduled')">💳 Pay via UPI</button>
-                    <button class="btn" style="margin-top: 12px; width: 100%; font-size: 15px; background: white; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="requestCardPayment('scheduled')">💳 Pay via Card / Netbanking</button>
+                    <!-- UPI Direct Flow updated here -->
+                    <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="openPaySheet('pay', 'scheduled')">💳 Pay via UPI App Direct</button>
+                    <button class="btn" style="margin-top: 12px; width: 100%; font-size: 15px; background: white; color: var(--primary-dark); border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="requestCardPayment('scheduled')">🔗 Pay via Card / Netbanking</button>
                 </div>
 
                 <div class="input-group" style="margin-top: 24px;">
@@ -1103,20 +1097,23 @@
             <div class="pay-summary" id="pay-summary"></div>
 
             <div id="pay-options">
-                <span class="text-hint">Pay Securely via Razorpay Link or QR</span>
+                <span class="text-hint">Pay directly via UPI App (PhonePe / GPay / Paytm)</span>
                 <div class="copy-row">
-                    <strong id="pay-link" style="font-size: 14px;">https://razorpay.me/@realastro</strong>
-                    <button class="copy-btn" onclick="copyPaymentLink()">Copy</button>
+                    <strong id="pay-upi-id" style="font-size: 14px;"></strong>
+                    <button class="copy-btn" onclick="copyUpiId()">Copy UPI ID</button>
                 </div>
-                <p class="pay-hint">Click the link below or scan the QR code to pay the exact amount shown above.</p>
-
-                <div style="text-align: center; margin-top: 16px;">
+                
+                <button class="btn" style="margin-top: 12px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1;" onclick="openUpiApp()">📲 Open UPI App Directly</button>
+                
+                <div style="text-align: center; margin-top: 20px;">
                     <img src="50505.jpg" alt="Razorpay QR Code" style="width: 160px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <p class="pay-hint">On the same phone? Take a screenshot of this QR, then use "Scan from gallery" in your UPI app.</p>
+                    <p class="pay-hint">Or scan this QR code from any UPI app</p>
                 </div>
 
-                <button class="btn" style="margin-top: 16px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1;" onclick="openUpiApp()">🔗 Open Razorpay Payment Link</button>
-                <p class="pay-hint" style="text-align: center;">Razorpay supports UPI, Cards, Netbanking & Wallets securely.</p>
+                <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 16px;">
+                    <span class="text-hint">Want to pay via Card or Netbanking?</span>
+                    <button class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; border: none; font-size: 14px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);" onclick="window.open(PAYMENT_LINK, '_blank')">🔗 Pay via Razorpay Gateway</button>
+                </div>
             </div>
 
             <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 18px;">
@@ -1142,6 +1139,10 @@
     <script>
         const ASTROLOGER_WHATSAPP = "919339199974"; 
         const PAYMENT_LINK = "https://razorpay.me/@realastro";
+        
+        // 👇 YAHAN APNA RAZORPAY UPI ID YA PERSONAL UPI ID DAALEIN 👇
+        const UPI_ID = "YOUR_UPI_ID_HERE@upi"; 
+        
         const PAYEE_NAME = "Acharya Subhadip";
 
         let selectedPlanAmount = 99;
@@ -1284,7 +1285,6 @@
             return isPopularService ? String(selectedPlanMinutes) : (selectedPlanMinutes + " Minutes");
         }
 
-        // Extracts state purely based on UI elements to prevent cross-section bleeding
         function updateStateFromUI(type) {
             if (isPopularService && type === 'scheduled') return;
             const gridId = type === 'instant' ? 'inst-plan-grid' : 'sched-plan-grid';
@@ -1296,7 +1296,6 @@
             }
         }
 
-        // Validates Step 1 + Step 2 fields based on Booking Type (Instant vs Scheduled)
         function getBookingDetails(type) {
             const nameId = type === 'instant' ? 'inst-username' : 'sched-username';
             const phoneId = type === 'instant' ? 'inst-userphone' : 'sched-userphone';
@@ -1338,6 +1337,15 @@
             return d;
         }
 
+        function buildUpiLink() {
+            const note = isPopularService ? "Real Astro Service" : ("Real Astro " + selectedPlanMinutes + " Min");
+            return "upi://pay?pa=" + UPI_ID
+                + "&pn=" + encodeURIComponent(PAYEE_NAME)
+                + "&am=" + Number(selectedPlanAmount).toFixed(2)
+                + "&cu=INR"
+                + "&tn=" + encodeURIComponent(note);
+        }
+
         function makePayment(type) {
             openPaySheet('pay', type);
         }
@@ -1345,8 +1353,10 @@
         function openPaySheet(mode, type) {
             updateStateFromUI(type);
             currentBookingType = type;
-            const d = startBooking(mode === 'confirm' ? 'Razorpay' : 'Razorpay', type);
+            const d = startBooking(mode === 'confirm' ? 'UPI/Card' : 'UPI', type);
             if (!d) return;
+
+            document.getElementById('pay-upi-id').textContent = UPI_ID;
             
             let summaryText = `<b>${planLabel()}</b> — <b>₹${selectedPlanAmount}</b><br>Slot: ${d.slotLabel}`;
             if(d.dateVal !== "Instant") summaryText += ` on ${d.dateVal}`;
@@ -1362,20 +1372,20 @@
             document.body.style.overflow = '';
         }
 
-        function copyPaymentLink() {
-            const link = PAYMENT_LINK;
+        function copyUpiId() {
+            const link = UPI_ID;
             const fallback = () => {
                 const t = document.createElement('textarea');
                 t.value = link;
                 document.body.appendChild(t);
                 t.select();
-                try { document.execCommand('copy'); showStatus("Payment link copied!", "success"); }
+                try { document.execCommand('copy'); showStatus("UPI ID copied!", "success"); }
                 catch (e) { showStatus("Could not copy. Please copy manually.", "error"); }
                 document.body.removeChild(t);
             };
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(link)
-                    .then(() => showStatus("Payment link copied!", "success"))
+                    .then(() => showStatus("UPI ID copied!", "success"))
                     .catch(fallback);
             } else {
                 fallback();
@@ -1383,8 +1393,12 @@
         }
 
         function openUpiApp() {
-            showStatus(`Opening Razorpay for ₹${selectedPlanAmount}...`, 'success');
-            setTimeout(() => { window.open(PAYMENT_LINK, '_blank'); }, 400);
+            if(UPI_ID === "YOUR_UPI_ID_HERE@upi" || !UPI_ID) {
+                showStatus("Admin: Please add your UPI ID in the code for direct UPI app opening.", "error");
+                return;
+            }
+            showStatus(`Opening UPI app for ₹${selectedPlanAmount}...`, 'success');
+            setTimeout(() => { window.location.href = buildUpiLink(); }, 400);
         }
 
         function submitPaymentProof() {
