@@ -300,7 +300,7 @@
         .account-menu { list-style: none; padding: 0; margin: 0; }
         .account-menu li { display: flex; align-items: center; padding: 18px 20px; border-bottom: 1px solid #f1f5f9; font-size: 15.5px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: var(--transition); }
         .account-menu li:last-child { border-bottom: none; }
-        .account-menu li:active { background: #f8fafc; }
+        .account-menu li:active { background: #fffbf0; color: var(--gold-dark); padding-left: 24px; }
         .account-menu li span { margin-right: 16px; font-size: 22px; width: 26px; text-align: center; }
         .account-menu li::after { content: '›'; margin-left: auto; font-size: 24px; color: #cbd5e1; font-weight: 300; }
         .account-header-bg { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-accent) 100%); color: white; padding: 28px 20px; border-radius: var(--border-radius) var(--border-radius) 0 0; text-align: center; }
@@ -334,6 +334,19 @@
         #notification-banner { display: none; position: fixed; top: 0; left: 0; width: 100%; background: var(--primary-dark); color: white; padding: 16px; z-index: 2000; text-align: center; font-size: 14.5px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         #notification-banner button { background: linear-gradient(135deg, #ff6a00, #ee0979); color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 700; margin-left: 10px; cursor: pointer; }
 
+        /* 💳 PAYMENT SHEET */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26, 11, 46, 0.7); backdrop-filter: blur(4px); z-index: 3000; align-items: flex-end; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal-sheet { background: #fff; width: 100%; max-width: 600px; border-radius: 24px 24px 0 0; padding: 24px 20px 32px; max-height: 92vh; overflow-y: auto; animation: fadeIn 0.25s ease; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
+        .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-head h3 { font-size: 18px; color: var(--primary-dark); font-weight: 800; }
+        .modal-close { font-size: 26px; cursor: pointer; color: #94a3b8; padding: 0 6px; line-height: 1; }
+        .pay-summary { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; border-radius: 14px; padding: 14px 16px; margin-bottom: 20px; font-size: 14px; color: #78350f; line-height: 1.6; font-weight: 500; }
+        .pay-summary b { color: var(--primary-dark); font-weight: 800; }
+        .copy-row { display: flex; gap: 8px; align-items: center; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 14px; padding: 12px 14px; }
+        .copy-row strong { flex: 1; word-break: break-all; font-size: 15px; color: var(--primary-dark); }
+        .copy-btn { background: var(--primary-dark); color: var(--gold); border: none; border-radius: 10px; padding: 10px 16px; font-size: 13.5px; font-weight: 700; cursor: pointer; }
+        .pay-hint { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin: 10px 0 0; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -372,10 +385,9 @@
             
             <!-- 🌟 HIGH-IMPACT BRANDING & HERO SECTION WITH REAL PHOTO -->
             <div class="home-section hero-card" style="margin-bottom: 24px; padding: 40px 16px; border-radius: 24px;">
-                <!-- SAFE & SMART EXPERT BADGE (UPDATED) -->
+                <!-- SAFE & SMART EXPERT BADGE -->
                 <div class="expert-badge">⭐ FORMER EXPERT AT INDIA'S TOP ASTRO PLATFORMS (4.9/5 ⭐ | 10,000+ HOROSCOPES ANALYZED)</div>
                 
-                <!-- 🔒 BULLETPROOF AVATAR FIX -->
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
                     <div style="width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden; background: #2a0845; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); position: relative;">
                         <span style="font-size: 45px; position: absolute;">🕉️</span>
@@ -609,15 +621,7 @@
                             </div>
                         </div>
                         
-                        <!-- NEW RAZORPAY UNIFIED BUTTON -->
                         <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="startRazorpayPayment('instant')">💳 Pay & Connect</button>
-                        
-                        <!-- NEW QR CODE DIRECTLY ON UI -->
-                        <div style="text-align: center; margin-top: 16px; background: #fff; padding: 16px; border-radius: 14px; border: 1px dashed #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-                            <p style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 10px;">Or Scan QR Code to Pay Directly</p>
-                            <img src="qr.jpg" alt="Razorpay QR Code" style="width: 150px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                            <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 10px; font-weight: 500; line-height: 1.4;">Scan with any UPI App. Then click <b>'Already paid?'</b> below to confirm.</p>
-                        </div>
                     </div>
 
                     <div class="input-group" style="margin-top: 24px;">
@@ -633,7 +637,6 @@
                         </p>
                     </div>
 
-                    <!-- NEW SUPPORT BUTTON FOR INSTANT SECTION -->
                     <div style="margin-top: 24px; text-align: center;">
                         <button class="btn" style="background: linear-gradient(145deg, #fffbeb, #fef3c7); color: #b45309; border: 1px dashed #fde68a; font-size: 14px; font-weight: 700; padding: 14px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);" onclick="window.open('https://wa.me/919339199974?text=Hi%20Acharya%20Ji,%20I%20have%20some%20confusion%20about%20booking%20Instant%20Live%20Consultation.', '_blank')">
                             Any Confusion 🤔 Consultation Support 🙏
@@ -689,7 +692,6 @@
             <div class="home-section" id="popular-services-section">
                 <div class="section-header">🔥 Popular Services</div>
                 
-                <!-- Trust / Marketing Badge -->
                 <div style="background: linear-gradient(135deg, #fff9e6, #fff0c2); border: 1px solid var(--gold); border-radius: 16px; padding: 20px; margin-bottom: 24px; text-align: left; box-shadow: 0 6px 20px rgba(255, 153, 51, 0.15);">
                     <div style="font-size: 16px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px;">✨ 100% Personal Guidance by Acharya Ji</div>
                     <p style="font-size: 13.5px; color: #b45309; line-height: 1.6; margin: 0; font-weight: 600;">
@@ -847,15 +849,7 @@
                         </div>
                     </div>
                     
-                    <!-- NEW RAZORPAY UNIFIED BUTTON -->
                     <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="startRazorpayPayment('scheduled')">💳 Pay & Connect</button>
-                    
-                    <!-- NEW QR CODE DIRECTLY ON UI -->
-                    <div style="text-align: center; margin-top: 16px; background: #fff; padding: 16px; border-radius: 14px; border: 1px dashed #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-                        <p style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 10px;">Or Scan QR Code to Pay Directly</p>
-                        <img src="qr.jpg" alt="Razorpay QR Code" style="width: 150px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                        <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 10px; font-weight: 500; line-height: 1.4;">Scan with any UPI App. Then click <b>'Already paid?'</b> below to confirm.</p>
-                    </div>
                 </div>
 
                 <div class="input-group" style="margin-top: 24px;">
@@ -1041,13 +1035,11 @@
                     <h3 style="margin: 0; font-size: 19px; font-weight: 700;">My Account</h3>
                 </div>
                 <ul class="account-menu">
-                    <li onclick="document.getElementById('p-name').focus()"><span>👤</span> Profile</li>
-                    <li onclick="showComingSoon('Bookings')"><span>📅</span> Bookings</li>
-                    <li onclick="switchTab('kundli', document.querySelectorAll('.nav-btn')[1])"><span>📜</span> Kundli</li>
-                    <li onclick="showComingSoon('Reports')"><span>📊</span> Reports</li>
-                    <li onclick="showComingSoon('Payments')"><span>💳</span> Payments</li>
-                    <li onclick="switchTab('home', document.querySelectorAll('.nav-btn')[0]); setTimeout(()=>window.scrollTo(0, document.body.scrollHeight/1.5), 100);"><span>⭐</span> Reviews</li>
-                    <li onclick="showComingSoon('Settings')"><span>⚙️</span> Settings</li>
+                    <li onclick="document.getElementById('p-name').focus()"><span>👤</span> Edit Profile</li>
+                    <li onclick="openMyConsultations()"><span>🔮</span> My Consultations</li>
+                    <li onclick="switchTab('kundli', document.querySelectorAll('.nav-btn')[1])"><span>📜</span> Kundli Tracker</li>
+                    <li onclick="switchTab('home', document.querySelectorAll('.nav-btn')[0]); setTimeout(()=>window.scrollTo(0, document.body.scrollHeight/1.5), 100);"><span>⭐</span> Client Reviews</li>
+                    <li onclick="openContact()"><span>📞</span> Help & Support</li>
                 </ul>
             </div>
         </div>
@@ -1078,7 +1070,7 @@
                     <strong style="color: var(--primary-dark); font-size: 15px; display: block; word-break: break-all;">
                         <a href="https://razorpay.me/@realastro" target="_blank" style="color: var(--orange); text-decoration: none;">https://razorpay.me/@realastro</a>
                     </strong>
-                    <img src="qr.jpg" alt="Razorpay QR Code" style="width: 140px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 12px;">
+                    <img src="50505.jpg" alt="Razorpay QR Code" style="width: 140px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 12px;">
                     <p style="font-size: 11.5px; color: var(--success); font-weight: 600; margin-top: 10px; margin-bottom: 0; line-height: 1.5;">🔒 Processed securely to founder Acharya Subhadip's verified account.</p>
                 </div>
                 
@@ -1093,37 +1085,35 @@
         <div id="status"></div>
     </div>
 
-    <!-- 💳 PAYMENT SHEET (NEW) -->
+    <!-- 🔮 MY CONSULTATIONS MODAL OVERLAY -->
+    <div id="consultations-overlay" class="modal-overlay" onclick="if(event.target === this) closeMyConsultations()">
+        <div class="modal-sheet" style="padding: 24px 20px 32px;">
+            <div class="modal-head" style="margin-bottom: 16px;">
+                <h3>My Consultations</h3>
+                <span class="modal-close" onclick="closeMyConsultations()">✕</span>
+            </div>
+            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); padding:16px; border-radius:14px; border:1px solid #fde68a; margin-bottom:16px;">
+                <p style="font-size:13px; color:#b45309; margin-bottom:10px; font-weight:600;">Enter your Mobile Number to track bookings:</p>
+                <div style="display:flex; gap:8px;">
+                    <input type="tel" id="check-phone-input" class="form-control" placeholder="Mobile Number" style="padding:12px; margin:0;" />
+                    <button class="btn btn-primary" style="width:auto; padding:0 20px; border-radius:12px;" onclick="fetchMyConsultations()">Track</button>
+                </div>
+            </div>
+            <div id="consultations-list" style="display:flex; flex-direction:column; gap:12px; max-height: 50vh; overflow-y: auto; padding-right: 4px;">
+                <!-- Consultations will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 💳 MANUAL PAYMENT SHEET (FALLBACK) -->
     <div id="pay-modal" class="modal-overlay" onclick="if(event.target === this) closePaySheet()">
         <div class="modal-sheet">
             <div class="modal-head">
-                <h3>Complete Your Payment</h3>
+                <h3>Submit Transaction Details</h3>
                 <span class="modal-close" onclick="closePaySheet()">✕</span>
             </div>
-
             <div class="pay-summary" id="pay-summary"></div>
-
-            <div id="pay-options">
-                <span class="text-hint">Pay directly via UPI App (PhonePe / GPay / Paytm)</span>
-                <div class="copy-row">
-                    <strong id="pay-upi-id" style="font-size: 14px;"></strong>
-                    <button class="copy-btn" onclick="copyUpiId()">Copy UPI ID</button>
-                </div>
-                
-                <button class="btn" style="margin-top: 12px; background: #f8fafc; color: var(--primary-dark); border: 1px solid #cbd5e1;" onclick="openUpiApp()">📲 Open UPI App Directly</button>
-                
-                <div style="text-align: center; margin-top: 20px;">
-                    <img src="qr.jpg" alt="Razorpay QR Code" style="width: 160px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <p class="pay-hint">Or scan this QR code from any UPI app</p>
-                </div>
-
-                <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 16px;">
-                    <span class="text-hint">Want to pay via Card or Netbanking?</span>
-                    <button class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; border: none; font-size: 14px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);" onclick="window.open(PAYMENT_LINK, '_blank')">🔗 Pay via Razorpay Gateway</button>
-                </div>
-            </div>
-
-            <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 18px;">
+            <div style="margin-top: 10px; padding-top: 10px;">
                 <span class="text-hint">After paying: enter your Transaction ID</span>
                 <input type="text" id="pay-utr" class="form-control" maxlength="30" autocomplete="off" placeholder="UPI Transaction ID / UTR (12 digits)" />
                 <p class="pay-hint" style="margin-bottom: 14px;">You can find it in your UPI app under payment details (UPI Ref No. / UTR / Transaction ID). Acharya ji verifies it before your session.</p>
@@ -1159,7 +1149,11 @@
         let paymentSubmitted = false;
         let bookingPromise = null;
         let bookingKey = "";
-        let currentBookingType = 'instant'; // 'instant' or 'scheduled'
+        let currentBookingType = 'instant';
+
+        function generateCID() {
+            return "CID-" + Math.floor(100000 + Math.random() * 900000);
+        }
 
         // Menu Toggle
         function toggleMenu() {
@@ -1199,11 +1193,9 @@
                 showStatus("Duration is not required for Popular Service. It's only for normal consultation!", "error");
                 return;
             }
-            
             const gridId = type === 'instant' ? 'inst-plan-grid' : 'sched-plan-grid';
             document.querySelectorAll(`#${gridId} .plan-card`).forEach(c => c.classList.remove('selected'));
             document.getElementById(elementId).classList.add('selected');
-            
             selectedPlanAmount = amount;
             selectedPlanMinutes = minutes;
             currentBookingType = type;
@@ -1257,6 +1249,21 @@
             showStatus(featureName + " will be available soon!", "success");
         }
 
+        function openMyConsultations() {
+            document.getElementById('consultations-overlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            const phone = document.getElementById('p-mobile').value || document.getElementById('inst-userphone').value || document.getElementById('sched-userphone').value;
+            if(phone) {
+                document.getElementById('check-phone-input').value = phone;
+                if(window.fetchMyConsultations) window.fetchMyConsultations();
+            }
+        }
+
+        function closeMyConsultations() {
+            document.getElementById('consultations-overlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
         function bookPopularService(serviceName) {
             isPopularService = true;
             currentBookingType = 'scheduled';
@@ -1286,7 +1293,7 @@
             selectedPlanMinutes = 10;
         }
 
-        /* ===================== PAYMENT FLOW WITH RAZORPAY API ===================== */
+        /* ===================== PAYMENT FLOW WITH RAZORPAY API & CID ===================== */
 
         function planLabel() {
             return isPopularService ? String(selectedPlanMinutes) : (selectedPlanMinutes + " Minutes");
@@ -1334,12 +1341,20 @@
         function startBooking(method, type) {
             const d = getBookingDetails(type);
             if (!d) return null;
+            
             const key = [d.dateVal, d.slotLabel, selectedPlanAmount, selectedPlanMinutes, d.userPhone].join('|');
+            
             if (!bookingPromise || bookingKey !== key) {
                 bookingKey = key;
+                let activeCID = generateCID();
+                localStorage.setItem('activeCID', activeCID);
+                d.cid = activeCID;
+
                 bookingPromise = window.saveClientBooking
-                    ? window.saveClientBooking(method, d.userName, d.userPhone, d.dateVal, d.slotLabel, selectedPlanMinutes, selectedPlanAmount)
+                    ? window.saveClientBooking(method, d.userName, d.userPhone, activeCID, d.dateVal, d.slotLabel, selectedPlanMinutes, selectedPlanAmount)
                     : Promise.resolve(null);
+            } else {
+                d.cid = localStorage.getItem('activeCID') || generateCID();
             }
             return d;
         }
@@ -1353,31 +1368,28 @@
 
             var options = {
                 "key": RAZORPAY_KEY_ID, 
-                "amount": selectedPlanAmount * 100, // Amount in paise
+                "amount": selectedPlanAmount * 100,
                 "currency": "INR",
                 "name": "Real Astro",
                 "description": planLabel() + " Consultation",
                 "image": "https://subhadiptata2-sketch.github.io/acharya.png", 
                 "handler": function (response){
-                    // Auto-Verification on Success
                     paymentSubmitted = true;
                     var paymentId = response.razorpay_payment_id;
                     
-                    // Trigger WhatsApp to Admin automatically
-                    const message = `Namaste Acharya ji! 🙏\nI have made the payment successfully via Razorpay.\n\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Type:* ${currentBookingType.toUpperCase()}\n*Slot:* ${d.slotLabel}${d.dateVal !== 'Instant' ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Payment ID:* ${paymentId}`;
+                    const message = `Namaste Acharya ji! 🙏\nI have made the payment successfully via Razorpay API.\n\n*Consultation ID:* ${d.cid}\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Type:* ${currentBookingType.toUpperCase()}\n*Slot:* ${d.slotLabel}${d.dateVal !== 'Instant' ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Payment ID:* ${paymentId}`;
                     window.open(`https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
                     
                     updateConnectHint(currentBookingType);
                     showStatus("Payment Successful! Your booking is confirmed.", "success");
                     
-                    // Attach proof to Firebase
                     (bookingPromise || Promise.resolve(null)).then(id => {
                         if (window.attachPaymentProof) return window.attachPaymentProof(id, paymentId);
                     });
                 },
                 "prefill": {
                     "name": d.userName,
-                    "contact": d.userPhone // THIS AUTO-FILLS CLIENT DETAILS
+                    "contact": d.userPhone
                 },
                 "theme": {
                     "color": "#1a0b2e"
@@ -1391,16 +1403,63 @@
             rzp1.open();
         }
 
+        function openPaySheet(mode, type) {
+            updateStateFromUI(type);
+            currentBookingType = type;
+            const d = startBooking('Manual UTR', type);
+            if (!d) return;
+
+            let summaryText = `<b>${planLabel()}</b> — <b>₹${selectedPlanAmount}</b><br>Slot: ${d.slotLabel}<br>Consultation ID: ${d.cid}`;
+            if(d.dateVal !== "Instant") summaryText += ` on ${d.dateVal}`;
+            
+            document.getElementById('pay-summary').innerHTML = summaryText;
+            document.getElementById('pay-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePaySheet() {
+            document.getElementById('pay-modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function submitPaymentProof() {
+            const d = getBookingDetails(currentBookingType);
+            if (!d) return;
+            const activeCID = localStorage.getItem('activeCID') || "N/A";
+            
+            const utr = document.getElementById('pay-utr').value.trim();
+            if (!/^[A-Za-z0-9_-]{8,30}$/.test(utr)) {
+                showStatus("Please enter a valid Transaction ID / UTR from your payment app (usually 12 digits).", 'error');
+                document.getElementById('pay-utr').focus();
+                return;
+            }
+
+            paymentSubmitted = true;
+
+            (bookingPromise || Promise.resolve(null)).then(id => {
+                if (window.attachPaymentProof) return window.attachPaymentProof(id, utr);
+            }).catch(e => console.error("Could not save payment proof:", e));
+
+            const message = `Namaste Acharya ji! 🙏\nI have made the payment. Please verify.\n\n*Consultation ID:* ${activeCID}\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Type:* ${currentBookingType.toUpperCase()}\n*Slot:* ${d.slotLabel}${d.dateVal !== 'Instant' ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Transaction ID (UTR):* ${utr}`;
+            window.open(`https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+
+            closePaySheet();
+            updateConnectHint(currentBookingType);
+            
+            if(currentBookingType === 'instant') {
+                showStatus("Payment details submitted! You can now connect with Acharya ji.", "success");
+            } else {
+                showStatus("Payment details submitted! Your booking is confirmed.", "success");
+            }
+        }
+
         function updateConnectHint(type) {
             const hintId = type === 'instant' ? 'inst-connect-lock-hint' : 'sched-connect-lock-hint';
             const hint = document.getElementById(hintId);
             if (!hint) return;
             if (paymentSubmitted) {
-                if(type === 'instant') {
-                    hint.innerHTML = "✅ Payment Successful! You can now use the connect buttons above.";
-                } else {
-                    hint.innerHTML = "✅ Booking Confirmed! Payment successful. Acharya ji will contact you shortly.";
-                }
+                const activeCID = localStorage.getItem('activeCID') || "N/A";
+                hint.innerHTML = `✅ Payment Successful!<br><strong style="color:var(--primary-dark); font-size:14.5px; display:inline-block; margin-top:6px;">Consultation ID: ${activeCID}</strong><br>Click Connect buttons above to join your private room.`;
                 hint.style.color = "var(--success)";
             }
         }
@@ -1447,25 +1506,27 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        /* ===================== CONNECT ===================== */
+        /* ===================== CONNECT (WITH CID AS ROOM ID) ===================== */
 
         function startChat() {
             if (!paymentGate()) return;
             const userName = document.getElementById('inst-username').value.trim();
             if (!userName) { showStatus("Enter your Name first!", 'error'); return; }
+            const cid = localStorage.getItem('activeCID') || "N/A";
             
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(userName)}.%20[Instant%20Live]%20I%20want%20to%20start%20my%20consultation%20chat.`;
+            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=Hello%20Acharya%20Subhadip,%20My%20name%20is%20${encodeURIComponent(userName)}.%20[Consultation%20ID:%20${cid}]%20I%20want%20to%20start%20my%20consultation%20chat.`;
             window.open(whatsappUrl, '_blank');
         }
 
         function startAudioCall() {
             if (!paymentGate()) return;
-            const userName = document.getElementById('inst-username').value.trim();
-            if (!userName) { showStatus("Enter your Name first!", 'error'); return; }
+            const userName = document.getElementById('inst-username').value.trim() || document.getElementById('sched-username').value.trim() || "Client";
+            const cid = localStorage.getItem('activeCID') || "real_astro_room";
 
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
-            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_consultation_room", userID, userName);
+            // Room ID is now the unique Consultation ID
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, cid, userID, userName);
             
             const zp = ZegoUIKitPrebuilt.create(token);
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.OneONoneCall }, turnOnCameraWhenJoining: false, showMyCameraToggleButton: false });
@@ -1473,12 +1534,13 @@
 
         function startVideoCall() {
             if (!paymentGate()) return;
-            const userName = document.getElementById('inst-username').value.trim();
-            if (!userName) { showStatus("Enter your Name first!", 'error'); return; }
+            const userName = document.getElementById('inst-username').value.trim() || document.getElementById('sched-username').value.trim() || "Client";
+            const cid = localStorage.getItem('activeCID') || "real_astro_room";
 
             const appID = 1009897816; const serverSecret = "30cf208a168057120577256aa90fba8c";
             const userID = String(Math.floor(Math.random() * 100000));
-            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, "real_astro_consultation_room", userID, userName);
+            // Room ID is now the unique Consultation ID
+            const token = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, cid, userID, userName);
             
             const zp = ZegoUIKitPrebuilt.create(token);
             zp.joinRoom({ container: document.body, scenario: { mode: ZegoUIKitPrebuilt.VideoConference }});
@@ -1553,7 +1615,7 @@
     <!-- FIREBASE AND NOTIFICATION SCRIPTS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, onSnapshot, collection, addDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, onSnapshot, collection, addDoc, setDoc, updateDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
         const app = initializeApp({
@@ -1565,6 +1627,7 @@
             appId: "1-972015683245-web:f4279a5b783d923of3a824"
         });
         const db = getFirestore(app);
+        window.db = db; // Exporting for My Consultations feature
         
         // --- NOTIFICATION PERMISSION LOGIC ---
         const messaging = getMessaging(app);
@@ -1602,12 +1665,13 @@
             window.showStatus("🔔 " + payload.notification.title, "success");
         });
 
-        // --- BOOKINGS ---
-        window.saveClientBooking = async (paymentMethod, userName, userPhone, date, slot, planMins, planAmt) => {
+        // --- BOOKINGS WITH CONSULTATION ID ---
+        window.saveClientBooking = async (paymentMethod, userName, userPhone, cid, date, slot, planMins, planAmt) => {
             try {
                 const ref = await addDoc(collection(db, "bookings"), {
                     clientName: userName,
                     clientPhone: userPhone, 
+                    consultationId: cid,
                     date: date,
                     slot: slot,
                     planMinutes: planMins,
@@ -1634,7 +1698,57 @@
             } catch(e) { console.error("Error saving payment proof:", e); }
         };
 
-        // NEW: PROFILE STATUS LISTENER (UPDATED WITH FORM TOGGLE)
+        // --- FETCH MY CONSULTATIONS ---
+        window.fetchMyConsultations = async () => {
+            const phone = document.getElementById('check-phone-input').value.trim();
+            const listDiv = document.getElementById('consultations-list');
+            if(!phone) { window.showStatus("Please enter mobile number", "error"); return; }
+            
+            listDiv.innerHTML = '<div class="spinner" style="margin: 20px auto;"></div>';
+            
+            try {
+                const q = query(collection(db, "bookings"), where("clientPhone", "==", phone));
+                const querySnapshot = await getDocs(q);
+                
+                if(querySnapshot.empty) {
+                    listDiv.innerHTML = '<p style="text-align:center; color:var(--text-muted); font-size:13.5px; padding:20px 0; font-weight:500;">No bookings found for this number.</p>';
+                    return;
+                }
+                
+                let bookings = [];
+                querySnapshot.forEach((doc) => { bookings.push(doc.data()); });
+                bookings.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                let html = '';
+                bookings.forEach(b => {
+                    let isPending = b.status === 'awaiting_payment';
+                    let statusColor = isPending ? '#f59e0b' : '#10b981';
+                    let statusText = isPending ? 'Pending Payment' : 'Confirmed';
+                    let cid = b.consultationId || 'N/A';
+                    
+                    html += `
+                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; box-shadow:0 4px 10px rgba(0,0,0,0.02);">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px; align-items:center;">
+                            <strong style="color:var(--primary-dark); font-size:15px;">ID: ${cid}</strong>
+                            <span style="font-size:11.5px; font-weight:700; color:${statusColor}; background:${statusColor}20; padding:4px 10px; border-radius:8px;">${statusText}</span>
+                        </div>
+                        <div style="font-size:13px; color:var(--text-muted); line-height:1.6; font-weight:500;">
+                            <b style="color:var(--text-main);">Date/Slot:</b> ${b.date} | ${b.slot}<br>
+                            <b style="color:var(--text-main);">Plan:</b> ${b.planMinutes} Mins (₹${b.planAmount})<br>
+                            <b style="color:var(--text-main);">Booked on:</b> ${new Date(b.timestamp).toLocaleDateString()}
+                        </div>
+                    </div>`;
+                });
+                
+                listDiv.innerHTML = html;
+                
+            } catch(e) {
+                console.error("Error fetching bookings:", e);
+                listDiv.innerHTML = '<p style="text-align:center; color:#e11d48; font-size:13.5px; padding:20px 0; font-weight:500;">Error loading details.</p>';
+            }
+        };
+
+        // PROFILE STATUS LISTENER
         onSnapshot(doc(db, "profile_status", "current"), (docSnap) => {
             const statusDisplay = document.getElementById('profile-status-display');
             const instForm = document.getElementById('inst-form-content');
@@ -1661,7 +1775,6 @@
                         statusDisplay.style.color = '#475569';
                         statusDisplay.style.animation = 'none';
                         
-                        // Hide instant form, show offline message
                         if(instForm) instForm.style.display = 'none';
                         if(instOfflineMsg) instOfflineMsg.style.display = 'block';
                         
