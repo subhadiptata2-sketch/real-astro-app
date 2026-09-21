@@ -368,8 +368,8 @@
             <!-- DROPDOWN MENU -->
             <div id="dropdown-menu" class="dropdown-menu">
                 <div class="dropdown-item" onclick="switchTab('home', document.querySelectorAll('.nav-btn')[0]); toggleMenu();">🏠 Home</div>
-                <div class="dropdown-item" onclick="switchTab('kundli', document.querySelectorAll('.nav-btn')[1]); toggleMenu();">📜 Kundli</div>
-                <div class="dropdown-item" onclick="switchTab('support', document.querySelectorAll('.nav-btn')[2]); toggleMenu();">👤 My Account</div>
+                <div class="dropdown-item" onclick="switchTab('kundli', document.querySelectorAll('.nav-btn')[3]); toggleMenu();">📜 Kundli</div>
+                <div class="dropdown-item" onclick="switchTab('support', document.querySelectorAll('.nav-btn')[4]); toggleMenu();">👤 My Account</div>
                 <div class="dropdown-item" onclick="openLegal('pol-privacy');">🔒 Privacy Policy</div>
                 <div class="dropdown-item" onclick="openLegal('pol-terms');">📝 Terms & Conditions</div>
                 <div class="dropdown-item" onclick="openLegal('pol-refund');">💳 Cancel & Refund</div>
@@ -426,7 +426,7 @@
 
             <!-- 🌟 NEW: ASTROLOGER LIVE SECTION 🌟 -->
             <div class="home-section" id="astrologer-live-section" style="border: 2px solid #fca5a5; background: linear-gradient(145deg, #fff, #fff5f5); display: none;">
-                <div class="section-header" style="color: #b91c1c; margin-bottom: 12px; font-size: 18px;">🔴 Astrologer Live Video</div>
+                <div class="section-header" style="color: #b91c1c; margin-bottom: 12px; font-size: 18px;">🔴 Astrologer Live Session</div>
                 
                 <!-- When Offline (Shows Schedule) -->
                 <div id="live-schedule-box" style="text-align: center;">
@@ -644,6 +644,7 @@
                         </p>
                     </div>
 
+                    <!-- NEW SUPPORT BUTTON FOR INSTANT SECTION -->
                     <div style="margin-top: 24px; text-align: center;">
                         <button class="btn" style="background: linear-gradient(145deg, #fffbeb, #fef3c7); color: #b45309; border: 1px dashed #fde68a; font-size: 14px; font-weight: 700; padding: 14px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);" onclick="window.open('https://wa.me/919339199974?text=Hi%20Acharya%20Ji,%20I%20have%20some%20confusion%20about%20booking%20Instant%20Live%20Consultation.', '_blank')">
                             Any Confusion 🤔 Consultation Support 🙏
@@ -1135,10 +1136,12 @@
         </div>
     </div>
 
-    <!-- BOTTOM NAVIGATION MENU BAR -->
+    <!-- BOTTOM NAVIGATION MENU BAR (UPDATED) -->
     <div class="bottom-nav">
-        <button class="nav-btn active" onclick="switchTab('home', this)"><span>🏠</span>Home</button>
-        <button class="nav-btn" onclick="switchTab('kundli', this)"><span>📜</span>Kundli</button>
+        <button class="nav-btn active" onclick="switchTab('home', this); window.scrollTo(0,0);"><span>🏠</span>Home</button>
+        <button class="nav-btn" onclick="switchTab('home', this); document.getElementById('astrologer-live-section').scrollIntoView({behavior: 'smooth'});"><span>🔴</span>Live</button>
+        <button class="nav-btn" onclick="switchTab('home', this); document.getElementById('instant-booking-area').scrollIntoView({behavior: 'smooth'});"><span>📞</span>Connect</button>
+        <button class="nav-btn" onclick="window.open('https://chat.whatsapp.com/LsvXO24A2GD7kdrrV5glnJ', '_blank')"><span>💬</span>WhatsApp</button>
         <button class="nav-btn" onclick="switchTab('support', this)"><span>👤</span>Account</button>
     </div>
 
