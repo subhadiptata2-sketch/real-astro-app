@@ -372,8 +372,8 @@
             
             <!-- 🌟 HIGH-IMPACT BRANDING & HERO SECTION WITH REAL PHOTO -->
             <div class="home-section hero-card" style="margin-bottom: 24px; padding: 40px 16px; border-radius: 24px;">
-                <!-- SAFE & SMART EXPERT BADGE -->
-                <div class="expert-badge">⭐ FORMER EXPERT AT INDIA'S TOP PLATFORMS</div>
+                <!-- SAFE & SMART EXPERT BADGE (UPDATED) -->
+                <div class="expert-badge">⭐ FORMER EXPERT AT INDIA'S TOP ASTRO PLATFORMS (4.9/5 ⭐ | 10,000+ HOROSCOPES ANALYZED)</div>
                 
                 <!-- 🔒 BULLETPROOF AVATAR FIX -->
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
@@ -1060,7 +1060,7 @@
                 <div class="section-header" style="font-size: 18px;">Help & Contact Us</div>
                 
                 <div style="background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px dashed #cbd5e1; text-align: center; margin-bottom: 16px;">
-                    <span class="text-hint" style="margin:0;">Razorpay Payment Link</span>
+                    <span class="text-hint" style="margin:0;">Razorpay Official Gateway</span>
                     <strong style="color: var(--primary-dark); font-size: 15px; display: block; word-break: break-all;">
                         <a href="https://razorpay.me/@realastro" target="_blank" style="color: var(--orange); text-decoration: none;">https://razorpay.me/@realastro</a>
                     </strong>
@@ -1311,7 +1311,7 @@
                     var paymentId = response.razorpay_payment_id;
                     
                     // Trigger WhatsApp to Admin automatically
-                    const message = `Namaste Acharya ji! 🙏\nI have made the payment successfully via Razorpay App.\n\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Type:* ${currentBookingType.toUpperCase()}\n*Slot:* ${d.slotLabel}${d.dateVal !== 'Instant' ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Payment ID:* ${paymentId}`;
+                    const message = `Namaste Acharya ji! 🙏\nI have made the payment successfully via Razorpay.\n\n*Name:* ${d.userName}\n*Mobile:* ${d.userPhone}\n*Type:* ${currentBookingType.toUpperCase()}\n*Slot:* ${d.slotLabel}${d.dateVal !== 'Instant' ? ' on ' + d.dateVal : ''}\n*Plan:* ${planLabel()}\n*Amount:* ₹${selectedPlanAmount}\n*Payment ID:* ${paymentId}`;
                     window.open(`https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
                     
                     updateConnectHint(currentBookingType);
@@ -1324,7 +1324,7 @@
                 },
                 "prefill": {
                     "name": d.userName,
-                    "contact": d.userPhone // THIS BYPASSES OTP FOR UPI
+                    "contact": d.userPhone // THIS AUTO-FILLS CLIENT DETAILS
                 },
                 "theme": {
                     "color": "#1a0b2e"
