@@ -348,6 +348,14 @@
         .copy-row strong { flex: 1; word-break: break-all; font-size: 15px; color: var(--primary-dark); }
         .copy-btn { background: var(--primary-dark); color: var(--gold); border: none; border-radius: 10px; padding: 10px 16px; font-size: 13.5px; font-weight: 700; cursor: pointer; }
         .pay-hint { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin: 10px 0 0; font-weight: 500; }
+
+        /* Store Product Image Box */
+        .store-img-box {
+            width: 85px; height: 85px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.05); background: #f8fafc; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .store-img-box img { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -698,7 +706,7 @@
                 </div>
             </div>
 
-            <!-- 🔥 POPULAR SERVICES SECTION (WITH TOGGLE ARROW) 🔥 -->
+            <!-- 🔥 POPULAR SERVICES SECTION -->
             <div class="home-section" id="popular-services-section">
                 <div class="section-header">🔥 Popular Services</div>
                 
@@ -719,12 +727,7 @@
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
-                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
-                            <strong style="color: var(--primary-dark);">Complete Birth Chart Analysis</strong><br>
-                            A detailed analysis of your complete birth chart, including planets, houses, Dashas and important Yogas. Get personalized insights into career, marriage, finances, family, health tendencies and major life phases.
-                        </p>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Select & Book Slot (₹499)</button>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px; margin-top: 10px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Select & Book Slot (₹499)</button>
                     </div>
 
                     <!-- Service 2 -->
@@ -736,63 +739,7 @@
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
-                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
-                            <strong style="color: var(--primary-dark);">Detailed Compatibility Analysis</strong><br>
-                            A comparative analysis of both birth charts covering Guna Milan, planetary compatibility, Manglik considerations, relationship dynamics and important astrological factors related to married life.
-                        </p>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Marriage Match Making')">Select & Book Slot (₹499)</button>
-                    </div>
-
-                    <!-- Service 3 -->
-                    <div class="pop-card">
-                        <div class="pop-header">
-                            <h4 class="pop-title">🪬 Detailed Remedy for Any Problem</h4>
-                            <div class="pop-price-box">
-                                <del>₹1200</del>
-                                <span>₹499</span>
-                            </div>
-                        </div>
-                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
-                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
-                            <strong style="color: var(--primary-dark);">Personalized Astrological Remedies</strong><br>
-                            Based on your specific concern and birth chart, receive personalized traditional remedies. Depending on the situation, guidance may include Mantra, Yantra, Rudraksha, Kavach, Gemstones and other astrological remedies.
-                        </p>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Detailed Remedy for Any Problem')">Select & Book Slot (₹499)</button>
-                    </div>
-
-                    <!-- Service 4 -->
-                    <div class="pop-card">
-                        <div class="pop-header">
-                            <h4 class="pop-title">🕉️ Spiritual Progress & Sadhana</h4>
-                            <div class="pop-price-box">
-                                <del>₹1200</del>
-                                <span>₹499</span>
-                            </div>
-                        </div>
-                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
-                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
-                            <strong style="color: var(--primary-dark);">Spiritual Growth & Inner Guidance</strong><br>
-                            Explore your spiritual tendencies, inner growth, Sadhana suitability and deeper life purpose through your birth chart. Receive personalized guidance on traditional spiritual practices and areas of personal development.
-                        </p>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Spiritual Progress & Sadhana')">Select & Book Slot (₹499)</button>
-                    </div>
-
-                    <!-- Service 5 -->
-                    <div class="pop-card">
-                        <div class="pop-header">
-                            <h4 class="pop-title">🌿 Emotional Well-being Guidance</h4>
-                            <div class="pop-price-box">
-                                <del>₹1200</del>
-                                <span>₹499</span>
-                            </div>
-                        </div>
-                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
-                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
-                            <strong style="color: var(--primary-dark);">Supportive Personal & Spiritual Guidance</strong><br>
-                            Receive personalized guidance from an astrological perspective for navigating stress, uncertainty, relationship concerns and challenging phases of life, with a focus on clarity, self-reflection and inner balance.
-                        </p>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Emotional Well-being Guidance')">Select & Book Slot (₹499)</button>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px; margin-top: 10px;" onclick="bookPopularService('Marriage Match Making')">Select & Book Slot (₹499)</button>
                     </div>
                 </div>
             </div>
@@ -810,7 +757,6 @@
                     <input type="tel" id="sched-userphone" class="form-control" placeholder="Mobile / WhatsApp Number (e.g. 9876543210)" />
                 </div>
 
-                <!-- Live Date & Selectable Time Slots -->
                 <div class="input-group" style="margin-top: 24px;">
                     <span class="text-hint" style="display: flex; justify-content: space-between; align-items: center;">
                         Step 2: Select Date & Time Slot
@@ -821,20 +767,16 @@
                             <span style="font-size: 14px; font-weight: 700; color: var(--primary-dark);">Date:</span>
                             <input type="date" id="client-date" style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Poppins'; font-size: 13.5px; font-weight: 600;">
                         </div>
-                        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px; text-align: center; font-weight: 500;">Tap an available slot to select it:<br><strong style="color: #ef4444; font-size: 11.5px;">🔥 Hurry up! Slots are filling fast today.</strong></p>
                         <div id="client-slot-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 220px; overflow-y: auto; padding-right: 4px;">
                             <div style="font-size: 13.5px; color: var(--text-muted); text-align: center; padding: 10px;">Loading available slots...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Selectable Pricing Plans & Payment Buttons -->
                 <div class="input-group" style="margin-top: 24px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
                     
-                    <div id="popular-selection-display" style="display:none; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; padding: 16px; border-radius: 14px; margin-bottom: 16px; text-align: left; animation: fadeIn 0.3s ease; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);">
-                        <!-- JS WILL FILL THIS -->
-                    </div>
+                    <div id="popular-selection-display" style="display:none; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; padding: 16px; border-radius: 14px; margin-bottom: 16px; text-align: left; animation: fadeIn 0.3s ease; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);"></div>
 
                     <div class="plan-grid" id="sched-plan-grid">
                         <div class="plan-card selected" id="sched-plan-10" onclick="selectPlan(99, 10, 'sched-plan-10', 'scheduled')">
@@ -861,7 +803,6 @@
                     
                     <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="startRazorpayPayment('scheduled')">💳 Pay & Connect</button>
                     
-                    <!-- NEW QR CODE DIRECTLY ON UI -->
                     <div style="text-align: center; margin-top: 16px; background: #fff; padding: 16px; border-radius: 14px; border: 1px dashed #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
                         <p style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 10px;">Or Scan QR Code to Pay Directly</p>
                         <img src="qr.jpg" alt="Payment QR Code" style="width: 150px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -874,84 +815,10 @@
                         <span style="color: var(--gold-dark); font-weight: 700; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm', 'scheduled')">Already paid? Enter Transaction ID to Confirm Booking</span>
                     </p>
                 </div>
-
-                <!-- NEW SUPPORT BUTTON FOR SCHEDULED SECTION -->
-                <div style="margin-top: 24px; text-align: center;">
-                    <button class="btn" style="background: linear-gradient(145deg, #fffbeb, #fef3c7); color: #b45309; border: 1px dashed #fde68a; font-size: 14px; font-weight: 700; padding: 14px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);" onclick="window.open('https://wa.me/919339199974?text=Hi%20Acharya%20Ji,%20I%20have%20some%20confusion%20about%20Book%20Scheduled%20Consultation.', '_blank')">
-                        Any Confusion 🤔 Consultation Support 🙏
-                    </button>
-                </div>
-            </div>
-
-            <!-- REVIEWS (Expanded with 4.9 Rating) -->
-            <div class="home-section">
-                <div class="section-header">Client Experiences (4.9 ⭐)</div>
-                <div class="review-scroll">
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Ananya Roy</span>
-                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="review-text">"Acharya Subhadip ji ki predictions ekdum sateek hoti hain. Bohot badiya guidance mili mere career ke liye!"</div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Vikram Malhotra</span>
-                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="review-text">"Inhone Kundli dekh kar itne aasan remedies bataye ki ab business mein sab thik chal raha hai. Highly recommended."</div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-header">
-                            <span class="review-name">Pooja Banerjee</span>
-                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="review-text">"Baki apps ki tarah per-minute ka tension nahi hota. Fixed time mein saare sawal khulkar pooch sakte hain. Best experience!"</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ ACCORDION -->
-            <div class="home-section">
-                <div class="section-header">Frequently Asked Questions</div>
-                <details>
-                    <summary>Why choose independent consultation over apps?</summary>
-                    <div class="faq-text">You get direct 1-on-1 time with Acharya Subhadip with zero per-minute rush, complete privacy, and logical straight-cut answers.</div>
-                </details>
-                <details>
-                    <summary>How do I book a consultation?</summary>
-                    <div class="faq-text">You can either choose the 'Instant Live Consultation' to connect right now, or the 'Book Scheduled Consultation' to pick a future date & time slot. Pay securely via UPI, and your booking is confirmed.</div>
-                </details>
-                <details>
-                    <summary>Is my payment secure?</summary>
-                    <div class="faq-text">Yes, all payments are processed securely through your own trusted UPI application.</div>
-                </details>
-            </div>
-
-            <!-- 🌟 NEW SUPPORT SECTION ON HOMEPAGE 🌟 -->
-            <div class="home-section" style="text-align: center;">
-                <div class="section-header" style="font-size: 20px;">Need Help?</div>
-                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; font-weight: 500;">
-                    For any queries regarding bookings, payments, or consultations, feel free to reach out to our support team.
-                </p>
-                <div style="background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px dashed #cbd5e1; margin-bottom: 16px;">
-                    <span style="font-size: 12.5px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">Email Support:</span>
-                    <strong style="color: var(--primary-dark); font-size: 15px;">realastrosupport@gmail.com</strong><br><br>
-                    <span style="font-size: 12.5px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">Location:</span>
-                    <strong style="color: var(--primary-dark); font-size: 15px;">Kolkata</strong>
-                </div>
-                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; padding: 14px; font-size: 14.5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support on WhatsApp</button>
-            </div>
-
-            <div style="text-align: center; margin: 40px 0 30px 0;">
-                <h3 style="color: var(--primary-dark); font-size: 19px; font-weight: 800; margin-bottom: 16px;">Don't leave your future to chance.</h3>
-                <button class="btn btn-primary" onclick="document.getElementById('instant-booking-area').scrollIntoView({behavior: 'smooth'})">
-                    Book Your Session Now
-                </button>
             </div>
         </div>
 
-        <!-- 📱 TAB 5: VEDIC STORE (FULLY EXPANDED & +30% PRICING) -->
+        <!-- 📱 TAB 5: VEDIC STORE -->
         <div id="tab-store" class="section-card">
             <div class="home-section hero-card" style="margin-bottom: 24px; padding: 30px 16px; border-radius: 24px; background: linear-gradient(145deg, #4a154b 0%, #1a0b2e 100%); border: 1px solid var(--gold);">
                 <div style="font-size: 40px; margin-bottom: 10px;">🛍️</div>
@@ -971,8 +838,13 @@
                 
                 <!-- 1. Pukhraj -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fde68a;">
-                    <div class="pop-header"><h4 class="pop-title">🟡 Siddh Pukhraj (Yellow Sapphire)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Attract wealth, wisdom, and success. 100% Original & Govt. Lab Certified. Energized by Acharya Ji according to your name and gotra before dispatch.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="pukhraj.jpg" alt="Pukhraj" onerror="this.src='https://placehold.co/150x150/fef3c7/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🟡 Siddh Pukhraj (Yellow Sapphire)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Attract wealth, wisdom, and success. Energized by Acharya Ji according to your name and gotra.</p>
+                        </div>
+                    </div>
                     <div style="background: #fffbeb; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #fcd34d;">
                         <span class="text-hint" style="color: #b45309;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-pukhraj" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -986,8 +858,13 @@
 
                 <!-- 2. Neelam -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #bfdbfe;">
-                    <div class="pop-header"><h4 class="pop-title">🔵 Siddh Neelam (Blue Sapphire)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Unlock fast career growth, fame, and protection from Shani dosha. 100% Authentic, Lab Certified & Energized specifically for you.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="neelam.jpg" alt="Neelam" onerror="this.src='https://placehold.co/150x150/eff6ff/1d4ed8?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🔵 Siddh Neelam (Blue Sapphire)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Unlock fast career growth, fame, and protection from Shani dosha. 100% Authentic & Lab Certified.</p>
+                        </div>
+                    </div>
                     <div style="background: #eff6ff; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #93c5fd;">
                         <span class="text-hint" style="color: #1d4ed8;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-neelam" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -999,10 +876,15 @@
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🔵 Siddh Neelam (Blue Sapphire)', 'prod-gem-neelam')">🛍️ Buy via WhatsApp</button>
                 </div>
 
-                <!-- 3. Panna (Price Corrected based on HKM) -->
+                <!-- 3. Panna -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #bbf7d0;">
-                    <div class="pop-header"><h4 class="pop-title">🟢 Siddh Panna (Emerald)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">For intelligence, business growth, and communication skills. High-quality natural premium stone.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="panna.jpg" alt="Panna" onerror="this.src='https://placehold.co/150x150/f0fdf4/15803d?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🟢 Siddh Panna (Emerald)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For intelligence, business growth, and communication skills. High-quality natural Zambian origin.</p>
+                        </div>
+                    </div>
                     <div style="background: #f0fdf4; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #86efac;">
                         <span class="text-hint" style="color: #15803d;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-panna" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1016,14 +898,19 @@
 
                 <!-- 4. Manik / Ruby -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fecaca;">
-                    <div class="pop-header"><h4 class="pop-title">🔴 Siddh Manik (Ruby)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">For leadership, confidence, government jobs, and strong health. Fully energized with Surya Mantras.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="manik.jpg" alt="Manik" onerror="this.src='https://placehold.co/150x150/fef2f2/b91c1c?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🔴 Siddh Manik (Ruby)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For leadership, confidence, government jobs, and strong health. Fully energized with Surya Mantras.</p>
+                        </div>
+                    </div>
                     <div style="background: #fef2f2; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #fca5a5;">
                         <span class="text-hint" style="color: #b91c1c;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-manik" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
-                            <option value="2599|4.25 Ratti">4.25 Ratti - ₹2,599</option>
-                            <option value="3299|5.25 Ratti">5.25 Ratti - ₹3,299</option>
-                            <option value="4499|7.25 Ratti">7.25 Ratti - ₹4,499</option>
+                            <option value="8499|4.25 Ratti (Premium)">4.25 Ratti (Premium) - ₹8,499</option>
+                            <option value="11999|5.25 Ratti (Premium)">5.25 Ratti (Premium) - ₹11,999</option>
+                            <option value="18999|7.25 Ratti (Premium)">7.25 Ratti (Premium) - ₹18,999</option>
                         </select>
                     </div>
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🔴 Siddh Manik (Ruby)', 'prod-gem-manik')">🛍️ Buy via WhatsApp</button>
@@ -1031,13 +918,18 @@
 
                 <!-- 5. Moti / Pearl -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #e2e8f0;">
-                    <div class="pop-header"><h4 class="pop-title">⚪ Siddh Moti (Natural Pearl)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">For mental peace, reducing anger, and emotional balance. Pure South Sea / Basra quality.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="moti.jpg" alt="Moti" onerror="this.src='https://placehold.co/150x150/f8fafc/475569?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">⚪ Siddh Moti (Natural Pearl)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For mental peace, reducing anger, and emotional balance. Pure South Sea quality.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint" style="color: #475569;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-moti" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
-                            <option value="1099|5.25 Ratti">5.25 Ratti - ₹1,099</option>
-                            <option value="1499|7.25 Ratti">7.25 Ratti - ₹1,499</option>
+                            <option value="2499|5.25 Ratti (South Sea)">5.25 Ratti (South Sea) - ₹2,499</option>
+                            <option value="3599|7.25 Ratti (South Sea)">7.25 Ratti (South Sea) - ₹3,599</option>
                         </select>
                     </div>
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('⚪ Siddh Moti (Natural Pearl)', 'prod-gem-moti')">🛍️ Buy via WhatsApp</button>
@@ -1045,8 +937,13 @@
 
                 <!-- 6. Moonga / Coral -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fed7aa;">
-                    <div class="pop-header"><h4 class="pop-title">🪸 Siddh Moonga (Red Coral)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">For courage, property gains, and removing Manglik dosha effects. Natural Italian Coral.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="moonga.jpg" alt="Moonga" onerror="this.src='https://placehold.co/150x150/fff7ed/c2410c?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🪸 Siddh Moonga (Red Coral)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For courage, property gains, and removing Manglik dosha effects. Natural Italian Coral.</p>
+                        </div>
+                    </div>
                     <div style="background: #fff7ed; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #fdba74;">
                         <span class="text-hint" style="color: #c2410c;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-moonga" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1057,10 +954,15 @@
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🪸 Siddh Moonga (Red Coral)', 'prod-gem-moonga')">🛍️ Buy via WhatsApp</button>
                 </div>
 
-                <!-- 7. Cat's Eye (Lehsuniya) -->
+                <!-- 7. Cat's Eye -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #d1d5db;">
-                    <div class="pop-header"><h4 class="pop-title">👁️ Siddh Cat's Eye (Lehsuniya)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Protects from hidden enemies, accidents, and sudden losses. Highly recommended for Ketu dosha.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="catseye.jpg" alt="Cat's Eye" onerror="this.src='https://placehold.co/150x150/f3f4f6/374151?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">👁️ Siddh Cat's Eye (Lehsuniya)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Protects from hidden enemies, accidents, and sudden losses. Highly recommended for Ketu dosha.</p>
+                        </div>
+                    </div>
                     <div style="background: #f3f4f6; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #9ca3af;">
                         <span class="text-hint" style="color: #374151;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-cats" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1072,10 +974,15 @@
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('👁️ Siddh Cats Eye (Lehsuniya)', 'prod-gem-cats')">🛍️ Buy via WhatsApp</button>
                 </div>
 
-                <!-- 8. Gomed (Hessonite) -->
+                <!-- 8. Gomed -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fca5a5;">
-                    <div class="pop-header"><h4 class="pop-title">🟤 Siddh Gomed (Hessonite)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Brings stability, success in politics/law, and pacifies Rahu dosha. 100% natural African origin.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="gomed.jpg" alt="Gomed" onerror="this.src='https://placehold.co/150x150/fef2f2/991b1b?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🟤 Siddh Gomed (Hessonite)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Brings stability, success in politics/law, and pacifies Rahu dosha. 100% natural African origin.</p>
+                        </div>
+                    </div>
                     <div style="background: #fef2f2; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #f87171;">
                         <span class="text-hint" style="color: #991b1b;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-gomed" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1087,10 +994,15 @@
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🟤 Siddh Gomed (Hessonite)', 'prod-gem-gomed')">🛍️ Buy via WhatsApp</button>
                 </div>
 
-                <!-- 9. Firoza (Turquoise) -->
+                <!-- 9. Firoza -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #67e8f9;">
-                    <div class="pop-header"><h4 class="pop-title">🩵 Siddh Firoza (Turquoise)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Brings luck, saves from accidents, and improves relationships. Ancient Irani/Tibetan quality.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="firoza.jpg" alt="Firoza" onerror="this.src='https://placehold.co/150x150/ecfeff/0891b2?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🩵 Siddh Firoza (Turquoise)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Brings luck, saves from accidents, and improves relationships. Ancient Irani/Tibetan quality.</p>
+                        </div>
+                    </div>
                     <div style="background: #ecfeff; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #22d3ee;">
                         <span class="text-hint" style="color: #0891b2;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-firoza" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1103,8 +1015,13 @@
 
                 <!-- 10. Lapis Lazuli -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #a5b4fc;">
-                    <div class="pop-header"><h4 class="pop-title">🌌 Siddh Lapis Lazuli (Lajward)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Enhances intellect, removes depression, and protects from Saturn's (Shani) negative effects.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="lapis.jpg" alt="Lapis" onerror="this.src='https://placehold.co/150x150/eef2ff/4338ca?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌌 Siddh Lapis Lazuli</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Enhances intellect, removes depression, and protects from Saturn's negative effects.</p>
+                        </div>
+                    </div>
                     <div style="background: #eef2ff; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #818cf8;">
                         <span class="text-hint" style="color: #4338ca;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-lapis" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1112,13 +1029,18 @@
                             <option value="1599|7-8 Carat">7-8 Carat - ₹1,599</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🌌 Siddh Lapis Lazuli (Lajward)', 'prod-gem-lapis')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🌌 Siddh Lapis Lazuli', 'prod-gem-lapis')">🛍️ Buy via WhatsApp</button>
                 </div>
 
                 <!-- 11. White Opal -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #e5e7eb;">
-                    <div class="pop-header"><h4 class="pop-title">🤍 Siddh White Opal</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Attracts luxury, beauty, and success in creative fields. Best substitute for Diamond (Venus).</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="opal.jpg" alt="Opal" onerror="this.src='https://placehold.co/150x150/f9fafb/374151?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🤍 Siddh White Opal</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Attracts luxury, beauty, and success in creative fields. Best substitute for Diamond (Venus).</p>
+                        </div>
+                    </div>
                     <div style="background: #f9fafb; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #d1d5db;">
                         <span class="text-hint" style="color: #374151;">Select Weight (Ratti/Carat):</span>
                         <select id="prod-gem-opal" class="form-control" style="padding: 10px; font-weight: 700; color: var(--primary-dark); margin-top: 5px;">
@@ -1138,8 +1060,13 @@
                 
                 <!-- 1 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 1 Mukhi Rudraksha (Half Moon)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">The most supreme Rudraksha. Symbol of Lord Shiva himself. Brings ultimate wealth and detachment.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-1.jpg" alt="1 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 1 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The most supreme Rudraksha. Symbol of Lord Shiva himself. Brings ultimate wealth.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-1" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1151,8 +1078,13 @@
 
                 <!-- 2 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 2 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Symbol of Ardhanareshwar. Best for resolving marital issues, mental peace, and emotional balance.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-2.jpg" alt="2 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 2 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Ardhanareshwar. Best for resolving marital issues and mental peace.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-2" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1164,8 +1096,13 @@
 
                 <!-- 3 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 3 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Symbol of Agni Dev. Burns past karmas, cures stomach issues, and provides immense confidence.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-3.jpg" alt="3 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 3 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Agni Dev. Burns past karmas, cures stomach issues, and gives confidence.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-3" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1177,8 +1114,13 @@
 
                 <!-- 4 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 4 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Symbol of Lord Brahma. Highly effective for students, memory, focus, and intelligence.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-4.jpg" alt="4 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 4 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Lord Brahma. Highly effective for students, memory, focus, and intelligence.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-4" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1190,8 +1132,13 @@
 
                 <!-- 5 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 5 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">For health, blood pressure control, and general well-being. Safe for everyone to wear.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-5.jpg" alt="5 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 5 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For health, blood pressure control, and general well-being. Safe for everyone.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-5" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1204,8 +1151,13 @@
 
                 <!-- 6 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 6 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Ruled by Lord Kartikeya. Excellent for focus, willpower, and overcoming laziness.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-6.jpg" alt="6 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 6 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Ruled by Lord Kartikeya. Excellent for focus, willpower, and overcoming laziness.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-6" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1217,8 +1169,13 @@
 
                 <!-- 7 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 7 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Symbol of Mata Mahalaxmi. Removes financial blockages and brings career growth and prosperity.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-7.jpg" alt="7 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 7 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Mata Mahalaxmi. Removes financial blockages and brings prosperity.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-7" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1230,8 +1187,13 @@
 
                 <!-- 8 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 8 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Symbol of Lord Ganesha. Removes all obstacles from life, brings success in new ventures, and controls Rahu.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-8.jpg" alt="8 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 8 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Lord Ganesha. Removes all obstacles and controls Rahu.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-8" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1243,8 +1205,13 @@
 
                 <!-- 9 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 9 Mukhi Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Symbol of Maa Durga. Makes the wearer fearless, dynamic, and brings victory over enemies.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="rudraksha-9.jpg" alt="9 Mukhi" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 9 Mukhi Rudraksha</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Maa Durga. Makes the wearer fearless, dynamic, and brings victory.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-rudra-9" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1253,30 +1220,22 @@
                     </div>
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 9 Mukhi Rudraksha', 'prod-rudra-9')">🛍️ Buy via WhatsApp</button>
                 </div>
-
-                <!-- Gauri Shankar -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 Gauri Shankar Rudraksha</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Two naturally joined beads representing Shiva and Parvati. Best for marriage, relationship harmony, and peace.</p>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-gs" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="5199|Premium Silver Capped">Premium Silver Capped - ₹5,199</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 Gauri Shankar Rudraksha', 'prod-rudra-gs')">🛍️ Buy via WhatsApp</button>
-                </div>
             </div>
 
             <!-- ===================== CATEGORY 3: SIDDHA MALA ===================== -->
             <div class="home-section">
                 <div class="section-header" style="font-size: 19px;">Siddha Jaap Mala</div>
-                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Hand-knotted 108+1 bead Malas, washed in Gangajal and energized for Mantra Jaap or wearing.</p>
+                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Hand-knotted 108+1 bead Malas, washed in Gangajal and energized for Mantra Jaap.</p>
 
                 <!-- Rudraksha Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📿 5 Mukhi Rudraksha Mala (108 Beads)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Original 5-Mukhi bead mala for Lord Shiva mantra chanting, meditation, and wearing for good health.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="mala-rudraksha.jpg" alt="Rudraksha Mala" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 5 Mukhi Rudraksha Mala</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Original 108-bead mala for Lord Shiva mantra chanting and wearing.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-mala-rudra" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1289,8 +1248,13 @@
 
                 <!-- Sphatik Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">💎 Pure Sphatik Mala (Crystal)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">100% natural cold crystal. Best for Maa Saraswati and Mahalaxmi Jaap. Cools the body and mind.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="mala-sphatik.jpg" alt="Sphatik Mala" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💎 Pure Sphatik Mala (Crystal)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">100% natural cold crystal. Best for Maa Saraswati and Mahalaxmi Jaap.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-mala-sphatik" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1302,8 +1266,13 @@
 
                 <!-- Kamal Gatta Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🪷 Kamal Gatta Mala</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Made from lotus seeds. Highly effective for chanting Laxmi Mantras and attracting financial abundance.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="mala-kamal.jpg" alt="Kamal Gatta Mala" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🪷 Kamal Gatta Mala</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Made from lotus seeds. Highly effective for chanting Laxmi Mantras.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-mala-kamal" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1315,8 +1284,13 @@
                 
                 <!-- Tulsi Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🌿 Original Tulsi Mala</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Sacred basil wood beads for Lord Vishnu/Krishna devotees. Purifies the aura and brings spiritual peace.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="mala-tulsi.jpg" alt="Tulsi Mala" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌿 Original Tulsi Mala</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Sacred basil wood beads. Purifies the aura and brings spiritual peace.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-mala-tulsi" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1334,8 +1308,13 @@
 
                 <!-- Tiger Eye -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🧿 Tiger Eye Bracelet</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Boost confidence, protect from evil eye, and attract money. Wear on the right hand for maximum impact.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="bracelet-tiger.jpg" alt="Tiger Eye" onerror="this.src='https://placehold.co/150x150/f8fafc/1d4ed8?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🧿 Tiger Eye Bracelet</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Boost confidence, protect from evil eye, and attract money.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Bead Size:</span>
                         <select id="prod-brace-tiger" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1348,8 +1327,13 @@
 
                 <!-- Pyrite -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">💰 Pyrite Bracelet (Fool's Gold)</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">The ultimate 'Money Magnet'. Attracts wealth, business opportunities, and financial luck.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="bracelet-pyrite.jpg" alt="Pyrite" onerror="this.src='https://placehold.co/150x150/f8fafc/1d4ed8?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💰 Pyrite Bracelet (Fool's Gold)</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The ultimate 'Money Magnet'. Attracts wealth, business opportunities.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Bead Size:</span>
                         <select id="prod-brace-pyrite" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1361,8 +1345,13 @@
 
                 <!-- Amethyst -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">💜 Amethyst Bracelet</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Reduces stress, anxiety, and overthinking. Promotes peaceful sleep and spiritual awareness.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="bracelet-amethyst.jpg" alt="Amethyst" onerror="this.src='https://placehold.co/150x150/f8fafc/1d4ed8?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💜 Amethyst Bracelet</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Reduces stress, anxiety, and overthinking. Promotes peaceful sleep.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Bead Size:</span>
                         <select id="prod-brace-ameth" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1374,8 +1363,13 @@
 
                 <!-- Black Tourmaline -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🛡️ Black Tourmaline Bracelet</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">The strongest protection stone against negative energies, psychic attacks, and evil eye (Nazar).</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="bracelet-tourmaline.jpg" alt="Tourmaline" onerror="this.src='https://placehold.co/150x150/f8fafc/1d4ed8?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🛡️ Black Tourmaline Bracelet</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Strongest protection against negative energies and evil eye (Nazar).</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Bead Size:</span>
                         <select id="prod-brace-tourma" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1387,8 +1381,13 @@
 
                 <!-- 7 Chakra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🌈 7 Chakra Balancing Bracelet</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Combines 7 natural stones to align your body's energy centers. Brings overall balance and health.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="bracelet-chakra.jpg" alt="7 Chakra" onerror="this.src='https://placehold.co/150x150/f8fafc/1d4ed8?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌈 7 Chakra Balancing Bracelet</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Combines 7 natural stones to align your body's energy centers.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Bead Size:</span>
                         <select id="prod-brace-chakra" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1402,12 +1401,17 @@
             <!-- ===================== CATEGORY 5: YANTRA ===================== -->
             <div class="home-section">
                 <div class="section-header" style="font-size: 19px;">Siddh Yantra (Vedic Geometry)</div>
-                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Carved on pure copper with gold plating. Energized with specific mantras for home or office pooja ghar.</p>
+                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Carved on pure copper with gold plating. Energized with specific mantras.</p>
 
                 <!-- Shree Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🕉️ Siddh Shree Yantra</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">The king of all Yantras. Invites Goddess Laxmi, removes Vastu doshas, and brings overall prosperity.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="yantra-shree.jpg" alt="Shree Yantra" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🕉️ Siddh Shree Yantra</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Invites Goddess Laxmi, removes Vastu doshas, and brings overall prosperity.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-yan-shree" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1419,8 +1423,13 @@
 
                 <!-- Kuber Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">💰 Siddh Kuber Yantra</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Dedicated to Lord Kuber. Helps in wealth accumulation, saving money, and finding hidden opportunities.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="yantra-kuber.jpg" alt="Kuber Yantra" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💰 Siddh Kuber Yantra</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Helps in wealth accumulation, saving money, and finding opportunities.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-yan-kuber" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1432,8 +1441,13 @@
 
                 <!-- Vyapar Vridhi Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">📈 Vyapar Vridhi Yantra</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Must-have for business owners and shops. Increases sales, attracts customers, and removes business obstacles.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="yantra-vyapar.jpg" alt="Vyapar Yantra" onerror="this.src='https://placehold.co/150x150/f8fafc/b45309?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📈 Vyapar Vridhi Yantra</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Must-have for business owners. Increases sales and removes obstacles.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-yan-vyapar" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1442,30 +1456,22 @@
                     </div>
                     <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📈 Vyapar Vridhi Yantra', 'prod-yan-vyapar')">🛍️ Buy via WhatsApp</button>
                 </div>
-
-                <!-- Mahamrityunjay Yantra -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🛡️ Mahamrityunjay Yantra</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Dedicated to Lord Shiva. Protects from severe illnesses, accidents, and untimely death fears.</p>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-yan-mrityu" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1599|Gold Plated (3x3 inch)">Gold Plated (3x3 inch) - ₹1,599</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🛡️ Mahamrityunjay Yantra', 'prod-yan-mrityu')">🛍️ Buy via WhatsApp</button>
-                </div>
             </div>
 
             <!-- ===================== CATEGORY 6: KAVACH ===================== -->
             <div class="home-section">
                 <div class="section-header" style="font-size: 19px;">Raksha Kavach (Wearable)</div>
-                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Wearable protection amulets energized with extreme Vedic chants by Acharya Ji.</p>
+                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Wearable protection amulets energized with extreme Vedic chants.</p>
 
                 <!-- Hanuman Kavach -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🐒 Siddh Hanuman Kavach</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">Protects from black magic, evil spirits, unseen fears, and enemies. Grants extreme courage.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="kavach-hanuman.jpg" alt="Hanuman Kavach" onerror="this.src='https://placehold.co/150x150/f8fafc/b91c1c?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🐒 Siddh Hanuman Kavach</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Protects from black magic, evil spirits, and enemies. Grants courage.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-kav-hanu" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1477,8 +1483,13 @@
 
                 <!-- Bagalamukhi Kavach -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🗡️ Siddh Bagalamukhi Kavach</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">The ultimate weapon to win legal cases, silence enemies, and gain victory in severe disputes.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="kavach-bagla.jpg" alt="Baglamukhi Kavach" onerror="this.src='https://placehold.co/150x150/f8fafc/b91c1c?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🗡️ Siddh Bagalamukhi Kavach</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The ultimate weapon to win legal cases and silence enemies.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-kav-bagla" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
@@ -1490,8 +1501,13 @@
 
                 <!-- Surya Kavach -->
                 <div class="pop-card" style="margin-bottom: 18px;">
-                    <div class="pop-header"><h4 class="pop-title">🌞 Siddh Surya Kavach</h4></div>
-                    <p class="pop-desc" style="margin-bottom: 10px;">For gaining government jobs, promotion, fame, society respect, and combating low confidence.</p>
+                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
+                        <div class="store-img-box"><img src="kavach-surya.jpg" alt="Surya Kavach" onerror="this.src='https://placehold.co/150x150/f8fafc/b91c1c?text=Photo'"></div>
+                        <div>
+                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌞 Siddh Surya Kavach</h4>
+                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For gaining government jobs, promotion, fame, and society respect.</p>
+                        </div>
+                    </div>
                     <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
                         <span class="text-hint">Select Option:</span>
                         <select id="prod-kav-surya" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
