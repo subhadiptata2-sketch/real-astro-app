@@ -349,13 +349,20 @@
         .copy-btn { background: var(--primary-dark); color: var(--gold); border: none; border-radius: 10px; padding: 10px 16px; font-size: 13.5px; font-weight: 700; cursor: pointer; }
         .pay-hint { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin: 10px 0 0; font-weight: 500; }
 
-        /* Store Product Image Box (UPDATED FOR REAL IMAGES) */
+        /* 📸 SMART STORE IMAGE FALLBACK SYSTEM */
         .store-img-box {
             width: 85px; height: 85px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
             border: 1px solid rgba(0,0,0,0.05); background: #f8fafc; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;
         }
-        .store-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .img-fallback {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 38px; z-index: 1; text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .store-img-box img { 
+            width: 100%; height: 100%; object-fit: cover; z-index: 2; position: relative; 
+        }
     </style>
 </head>
 <body>
@@ -399,7 +406,7 @@
                 <div class="expert-badge">⭐ FORMER EXPERT AT INDIA'S TOP ASTRO PLATFORMS<br>(4.9/5 ⭐ | 10,000+ HOROSCOPES ANALYZED)</div>
                 
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-                    <div style="width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden; background: #2a0845; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); position: relative;">
+                    <div style="width: 110px; height: 110px; border-radius: 50%; border: 4px solid var(--gold); overflow: hidden; background: #2a0845; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); position: relative;">
                         <span style="font-size: 45px; position: absolute;">🕉️</span>
                         <img src="acharya.png" alt="Acharya Subhadip" style="width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2;" onerror="this.style.display='none'">
                     </div>
@@ -706,7 +713,7 @@
                 </div>
             </div>
 
-            <!-- 🔥 POPULAR SERVICES SECTION -->
+            <!-- 🔥 POPULAR SERVICES SECTION (RESTORED ALL 5) 🔥 -->
             <div class="home-section" id="popular-services-section">
                 <div class="section-header">🔥 Popular Services</div>
                 
@@ -727,7 +734,12 @@
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px; margin-top: 10px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Select & Book Slot (₹499)</button>
+                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
+                            <strong style="color: var(--primary-dark);">Complete Birth Chart Analysis</strong><br>
+                            A detailed analysis of your complete birth chart, including planets, houses, Dashas and important Yogas. Get personalized insights into career, marriage, finances, family, health tendencies and major life phases.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Full Kundli Making & Analysis')">Select & Book Slot (₹499)</button>
                     </div>
 
                     <!-- Service 2 -->
@@ -739,7 +751,63 @@
                                 <span>₹499</span>
                             </div>
                         </div>
-                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px; margin-top: 10px;" onclick="bookPopularService('Marriage Match Making')">Select & Book Slot (₹499)</button>
+                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
+                            <strong style="color: var(--primary-dark);">Detailed Compatibility Analysis</strong><br>
+                            A comparative analysis of both birth charts covering Guna Milan, planetary compatibility, Manglik considerations, relationship dynamics and important astrological factors related to married life.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Marriage Match Making')">Select & Book Slot (₹499)</button>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">🪬 Detailed Remedy for Any Problem</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
+                            <strong style="color: var(--primary-dark);">Personalized Astrological Remedies</strong><br>
+                            Based on your specific concern and birth chart, receive personalized traditional remedies. Depending on the situation, guidance may include Mantra, Yantra, Rudraksha, Kavach, Gemstones and other astrological remedies.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Detailed Remedy for Any Problem')">Select & Book Slot (₹499)</button>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">🕉️ Spiritual Progress & Sadhana</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
+                            <strong style="color: var(--primary-dark);">Spiritual Growth & Inner Guidance</strong><br>
+                            Explore your spiritual tendencies, inner growth, Sadhana suitability and deeper life purpose through your birth chart. Receive personalized guidance on traditional spiritual practices and areas of personal development.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Spiritual Progress & Sadhana')">Select & Book Slot (₹499)</button>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="pop-card">
+                        <div class="pop-header">
+                            <h4 class="pop-title">🌿 Emotional Well-being Guidance</h4>
+                            <div class="pop-price-box">
+                                <del>₹1200</del>
+                                <span>₹499</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 13px; color: #b45309; font-weight: 700; cursor: pointer; margin-bottom: 10px; display: inline-block; background: #fffbeb; padding: 4px 10px; border-radius: 8px; border: 1px solid #fde68a;" onclick="var p = this.nextElementSibling; if(p.style.display==='none'){p.style.display='block'; this.innerText='Hide Details ▲';}else{p.style.display='none'; this.innerText='View Details ▼';}">View Details ▼</div>
+                        <p class="pop-desc" style="display: none; padding-top: 10px; border-top: 1px dashed #cbd5e1; margin-bottom: 14px;">
+                            <strong style="color: var(--primary-dark);">Supportive Personal & Spiritual Guidance</strong><br>
+                            Receive personalized guidance from an astrological perspective for navigating stress, uncertainty, relationship concerns and challenging phases of life, with a focus on clarity, self-reflection and inner balance.
+                        </p>
+                        <button class="btn btn-primary" style="padding: 12px; font-size: 14px;" onclick="bookPopularService('Emotional Well-being Guidance')">Select & Book Slot (₹499)</button>
                     </div>
                 </div>
             </div>
@@ -757,6 +825,7 @@
                     <input type="tel" id="sched-userphone" class="form-control" placeholder="Mobile / WhatsApp Number (e.g. 9876543210)" />
                 </div>
 
+                <!-- Live Date & Selectable Time Slots -->
                 <div class="input-group" style="margin-top: 24px;">
                     <span class="text-hint" style="display: flex; justify-content: space-between; align-items: center;">
                         Step 2: Select Date & Time Slot
@@ -767,16 +836,20 @@
                             <span style="font-size: 14px; font-weight: 700; color: var(--primary-dark);">Date:</span>
                             <input type="date" id="client-date" style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Poppins'; font-size: 13.5px; font-weight: 600;">
                         </div>
+                        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px; text-align: center; font-weight: 500;">Tap an available slot to select it:<br><strong style="color: #ef4444; font-size: 11.5px;">🔥 Hurry up! Slots are filling fast today.</strong></p>
                         <div id="client-slot-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 220px; overflow-y: auto; padding-right: 4px;">
                             <div style="font-size: 13.5px; color: var(--text-muted); text-align: center; padding: 10px;">Loading available slots...</div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Selectable Pricing Plans & Payment Buttons -->
                 <div class="input-group" style="margin-top: 24px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
                     
-                    <div id="popular-selection-display" style="display:none; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; padding: 16px; border-radius: 14px; margin-bottom: 16px; text-align: left; animation: fadeIn 0.3s ease; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);"></div>
+                    <div id="popular-selection-display" style="display:none; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; padding: 16px; border-radius: 14px; margin-bottom: 16px; text-align: left; animation: fadeIn 0.3s ease; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);">
+                        <!-- JS WILL FILL THIS -->
+                    </div>
 
                     <div class="plan-grid" id="sched-plan-grid">
                         <div class="plan-card selected" id="sched-plan-10" onclick="selectPlan(99, 10, 'sched-plan-10', 'scheduled')">
@@ -803,6 +876,7 @@
                     
                     <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="startRazorpayPayment('scheduled')">💳 Pay & Connect</button>
                     
+                    <!-- NEW QR CODE DIRECTLY ON UI -->
                     <div style="text-align: center; margin-top: 16px; background: #fff; padding: 16px; border-radius: 14px; border: 1px dashed #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
                         <p style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 10px;">Or Scan QR Code to Pay Directly</p>
                         <img src="qr.jpg" alt="Payment QR Code" style="width: 150px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
@@ -815,10 +889,195 @@
                         <span style="color: var(--gold-dark); font-weight: 700; text-decoration: underline; cursor: pointer;" onclick="openPaySheet('confirm', 'scheduled')">Already paid? Enter Transaction ID to Confirm Booking</span>
                     </p>
                 </div>
+
+                <!-- NEW SUPPORT BUTTON FOR SCHEDULED SECTION -->
+                <div style="margin-top: 24px; text-align: center;">
+                    <button class="btn" style="background: linear-gradient(145deg, #fffbeb, #fef3c7); color: #b45309; border: 1px dashed #fde68a; font-size: 14px; font-weight: 700; padding: 14px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);" onclick="window.open('https://wa.me/919339199974?text=Hi%20Acharya%20Ji,%20I%20have%20some%20confusion%20about%20Book%20Scheduled%20Consultation.', '_blank')">
+                        Any Confusion 🤔 Consultation Support 🙏
+                    </button>
+                </div>
+            </div>
+
+            <!-- REVIEWS (Expanded with 4.9 Rating) -->
+            <div class="home-section">
+                <div class="section-header">Client Experiences (4.9 ⭐)</div>
+                <div class="review-scroll">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Ananya Roy</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Acharya Subhadip ji ki predictions ekdum sateek hoti hain. Bohot badiya guidance mili mere career ke liye!"</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Vikram Malhotra</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Inhone Kundli dekh kar itne aasan remedies bataye ki ab business mein sab thik chal raha hai. Highly recommended."</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-name">Pooja Banerjee</span>
+                            <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="review-text">"Baki apps ki tarah per-minute ka tension nahi hota. Fixed time mein saare sawal khulkar pooch sakte hain. Best experience!"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ ACCORDION -->
+            <div class="home-section">
+                <div class="section-header">Frequently Asked Questions</div>
+                <details>
+                    <summary>Why choose independent consultation over apps?</summary>
+                    <div class="faq-text">You get direct 1-on-1 time with Acharya Subhadip with zero per-minute rush, complete privacy, and logical straight-cut answers.</div>
+                </details>
+                <details>
+                    <summary>How do I book a consultation?</summary>
+                    <div class="faq-text">You can either choose the 'Instant Live Consultation' to connect right now, or the 'Book Scheduled Consultation' to pick a future date & time slot. Pay securely via UPI, and your booking is confirmed.</div>
+                </details>
+                <details>
+                    <summary>Is my payment secure?</summary>
+                    <div class="faq-text">Yes, all payments are processed securely through your own trusted UPI application.</div>
+                </details>
+            </div>
+
+            <!-- 🌟 NEW SUPPORT SECTION ON HOMEPAGE 🌟 -->
+            <div class="home-section" style="text-align: center;">
+                <div class="section-header" style="font-size: 20px;">Need Help?</div>
+                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; font-weight: 500;">
+                    For any queries regarding bookings, payments, or consultations, feel free to reach out to our support team.
+                </p>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px dashed #cbd5e1; margin-bottom: 16px;">
+                    <span style="font-size: 12.5px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">Email Support:</span>
+                    <strong style="color: var(--primary-dark); font-size: 15px;">realastrosupport@gmail.com</strong><br><br>
+                    <span style="font-size: 12.5px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">Location:</span>
+                    <strong style="color: var(--primary-dark); font-size: 15px;">Kolkata</strong>
+                </div>
+                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; padding: 14px; font-size: 14.5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support on WhatsApp</button>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0 30px 0;">
+                <h3 style="color: var(--primary-dark); font-size: 19px; font-weight: 800; margin-bottom: 16px;">Don't leave your future to chance.</h3>
+                <button class="btn btn-primary" onclick="document.getElementById('instant-booking-area').scrollIntoView({behavior: 'smooth'})">
+                    Book Your Session Now
+                </button>
             </div>
         </div>
 
-        <!-- 📱 TAB 5: VEDIC STORE (WITH HIGH-QUALITY REAL IMAGES) -->
+        <!-- 📱 TAB 2: KUNDLI GENERATION -->
+        <div id="tab-kundli" class="section-card">
+            <div id="kundli-input-section" class="home-section">
+                <div class="section-header">Kundli Analysis</div>
+                <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; text-align: center; font-weight: 500;">Vedic calculations require precision. Enter your exact birth details for accurate analysis.</p>
+                <div class="input-group">
+                    <span class="text-hint">Full Name</span>
+                    <input type="text" id="k-name" class="form-control" placeholder="Enter your name" />
+                </div>
+                <div class="input-group">
+                    <span class="text-hint">Date of Birth</span>
+                    <input type="date" id="k-dob" class="form-control" />
+                </div>
+                <div class="input-group">
+                    <span class="text-hint">Time of Birth</span>
+                    <input type="time" id="k-time" class="form-control" />
+                </div>
+                <div class="input-group">
+                    <span class="text-hint">Place of Birth (City)</span>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="k-place" class="form-control" placeholder="Type your city name" style="margin-bottom: 0;" />
+                        <button class="btn" style="width: auto; padding: 0 18px; background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; font-size: 20px; border-radius: 12px;" onclick="detectLocation('k-place')">📍</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 12px; font-size: 15px;" onclick="sendKundliWhatsApp()">✨ Kundli Analysis With Acharya Ji</button>
+            </div>
+
+            <div id="kundli-loading-section" class="home-section" style="display: none; text-align: center; padding: 60px 20px;">
+                <div class="spinner"></div>
+                <h4 style="color: var(--primary-dark); margin-top: 24px; font-size: 17px; font-weight: 700;">Verifying Details...</h4>
+                <p style="font-size: 14px; color: var(--text-muted); font-weight: 500;">Preparing data for Acharya Subhadip.</p>
+            </div>
+
+            <div id="kundli-result-section" class="home-section" style="display: none; text-align: center;">
+                <div class="section-header">Details Verified</div>
+                <div class="secure-data-box">
+                    <div class="secure-icon">🔒</div>
+                    <h3 style="color: var(--primary-dark); font-size: 17px; font-weight: 800; margin-bottom: 10px;">Planetary Data Prepared</h3>
+                    <p style="font-size: 13.5px; color: #b45309; margin-bottom: 14px; font-weight: 600; line-height: 1.6;">
+                        True Vedic Kundli requires deep manual analysis to study Doshas, Mahadashas, and planetary alignments accurately. 
+                    </p>
+                    <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 0; font-weight: 500;">
+                        We do not rely on automatic software for crucial life predictions.
+                    </p>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 14px; margin-bottom: 24px; text-align: left; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);">
+                    <h4 id="res-name" style="color: var(--primary-dark); font-size: 16px; margin-bottom: 6px; font-weight: 700;"></h4>
+                    <p id="res-details" style="font-size: 14px; color: var(--text-muted); font-weight: 600; margin:0;"></p>
+                </div>
+                <p style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Send this secure data to Acharya Subhadip for full reading.</p>
+                <button class="btn btn-whatsapp" style="font-size: 15px;" onclick="sendKundliWhatsApp()">Send for Expert Analysis ➔</button>
+                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); margin-top: 12px; font-size: 14.5px;" onclick="resetKundliUI()">Modify Details</button>
+            </div>
+        </div>
+
+        <!-- 📱 TAB 3: ACCOUNT & PROFILE -->
+        <div id="tab-support" class="section-card">
+            <div class="home-section">
+                <div class="section-header">My Profile</div>
+                <div class="input-group"><span class="text-hint">Name</span><input type="text" id="p-name" class="form-control" placeholder="Your full name" /></div>
+                <div class="input-group"><span class="text-hint">Mobile Number</span><input type="tel" id="p-mobile" class="form-control" placeholder="+91 XXXXX XXXXX" /></div>
+                <div class="input-group"><span class="text-hint">Email Address</span><input type="email" id="p-email" class="form-control" placeholder="you@email.com" /></div>
+                <div class="input-group"><span class="text-hint">Date of Birth</span><input type="date" id="p-dob" class="form-control" /></div>
+                <div class="input-group"><span class="text-hint">Birth Time</span><input type="time" id="p-time" class="form-control" /></div>
+                <div class="input-group">
+                    <span class="text-hint">Birth Place (City)</span>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="p-place" class="form-control" placeholder="Type your city name" style="margin-bottom: 0;" />
+                        <button class="btn" style="width: auto; padding: 0 18px; background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; font-size: 20px; border-radius: 12px;" onclick="detectLocation('p-place')" title="Detect Location">📍</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 12px;" onclick="saveProfile()">Save Profile</button>
+            </div>
+
+            <div class="home-section" style="padding: 0; overflow: hidden;">
+                <div class="account-header-bg">
+                    <h3 style="margin: 0; font-size: 19px; font-weight: 700;">My Account</h3>
+                </div>
+                <ul class="account-menu">
+                    <li onclick="document.getElementById('p-name').focus()"><span>👤</span> Edit Profile</li>
+                    <li onclick="openMyConsultations()"><span>🔮</span> My Consultations</li>
+                    <li onclick="switchTab('store', document.querySelectorAll('.nav-btn')[3])"><span>🛍️</span> My Orders</li>
+                    <li onclick="openContact()"><span>📞</span> Help & Support</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 📱 TAB 4: LEGAL & POLICIES -->
+        <div id="tab-legal" class="section-card">
+            <div class="home-section">
+                <div class="section-header" style="font-size: 18px;">Legal & Policies</div>
+                <details id="pol-privacy"><summary>Privacy Policy</summary><div class="faq-text">Your privacy is our top priority. All personal information, birth details, and consultation discussions are 100% confidential and strictly protected.</div></details>
+                <details id="pol-terms"><summary>Terms & Conditions</summary><div class="faq-text">By using Real Astro, you agree to our terms of service. Astrological consultations provided by Acharya Subhadip are based on Vedic and KP principles and are meant for guidance purposes.</div></details>
+                <details id="pol-refund"><summary>Cancellation & Refund Policy</summary><div class="faq-text">Booked slots are reserved specifically for you. Completed consultations are non-refundable.</div></details>
+            </div>
+
+            <div class="home-section" id="contact-section">
+                <div class="section-header" style="font-size: 18px;">Help & Contact Us</div>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px dashed #cbd5e1; text-align: center; margin-bottom: 16px;">
+                    <span class="text-hint" style="margin-bottom: 8px;">Scan QR to Pay</span>
+                    <img src="qr.jpg" alt="Payment QR Code" style="width: 140px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
+                    <p style="font-size: 11.5px; color: var(--success); font-weight: 600; margin-top: 10px; margin-bottom: 0; line-height: 1.5;">🔒 Processed securely to founder Acharya Subhadip's verified account.</p>
+                </div>
+                <div style="font-size: 14px; color: var(--text-muted); text-align: center; margin-bottom: 16px; line-height: 1.6; font-weight: 500;">
+                    <strong>Email:</strong> realastrosupport@gmail.com<br>
+                    <strong>Location:</strong> Kolkata
+                </div>
+                <button class="btn" style="background: #f1f5f9; color: var(--primary-dark); border: 1px solid #cbd5e1; padding: 12px; font-size: 14px;" onclick="window.open(`https://wa.me/919339199974?text=Need%20Support`, `_blank`)">Contact Support on WhatsApp</button>
+            </div>
+        </div>
+
+        <!-- 📱 TAB 5: VEDIC STORE -->
         <div id="tab-store" class="section-card">
             <div class="home-section hero-card" style="margin-bottom: 24px; padding: 30px 16px; border-radius: 24px; background: linear-gradient(145deg, #4a154b 0%, #1a0b2e 100%); border: 1px solid var(--gold);">
                 <div style="font-size: 40px; margin-bottom: 10px;">🛍️</div>
@@ -839,7 +1098,10 @@
                 <!-- 1. Pukhraj -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fde68a;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Pukhraj"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">🟡</div>
+                            <img src="pukhraj.jpg" alt="Pukhraj" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🟡 Siddh Pukhraj (Yellow Sapphire)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Attract wealth, wisdom, and success. Energized by Acharya Ji according to your name and gotra.</p>
@@ -859,7 +1121,10 @@
                 <!-- 2. Neelam -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #bfdbfe;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1615468750849-0524451b66b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Neelam"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #eff6ff, #bfdbfe);">🔵</div>
+                            <img src="neelam.jpg" alt="Neelam" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🔵 Siddh Neelam (Blue Sapphire)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Unlock fast career growth, fame, and protection from Shani dosha. 100% Authentic & Lab Certified.</p>
@@ -879,7 +1144,10 @@
                 <!-- 3. Panna -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #bbf7d0;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Panna"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0);">🟢</div>
+                            <img src="panna.jpg" alt="Panna" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🟢 Siddh Panna (Emerald)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For intelligence, business growth, and communication skills. High-quality natural Zambian origin.</p>
@@ -899,7 +1167,10 @@
                 <!-- 4. Manik / Ruby -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fecaca;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1601004869502-36c57f794ea8?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Manik"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef2f2, #fecaca);">🔴</div>
+                            <img src="manik.jpg" alt="Manik" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🔴 Siddh Manik (Ruby)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For leadership, confidence, government jobs, and strong health. Fully energized with Surya Mantras.</p>
@@ -919,7 +1190,10 @@
                 <!-- 5. Moti / Pearl -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #e2e8f0;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Moti"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f8fafc, #cbd5e1);">⚪</div>
+                            <img src="moti.jpg" alt="Moti" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">⚪ Siddh Moti (Natural Pearl)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For mental peace, reducing anger, and emotional balance. Pure South Sea quality.</p>
@@ -938,7 +1212,10 @@
                 <!-- 6. Moonga / Coral -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fed7aa;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/gK63g2A.jpg" alt="Moonga" onerror="this.src='https://dummyimage.com/150x150/fff7ed/c2410c.png&text=Red+Coral'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fff7ed, #fed7aa);">🪸</div>
+                            <img src="moonga.jpg" alt="Moonga" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🪸 Siddh Moonga (Red Coral)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For courage, property gains, and removing Manglik dosha effects. Natural Italian Coral.</p>
@@ -957,7 +1234,10 @@
                 <!-- 7. Cat's Eye -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #d1d5db;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/kYmQ0W7.jpg" alt="Cat's Eye" onerror="this.src='https://dummyimage.com/150x150/f3f4f6/374151.png&text=Cats+Eye'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f3f4f6, #d1d5db);">👁️</div>
+                            <img src="catseye.jpg" alt="Cat's Eye" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">👁️ Siddh Cat's Eye (Lehsuniya)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Protects from hidden enemies, accidents, and sudden losses. Highly recommended for Ketu dosha.</p>
@@ -977,7 +1257,10 @@
                 <!-- 8. Gomed -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #fca5a5;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/Kz8L2X4.jpg" alt="Gomed" onerror="this.src='https://dummyimage.com/150x150/fef2f2/991b1b.png&text=Gomed'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef2f2, #fca5a5);">🟤</div>
+                            <img src="gomed.jpg" alt="Gomed" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🟤 Siddh Gomed (Hessonite)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Brings stability, success in politics/law, and pacifies Rahu dosha. 100% natural African origin.</p>
@@ -997,7 +1280,10 @@
                 <!-- 9. Firoza -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #67e8f9;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/mJ3Q7H1.jpg" alt="Firoza" onerror="this.src='https://dummyimage.com/150x150/ecfeff/0891b2.png&text=Turquoise'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #ecfeff, #67e8f9);">🩵</div>
+                            <img src="firoza.jpg" alt="Firoza" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🩵 Siddh Firoza (Turquoise)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Brings luck, saves from accidents, and improves relationships. Ancient Irani/Tibetan quality.</p>
@@ -1016,7 +1302,10 @@
                 <!-- 10. Lapis Lazuli -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #a5b4fc;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Lapis" style="filter: hue-rotate(220deg);"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #eef2ff, #a5b4fc);">🌌</div>
+                            <img src="lapis.jpg" alt="Lapis" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌌 Siddh Lapis Lazuli (Lajward)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Enhances intellect, removes depression, and protects from Saturn's (Shani) negative effects.</p>
@@ -1035,7 +1324,10 @@
                 <!-- 11. White Opal -->
                 <div class="pop-card" style="margin-bottom: 18px; border: 1px solid #e5e7eb;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Opal" style="filter: grayscale(100%) brightness(1.5);"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f9fafb, #e5e7eb);">🤍</div>
+                            <img src="opal.jpg" alt="Opal" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🤍 Siddh White Opal</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Attracts luxury, beauty, and success in creative fields. Best substitute for Diamond (Venus).</p>
@@ -1061,7 +1353,10 @@
                 <!-- 1 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/W2d8P5c.jpg" alt="1 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=1+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-1.jpg" alt="1 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 1 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The most supreme Rudraksha. Symbol of Lord Shiva himself. Brings ultimate wealth.</p>
@@ -1079,7 +1374,10 @@
                 <!-- 2 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/c6k2w3P.jpg" alt="2 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=2+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-2.jpg" alt="2 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 2 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Ardhanareshwar. Best for resolving marital issues and mental peace.</p>
@@ -1097,7 +1395,10 @@
                 <!-- 3 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/r7YvN0b.jpg" alt="3 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=3+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-3.jpg" alt="3 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 3 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Agni Dev. Burns past karmas, cures stomach issues, and gives confidence.</p>
@@ -1115,7 +1416,10 @@
                 <!-- 4 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/x4W8T9N.jpg" alt="4 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=4+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-4.jpg" alt="4 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 4 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Lord Brahma. Highly effective for students, memory, focus, and intelligence.</p>
@@ -1133,7 +1437,10 @@
                 <!-- 5 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/b9JpQ3g.jpg" alt="5 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=5+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-5.jpg" alt="5 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 5 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For health, blood pressure control, and general well-being. Safe for everyone.</p>
@@ -1152,7 +1459,10 @@
                 <!-- 6 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/V2v8x9L.jpg" alt="6 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=6+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-6.jpg" alt="6 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 6 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Ruled by Lord Kartikeya. Excellent for focus, willpower, and overcoming laziness.</p>
@@ -1170,7 +1480,10 @@
                 <!-- 7 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/Z4c9M8N.jpg" alt="7 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=7+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-7.jpg" alt="7 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 7 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Mata Mahalaxmi. Removes financial blockages and brings prosperity.</p>
@@ -1188,7 +1501,10 @@
                 <!-- 8 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/M5f3b7Z.jpg" alt="8 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=8+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-8.jpg" alt="8 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 8 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Lord Ganesha. Removes all obstacles and controls Rahu.</p>
@@ -1206,7 +1522,10 @@
                 <!-- 9 Mukhi -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/N7x4P8K.jpg" alt="9 Mukhi" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=9+Mukhi'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-9.jpg" alt="9 Mukhi" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 9 Mukhi Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Maa Durga. Makes the wearer fearless, dynamic, and brings victory.</p>
@@ -1224,7 +1543,10 @@
                 <!-- Gauri Shankar -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/L8t9W2R.jpg" alt="Gauri Shankar" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=Gauri+Shankar'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="rudraksha-gs.jpg" alt="Gauri Shankar" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 Gauri Shankar Rudraksha</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Two naturally joined beads representing Shiva and Parvati. Best for relationship harmony.</p>
@@ -1248,7 +1570,10 @@
                 <!-- Rudraksha Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1601058268499-e52658b8ebf8?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Rudraksha Mala"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
+                            <img src="mala-rudraksha.jpg" alt="Rudraksha Mala" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 5 Mukhi Rudraksha Mala</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Original 108-bead mala for Lord Shiva mantra chanting and wearing.</p>
@@ -1267,7 +1592,10 @@
                 <!-- Sphatik Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1598560917805-59a3ad559071?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Sphatik Mala" style="filter: grayscale(100%) brightness(1.2);"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f8fafc, #cbd5e1);">💎</div>
+                            <img src="mala-sphatik.jpg" alt="Sphatik Mala" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💎 Pure Sphatik Mala (Crystal)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">100% natural cold crystal. Best for Maa Saraswati and Mahalaxmi Jaap.</p>
@@ -1285,7 +1613,10 @@
                 <!-- Kamal Gatta Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/H9jP5Qz.jpg" alt="Kamal Gatta Mala" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b45309.png&text=Kamal+Mala'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">🪷</div>
+                            <img src="mala-kamal.jpg" alt="Kamal Gatta Mala" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🪷 Kamal Gatta Mala</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Made from lotus seeds. Highly effective for chanting Laxmi Mantras.</p>
@@ -1303,7 +1634,10 @@
                 <!-- Tulsi Mala -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1601058268499-e52658b8ebf8?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Tulsi Mala" style="filter: sepia(50%);"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0);">🌿</div>
+                            <img src="mala-tulsi.jpg" alt="Tulsi Mala" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌿 Original Tulsi Mala</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Sacred basil wood beads. Purifies the aura and brings spiritual peace.</p>
@@ -1327,7 +1661,10 @@
                 <!-- Tiger Eye -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/T8zP4nF.jpg" alt="Tiger Eye" onerror="this.src='https://dummyimage.com/150x150/f8fafc/1d4ed8.png&text=Tiger+Eye'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">🧿</div>
+                            <img src="bracelet-tiger.jpg" alt="Tiger Eye" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🧿 Tiger Eye Bracelet</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Boost confidence, protect from evil eye, and attract money.</p>
@@ -1346,7 +1683,10 @@
                 <!-- Pyrite -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/Kx9M7tL.jpg" alt="Pyrite" onerror="this.src='https://dummyimage.com/150x150/f8fafc/1d4ed8.png&text=Pyrite'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">💰</div>
+                            <img src="bracelet-pyrite.jpg" alt="Pyrite" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💰 Pyrite Bracelet (Fool's Gold)</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The ultimate 'Money Magnet'. Attracts wealth, business opportunities.</p>
@@ -1364,7 +1704,10 @@
                 <!-- Amethyst -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Amethyst" style="filter: hue-rotate(280deg);"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #eef2ff, #a5b4fc);">💜</div>
+                            <img src="bracelet-amethyst.jpg" alt="Amethyst" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💜 Amethyst Bracelet</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Reduces stress, anxiety, and overthinking. Promotes peaceful sleep.</p>
@@ -1382,7 +1725,10 @@
                 <!-- Black Tourmaline -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Tourmaline" style="filter: grayscale(100%) contrast(1.5);"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #f8fafc, #cbd5e1);">🛡️</div>
+                            <img src="bracelet-tourmaline.jpg" alt="Tourmaline" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🛡️ Black Tourmaline Bracelet</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Strongest protection against negative energies and evil eye (Nazar).</p>
@@ -1400,7 +1746,10 @@
                 <!-- 7 Chakra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/B9TzM9q.jpg" alt="7 Chakra" onerror="this.src='https://dummyimage.com/150x150/f8fafc/1d4ed8.png&text=7+Chakra'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #ecfeff, #67e8f9);">🌈</div>
+                            <img src="bracelet-chakra.jpg" alt="7 Chakra" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌈 7 Chakra Balancing Bracelet</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Combines 7 natural stones to align your body's energy centers.</p>
@@ -1424,7 +1773,10 @@
                 <!-- Shree Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/HjL5nJ4.jpg" alt="Shree Yantra" onerror="this.src='https://dummyimage.com/150x150/fef3c7/b45309.png&text=Shree+Yantra'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #f59e0b);">🕉️</div>
+                            <img src="yantra-shree.jpg" alt="Shree Yantra" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🕉️ Siddh Shree Yantra</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Invites Goddess Laxmi, removes Vastu doshas, and brings overall prosperity.</p>
@@ -1442,7 +1794,10 @@
                 <!-- Kuber Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/V9Wz4vG.jpg" alt="Kuber Yantra" onerror="this.src='https://dummyimage.com/150x150/fef3c7/b45309.png&text=Kuber+Yantra'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #f59e0b);">💰</div>
+                            <img src="yantra-kuber.jpg" alt="Kuber Yantra" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💰 Siddh Kuber Yantra</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Helps in wealth accumulation, saving money, and finding opportunities.</p>
@@ -1460,7 +1815,10 @@
                 <!-- Vyapar Vridhi Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/K8JmQ9z.jpg" alt="Vyapar Yantra" onerror="this.src='https://dummyimage.com/150x150/fef3c7/b45309.png&text=Vyapar+Yantra'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #f59e0b);">📈</div>
+                            <img src="yantra-vyapar.jpg" alt="Vyapar Yantra" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📈 Vyapar Vridhi Yantra</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Must-have for business owners. Increases sales and removes obstacles.</p>
@@ -1478,7 +1836,10 @@
                 <!-- Mahamrityunjay Yantra -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/Gz5mR3w.jpg" alt="Mahamrityunjay" onerror="this.src='https://dummyimage.com/150x150/fef3c7/b45309.png&text=Mrityunjay'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #f59e0b);">🛡️</div>
+                            <img src="yantra-mrityu.jpg" alt="Mahamrityunjay" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🛡️ Mahamrityunjay Yantra</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Dedicated to Lord Shiva. Protects from illnesses and untimely death fears.</p>
@@ -1502,7 +1863,10 @@
                 <!-- Hanuman Kavach -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/B1xQZ8t.jpg" alt="Hanuman Kavach" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b91c1c.png&text=Hanuman+Kavach'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef2f2, #ef4444);">🐒</div>
+                            <img src="kavach-hanuman.jpg" alt="Hanuman Kavach" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🐒 Siddh Hanuman Kavach</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Protects from black magic, evil spirits, and enemies. Grants courage.</p>
@@ -1520,7 +1884,10 @@
                 <!-- Bagalamukhi Kavach -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/Z4wQ7vM.jpg" alt="Baglamukhi Kavach" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b91c1c.png&text=Bagla+Kavach'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef2f2, #ef4444);">🗡️</div>
+                            <img src="kavach-bagla.jpg" alt="Baglamukhi Kavach" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🗡️ Siddh Bagalamukhi Kavach</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The ultimate weapon to win legal cases and silence enemies.</p>
@@ -1538,7 +1905,10 @@
                 <!-- Surya Kavach -->
                 <div class="pop-card" style="margin-bottom: 18px;">
                     <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box"><img src="https://i.imgur.com/P5rG2xW.jpg" alt="Surya Kavach" onerror="this.src='https://dummyimage.com/150x150/f8fafc/b91c1c.png&text=Surya+Kavach'"></div>
+                        <div class="store-img-box">
+                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef2f2, #ef4444);">🌞</div>
+                            <img src="kavach-surya.jpg" alt="Surya Kavach" onerror="this.style.display='none'">
+                        </div>
                         <div>
                             <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌞 Siddh Surya Kavach</h4>
                             <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For gaining government jobs, promotion, fame, and society respect.</p>
@@ -1598,7 +1968,7 @@
         </div>
     </div>
 
-    <!-- 🌟 BOTTOM NAVIGATION MENU BAR (UPDATED 5 TABS) 🌟 -->
+    <!-- 🌟 BOTTOM NAVIGATION MENU BAR -->
     <div class="bottom-nav" style="padding: 10px 0 16px 0;">
         <button class="nav-btn active" onclick="switchTab('home', this); window.scrollTo(0,0);"><span>🏠</span>Home</button>
         <button class="nav-btn" onclick="switchTab('home', this); document.getElementById('astrologer-live-section').scrollIntoView({behavior: 'smooth'});"><span>🔴</span>Live</button>
