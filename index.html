@@ -825,7 +825,6 @@
                     <input type="tel" id="sched-userphone" class="form-control" placeholder="Mobile / WhatsApp Number (e.g. 9876543210)" />
                 </div>
 
-                <!-- Live Date & Selectable Time Slots -->
                 <div class="input-group" style="margin-top: 24px;">
                     <span class="text-hint" style="display: flex; justify-content: space-between; align-items: center;">
                         Step 2: Select Date & Time Slot
@@ -836,20 +835,16 @@
                             <span style="font-size: 14px; font-weight: 700; color: var(--primary-dark);">Date:</span>
                             <input type="date" id="client-date" style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Poppins'; font-size: 13.5px; font-weight: 600;">
                         </div>
-                        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px; text-align: center; font-weight: 500;">Tap an available slot to select it:<br><strong style="color: #ef4444; font-size: 11.5px;">🔥 Hurry up! Slots are filling fast today.</strong></p>
                         <div id="client-slot-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 220px; overflow-y: auto; padding-right: 4px;">
                             <div style="font-size: 13.5px; color: var(--text-muted); text-align: center; padding: 10px;">Loading available slots...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Selectable Pricing Plans & Payment Buttons -->
                 <div class="input-group" style="margin-top: 24px;">
                     <span class="text-hint">Step 3: Select Duration & Pay</span>
                     
-                    <div id="popular-selection-display" style="display:none; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; padding: 16px; border-radius: 14px; margin-bottom: 16px; text-align: left; animation: fadeIn 0.3s ease; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);">
-                        <!-- JS WILL FILL THIS -->
-                    </div>
+                    <div id="popular-selection-display" style="display:none; background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; padding: 16px; border-radius: 14px; margin-bottom: 16px; text-align: left; animation: fadeIn 0.3s ease; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);"></div>
 
                     <div class="plan-grid" id="sched-plan-grid">
                         <div class="plan-card selected" id="sched-plan-10" onclick="selectPlan(99, 10, 'sched-plan-10', 'scheduled')">
@@ -876,7 +871,6 @@
                     
                     <button class="btn btn-primary" style="margin-top: 12px; width: 100%; font-size: 16px;" onclick="startRazorpayPayment('scheduled')">💳 Pay & Connect</button>
                     
-                    <!-- NEW QR CODE DIRECTLY ON UI -->
                     <div style="text-align: center; margin-top: 16px; background: #fff; padding: 16px; border-radius: 14px; border: 1px dashed #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
                         <p style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 10px;">Or Scan QR Code to Pay Directly</p>
                         <img src="qr.jpg" alt="Payment QR Code" style="width: 150px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
@@ -1025,6 +1019,7 @@
         <div id="tab-support" class="section-card">
             <div class="home-section">
                 <div class="section-header">My Profile</div>
+                <!-- Profile Inputs -->
                 <div class="input-group"><span class="text-hint">Name</span><input type="text" id="p-name" class="form-control" placeholder="Your full name" /></div>
                 <div class="input-group"><span class="text-hint">Mobile Number</span><input type="tel" id="p-mobile" class="form-control" placeholder="+91 XXXXX XXXXX" /></div>
                 <div class="input-group"><span class="text-hint">Email Address</span><input type="email" id="p-email" class="form-control" placeholder="you@email.com" /></div>
@@ -1115,7 +1110,7 @@
                             <option value="6499|7.25 Ratti">7.25 Ratti - ₹6,499</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🟡 Siddh Pukhraj (Yellow Sapphire)', 'prod-gem-pukhraj')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🟡 Siddh Pukhraj (Yellow Sapphire)', 'prod-gem-pukhraj')">💳 Buy Now</button>
                 </div>
 
                 <!-- 2. Neelam -->
@@ -1138,7 +1133,7 @@
                             <option value="6999|7.25 Ratti">7.25 Ratti - ₹6,999</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🔵 Siddh Neelam (Blue Sapphire)', 'prod-gem-neelam')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🔵 Siddh Neelam (Blue Sapphire)', 'prod-gem-neelam')">💳 Buy Now</button>
                 </div>
 
                 <!-- 3. Panna -->
@@ -1161,7 +1156,7 @@
                             <option value="23400|7.25 Ratti (Premium)">7.25 Ratti (Premium) - ₹23,400</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🟢 Siddh Panna (Emerald)', 'prod-gem-panna')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🟢 Siddh Panna (Emerald)', 'prod-gem-panna')">💳 Buy Now</button>
                 </div>
 
                 <!-- 4. Manik / Ruby -->
@@ -1184,7 +1179,7 @@
                             <option value="18999|7.25 Ratti (Premium)">7.25 Ratti (Premium) - ₹18,999</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🔴 Siddh Manik (Ruby)', 'prod-gem-manik')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🔴 Siddh Manik (Ruby)', 'prod-gem-manik')">💳 Buy Now</button>
                 </div>
 
                 <!-- 5. Moti / Pearl -->
@@ -1206,7 +1201,7 @@
                             <option value="3599|7.25 Ratti (South Sea)">7.25 Ratti (South Sea) - ₹3,599</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('⚪ Siddh Moti (Natural Pearl)', 'prod-gem-moti')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('⚪ Siddh Moti (Natural Pearl)', 'prod-gem-moti')">💳 Buy Now</button>
                 </div>
 
                 <!-- 6. Moonga / Coral -->
@@ -1228,7 +1223,7 @@
                             <option value="1699|7.25 Ratti">7.25 Ratti - ₹1,699</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🪸 Siddh Moonga (Red Coral)', 'prod-gem-moonga')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🪸 Siddh Moonga (Red Coral)', 'prod-gem-moonga')">💳 Buy Now</button>
                 </div>
 
                 <!-- 7. Cat's Eye -->
@@ -1251,7 +1246,7 @@
                             <option value="2399|6-7 Carat">6-7 Carat - ₹2,399</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('👁️ Siddh Cats Eye (Lehsuniya)', 'prod-gem-cats')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('👁️ Siddh Cats Eye (Lehsuniya)', 'prod-gem-cats')">💳 Buy Now</button>
                 </div>
 
                 <!-- 8. Gomed -->
@@ -1274,7 +1269,7 @@
                             <option value="2399|6-7 Carat">6-7 Carat - ₹2,399</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🟤 Siddh Gomed (Hessonite)', 'prod-gem-gomed')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🟤 Siddh Gomed (Hessonite)', 'prod-gem-gomed')">💳 Buy Now</button>
                 </div>
 
                 <!-- 9. Firoza -->
@@ -1296,7 +1291,7 @@
                             <option value="1999|7-8 Carat Premium">7-8 Carat Premium - ₹1,999</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🩵 Siddh Firoza (Turquoise)', 'prod-gem-firoza')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🩵 Siddh Firoza (Turquoise)', 'prod-gem-firoza')">💳 Buy Now</button>
                 </div>
 
                 <!-- 10. Lapis Lazuli -->
@@ -1318,7 +1313,7 @@
                             <option value="1599|7-8 Carat">7-8 Carat - ₹1,599</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🌌 Siddh Lapis Lazuli (Lajward)', 'prod-gem-lapis')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🌌 Siddh Lapis Lazuli (Lajward)', 'prod-gem-lapis')">💳 Buy Now</button>
                 </div>
 
                 <!-- 11. White Opal -->
@@ -1341,427 +1336,7 @@
                             <option value="3899|6-7 Carat Premium">6-7 Carat Premium - ₹3,899</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🤍 Siddh White Opal', 'prod-gem-opal')">🛍️ Buy via WhatsApp</button>
-                </div>
-            </div>
-
-            <!-- ===================== CATEGORY 2: RUDRAKSHA ===================== -->
-            <div class="home-section">
-                <div class="section-header" style="font-size: 19px;">Siddh Rudraksha (Nepali)</div>
-                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">100% Original Nepali Rudraksha beads, capped in silver and energized with Vedic mantras.</p>
-                
-                <!-- 1 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-1.jpg" alt="1 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 1 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The most supreme Rudraksha. Symbol of Lord Shiva himself. Brings ultimate wealth.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-1" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="27300|Premium Silver Capped">Premium Silver Capped - ₹27,300</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 1 Mukhi Rudraksha', 'prod-rudra-1')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 2 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-2.jpg" alt="2 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 2 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Ardhanareshwar. Best for resolving marital issues and mental peace.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-2" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="2599|Silver Capped Pendant">Silver Capped Pendant - ₹2,599</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 2 Mukhi Rudraksha', 'prod-rudra-2')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 3 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-3.jpg" alt="3 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 3 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Agni Dev. Burns past karmas, cures stomach issues, and gives confidence.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-3" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1999|Silver Capped Pendant">Silver Capped Pendant - ₹1,999</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 3 Mukhi Rudraksha', 'prod-rudra-3')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 4 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-4.jpg" alt="4 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 4 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Lord Brahma. Highly effective for students, memory, focus, and intelligence.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-4" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1099|Silver Capped Pendant">Silver Capped Pendant - ₹1,099</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 4 Mukhi Rudraksha', 'prod-rudra-4')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 5 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-5.jpg" alt="5 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 5 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">For health, blood pressure control, and general well-being. Safe for everyone.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-5" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1299|Silver Capped Pendant">Silver Capped Pendant - ₹1,299</option>
-                            <option value="1999|With Premium Silver Chain">With Premium Silver Chain - ₹1,999</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 5 Mukhi Rudraksha', 'prod-rudra-5')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 6 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-6.jpg" alt="6 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 6 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Ruled by Lord Kartikeya. Excellent for focus, willpower, and overcoming laziness.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-6" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1599|Silver Capped Pendant">Silver Capped Pendant - ₹1,599</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 6 Mukhi Rudraksha', 'prod-rudra-6')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 7 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-7.jpg" alt="7 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 7 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Mata Mahalaxmi. Removes financial blockages and brings prosperity.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-7" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="3299|Silver Capped Pendant">Silver Capped Pendant - ₹3,299</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 7 Mukhi Rudraksha', 'prod-rudra-7')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 8 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-8.jpg" alt="8 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 8 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Lord Ganesha. Removes all obstacles and controls Rahu.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-8" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="4599|Silver Capped Pendant">Silver Capped Pendant - ₹4,599</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 8 Mukhi Rudraksha', 'prod-rudra-8')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 9 Mukhi -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-9.jpg" alt="9 Mukhi" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 9 Mukhi Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Symbol of Maa Durga. Makes the wearer fearless, dynamic, and brings victory.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-9" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="5899|Silver Capped Pendant">Silver Capped Pendant - ₹5,899</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 9 Mukhi Rudraksha', 'prod-rudra-9')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- Gauri Shankar -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="rudraksha-gs.jpg" alt="Gauri Shankar" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 Gauri Shankar Rudraksha</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Two naturally joined beads representing Shiva and Parvati. Best for relationship harmony.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-rudra-gs" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="5199|Premium Silver Capped">Premium Silver Capped - ₹5,199</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 Gauri Shankar Rudraksha', 'prod-rudra-gs')">🛍️ Buy via WhatsApp</button>
-                </div>
-            </div>
-
-            <!-- ===================== CATEGORY 3: SIDDHA MALA ===================== -->
-            <div class="home-section">
-                <div class="section-header" style="font-size: 19px;">Siddha Jaap Mala</div>
-                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">Hand-knotted 108+1 bead Malas, washed in Gangajal and energized for Mantra Jaap.</p>
-
-                <!-- Rudraksha Mala -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">📿</div>
-                            <img src="mala-rudraksha.jpg" alt="Rudraksha Mala" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">📿 5 Mukhi Rudraksha Mala</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Original 108-bead mala for Lord Shiva mantra chanting and wearing.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-mala-rudra" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1999|Standard Knotted (7-8mm)">Standard Knotted (7-8mm) - ₹1,999</option>
-                            <option value="2999|Premium Small Beads (5-6mm)">Premium Small Beads (5-6mm) - ₹2,999</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📿 5 Mukhi Rudraksha Mala', 'prod-mala-rudra')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- Sphatik Mala -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #f8fafc, #cbd5e1);">💎</div>
-                            <img src="mala-sphatik.jpg" alt="Sphatik Mala" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💎 Pure Sphatik Mala (Crystal)</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">100% natural cold crystal. Best for Maa Saraswati and Mahalaxmi Jaap.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-mala-sphatik" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="2399|Diamond Cut (108 Beads)">Diamond Cut (108 Beads) - ₹2,399</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('💎 Pure Sphatik Mala', 'prod-mala-sphatik')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- Kamal Gatta Mala -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fffbeb, #fcd34d);">🪷</div>
-                            <img src="mala-kamal.jpg" alt="Kamal Gatta Mala" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🪷 Kamal Gatta Mala</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Made from lotus seeds. Highly effective for chanting Laxmi Mantras.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-mala-kamal" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1099|Standard 108 Beads">Standard 108 Beads - ₹1,099</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🪷 Kamal Gatta Mala', 'prod-mala-kamal')">🛍️ Buy via WhatsApp</button>
-                </div>
-                
-                <!-- Tulsi Mala -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0);">🌿</div>
-                            <img src="mala-tulsi.jpg" alt="Tulsi Mala" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌿 Original Tulsi Mala</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Sacred basil wood beads. Purifies the aura and brings spiritual peace.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Option:</span>
-                        <select id="prod-mala-tulsi" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="699|Standard 108 Beads">Standard 108 Beads - ₹699</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🌿 Original Tulsi Mala', 'prod-mala-tulsi')">🛍️ Buy via WhatsApp</button>
-                </div>
-            </div>
-
-            <!-- ===================== CATEGORY 4: BRACELETS ===================== -->
-            <div class="home-section">
-                <div class="section-header" style="font-size: 19px;">Healing Crystal Bracelets</div>
-                <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">100% natural, unheated, and untreated crystal bead bracelets. Energized before dispatch.</p>
-
-                <!-- Tiger Eye -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">🧿</div>
-                            <img src="bracelet-tiger.jpg" alt="Tiger Eye" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🧿 Tiger Eye Bracelet</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Boost confidence, protect from evil eye, and attract money.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Bead Size:</span>
-                        <select id="prod-brace-tiger" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="899|8mm Beads">8mm Beads - ₹899</option>
-                            <option value="1099|10mm Premium Beads">10mm Premium Beads - ₹1,099</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🧿 Tiger Eye Bracelet', 'prod-brace-tiger')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- Pyrite -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">💰</div>
-                            <img src="bracelet-pyrite.jpg" alt="Pyrite" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💰 Pyrite Bracelet (Fool's Gold)</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">The ultimate 'Money Magnet'. Attracts wealth, business opportunities.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Bead Size:</span>
-                        <select id="prod-brace-pyrite" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1299|8mm Beads">8mm Beads - ₹1,299</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('💰 Pyrite Bracelet', 'prod-brace-pyrite')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- Amethyst -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #eef2ff, #a5b4fc);">💜</div>
-                            <img src="bracelet-amethyst.jpg" alt="Amethyst" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">💜 Amethyst Bracelet</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Reduces stress, anxiety, and overthinking. Promotes peaceful sleep.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Bead Size:</span>
-                        <select id="prod-brace-ameth" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1199|8mm Beads">8mm Beads - ₹1,199</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('💜 Amethyst Bracelet', 'prod-brace-ameth')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- Black Tourmaline -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #f8fafc, #cbd5e1);">🛡️</div>
-                            <img src="bracelet-tourmaline.jpg" alt="Tourmaline" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🛡️ Black Tourmaline Bracelet</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Strongest protection against negative energies and evil eye (Nazar).</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Bead Size:</span>
-                        <select id="prod-brace-tourma" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="1199|8mm Beads">8mm Beads - ₹1,199</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🛡️ Black Tourmaline Bracelet', 'prod-brace-tourma')">🛍️ Buy via WhatsApp</button>
-                </div>
-
-                <!-- 7 Chakra -->
-                <div class="pop-card" style="margin-bottom: 18px;">
-                    <div style="display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;">
-                        <div class="store-img-box">
-                            <div class="img-fallback" style="background: linear-gradient(135deg, #ecfeff, #67e8f9);">🌈</div>
-                            <img src="bracelet-chakra.jpg" alt="7 Chakra" onerror="this.style.display='none'">
-                        </div>
-                        <div>
-                            <h4 class="pop-title" style="margin-bottom: 6px; font-size: 14.5px;">🌈 7 Chakra Balancing Bracelet</h4>
-                            <p class="pop-desc" style="font-size: 12px; line-height: 1.5; margin-bottom: 0;">Combines 7 natural stones to align your body's energy centers.</p>
-                        </div>
-                    </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 10px; margin-bottom: 14px; border: 1px dashed #cbd5e1;">
-                        <span class="text-hint">Select Bead Size:</span>
-                        <select id="prod-brace-chakra" class="form-control" style="padding: 10px; font-weight: 700; margin-top: 5px;">
-                            <option value="899|8mm Beads">8mm Beads - ₹899</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🌈 7 Chakra Bracelet', 'prod-brace-chakra')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🤍 Siddh White Opal', 'prod-gem-opal')">💳 Buy Now</button>
                 </div>
             </div>
 
@@ -1788,7 +1363,7 @@
                             <option value="1999|Gold Plated (3x3 inch)">Gold Plated (3x3 inch) - ₹1,999</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🕉️ Siddh Shree Yantra', 'prod-yan-shree')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🕉️ Siddh Shree Yantra', 'prod-yan-shree')">💳 Buy Now</button>
                 </div>
 
                 <!-- Kuber Yantra -->
@@ -1809,7 +1384,7 @@
                             <option value="1599|Gold Plated (3x3 inch)">Gold Plated (3x3 inch) - ₹1,599</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('💰 Siddh Kuber Yantra', 'prod-yan-kuber')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('💰 Siddh Kuber Yantra', 'prod-yan-kuber')">💳 Buy Now</button>
                 </div>
 
                 <!-- Vyapar Vridhi Yantra -->
@@ -1830,7 +1405,7 @@
                             <option value="1599|Gold Plated (3x3 inch)">Gold Plated (3x3 inch) - ₹1,599</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('📈 Vyapar Vridhi Yantra', 'prod-yan-vyapar')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('📈 Vyapar Vridhi Yantra', 'prod-yan-vyapar')">💳 Buy Now</button>
                 </div>
 
                 <!-- Mahamrityunjay Yantra -->
@@ -1851,7 +1426,7 @@
                             <option value="1599|Gold Plated (3x3 inch)">Gold Plated (3x3 inch) - ₹1,599</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🛡️ Mahamrityunjay Yantra', 'prod-yan-mrityu')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🛡️ Mahamrityunjay Yantra', 'prod-yan-mrityu')">💳 Buy Now</button>
                 </div>
             </div>
 
@@ -1878,7 +1453,7 @@
                             <option value="1499|Silver Plated Pendant">Silver Plated Pendant - ₹1,499</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🐒 Siddh Hanuman Kavach', 'prod-kav-hanu')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🐒 Siddh Hanuman Kavach', 'prod-kav-hanu')">💳 Buy Now</button>
                 </div>
 
                 <!-- Bagalamukhi Kavach -->
@@ -1899,7 +1474,7 @@
                             <option value="1999|Silver Plated Pendant">Silver Plated Pendant - ₹1,999</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🗡️ Siddh Bagalamukhi Kavach', 'prod-kav-bagla')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🗡️ Siddh Bagalamukhi Kavach', 'prod-kav-bagla')">💳 Buy Now</button>
                 </div>
 
                 <!-- Surya Kavach -->
@@ -1920,7 +1495,7 @@
                             <option value="1499|Silver Plated Pendant">Silver Plated Pendant - ₹1,499</option>
                         </select>
                     </div>
-                    <button class="btn btn-whatsapp" style="padding: 14px; font-size: 14.5px; border-radius: 12px;" onclick="buyStoreProduct('🌞 Siddh Surya Kavach', 'prod-kav-surya')">🛍️ Buy via WhatsApp</button>
+                    <button class="btn btn-primary" style="padding: 14px; font-size: 14.5px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 106, 0, 0.2);" onclick="processStoreBuy('🌞 Siddh Surya Kavach', 'prod-kav-surya')">💳 Buy Now</button>
                 </div>
             </div>
             
@@ -2025,18 +1600,32 @@
             setTimeout(() => document.getElementById('contact-section').scrollIntoView({behavior: 'smooth', block: 'center'}), 200);
         }
 
-        // STORE BUY FUNCTION
-        function buyStoreProduct(productName, selectId) {
+        // STORE BUY FUNCTION (NEW: RAZORPAY INTEGRATION)
+        function processStoreBuy(productName, selectId) {
             const selectEl = document.getElementById(selectId);
             const val = selectEl.value; 
             const parts = val.split('|');
-            const price = parts[0];
+            const price = parseInt(parts[0]);
             const variant = parts[1];
 
-            const message = `Namaste Acharya ji! 🙏\nI want to buy a 100% Original Certified product from your Vedic Store.\n\n*Product Name:* ${productName}\n*Variant/Weight:* ${variant}\n*Price:* ₹${price}\n\nPlease share the payment process and how I can provide my shipping delivery address.`;
-            
-            const whatsappUrl = `https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            var options = {
+                "key": RAZORPAY_KEY_ID, 
+                "amount": price * 100,
+                "currency": "INR",
+                "name": "Real Astro Store",
+                "description": productName + " (" + variant + ")",
+                "image": "https://subhadiptata2-sketch.github.io/acharya.png", 
+                "handler": function (response){
+                    var paymentId = response.razorpay_payment_id;
+                    const message = `Namaste Acharya ji! 🙏\nI have successfully made the payment for a Vedic Store product via Razorpay.\n\n*Product:* ${productName}\n*Variant:* ${variant}\n*Amount Paid:* ₹${price}\n*Payment ID:* ${paymentId}\n\nI am ready to share my shipping delivery address.`;
+                    window.open(`https://wa.me/${ASTROLOGER_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+                    showStatus("Payment Successful! Order Confirmed.", "success");
+                },
+                "theme": { "color": "#1a0b2e" }
+            };
+            var rzp_store = new Razorpay(options);
+            rzp_store.on('payment.failed', function (response){ showStatus("Payment Failed: " + response.error.description, "error"); });
+            rzp_store.open();
         }
 
         function selectPlan(amount, minutes, elementId, type) {
